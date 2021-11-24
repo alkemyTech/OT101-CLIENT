@@ -1,0 +1,42 @@
+import React from 'react';
+import { useFormik } from 'formik';
+
+export function Contact() {
+  const { handleChange, handleSubmit, values } = useFormik({
+    initialValues: {
+      name: '',
+      lastname: '',
+      email: '',
+      content: '',
+    },
+    validate: (values) => {
+      const errors = {};
+
+      return errors;
+    },
+    onSubmit: (values) => {
+      //Agregar llamada a servicio de contacto
+    },
+  });
+
+  return (
+    <section>
+      <h2>Contactate con nosotros</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input id="name" name="name" onChange={handleChange} value={values.email} placeholder="Nombre" />
+          <input id="lastname" name="lastname" onChange={handleChange} value={values.lastname} placeholder="Apellido" />
+        </div>
+        <input id="email" name="email" type="email" onChange={handleChange} value={values.email} placeholder="Email" />
+        <textarea
+          id="content"
+          name="content"
+          onChange={handleChange}
+          value={values.content}
+          placeholder="Escribe tu consulta..."
+        ></textarea>
+        <button>Enviar</button>
+      </form>
+    </section>
+  );
+}
