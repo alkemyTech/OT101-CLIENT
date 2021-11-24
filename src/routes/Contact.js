@@ -42,7 +42,7 @@ export function Contact() {
       <h2>Contactate con nosotros</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <input id="name" name="name" onChange={handleChange} value={values.email} placeholder="Nombre" />
+          <input id="name" name="name" onChange={handleChange} value={values.name} placeholder="Nombre" />
           <input id="lastname" name="lastname" onChange={handleChange} value={values.lastname} placeholder="Apellido" />
         </div>
         <input id="email" name="email" type="email" onChange={handleChange} value={values.email} placeholder="Email" />
