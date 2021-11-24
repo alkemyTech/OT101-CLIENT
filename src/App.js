@@ -1,6 +1,8 @@
 import React from 'react';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Loader from "react-loader-spinner";
 import './App.css';
+
 import About from './components/About';
 import Activities from './components/Activities';
 import Contact from './components/Contact';
@@ -13,6 +15,12 @@ import Testimonials from './components/Testimonials';
 function App() {
   return (
     <BrowserRouter>
+      <Loader 
+        type="TailSpin"
+        color="#DB5752"
+        height={100}
+        width={100}
+        timeout={2000} />
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/about' element={<About/>} />
