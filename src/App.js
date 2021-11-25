@@ -1,6 +1,19 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+=======
+import React from 'react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+>>>>>>> 57fdb4c5ee810a8979c70668343323efd3c6401c
 import './App.css';
+import About from './components/About';
+import Activities from './components/Activities';
+import Contact from './components/Contact';
+import Contribute from './components/Contribute';
+import Error404 from './components/Error404';
+import Home from './components/Home';
+import News from './components/News';
+import Testimonials from './components/Testimonials';
 
 import About from './components/About';
 import Activities from './components/Activities';
