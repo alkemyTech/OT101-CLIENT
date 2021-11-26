@@ -34,6 +34,7 @@ function Register(props) {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      //the values object has all the values from the form
       alert(JSON.stringify(values, null, 2));
     },
   });
@@ -52,7 +53,7 @@ function Register(props) {
                 fullWidth
                 id='name'
                 name='name'
-                label='nombre'
+                label='Nombre'
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 error={formik.touched.name && Boolean(formik.errors.name)}
