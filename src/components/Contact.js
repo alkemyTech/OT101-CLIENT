@@ -1,14 +1,17 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 
-export function Contact() {
-  const { handleChange, handleSubmit, values } = useFormik({
+function Contact() {
+  const { handleChange, handleSubmit, values, errors } = useFormik({
     initialValues: {
       name: '',
       lastname: '',
       email: '',
       content: '',
     },
+
     validate: (values) => {
       const errors = {};
 
@@ -35,26 +38,81 @@ export function Contact() {
     onSubmit: (values) => {
       //Agregar llamada a servicio de contacto
     },
+    validateOnChange: false,
   });
 
   return (
-    <section>
-      <h2>Contactate con nosotros</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input id="name" name="name" onChange={handleChange} value={values.name} placeholder="Nombre" />
-          <input id="lastname" name="lastname" onChange={handleChange} value={values.lastname} placeholder="Apellido" />
-        </div>
-        <input id="email" name="email" type="email" onChange={handleChange} value={values.email} placeholder="Email" />
-        <textarea
-          id="content"
-          name="content"
-          onChange={handleChange}
-          value={values.content}
-          placeholder="Escribe tu consulta..."
-        ></textarea>
-        <button>Enviar</button>
-      </form>
-    </section>
+    <Container maxWidth="sm">
+      <Box
+        sx={{ border: 1, paddingX: 5, paddingY: 5, borderRadius: 0.5, borderColor: 'lightgrey' }}
+        justifyContent="center"
+      >
+        <Typography variant="h5" component="h2" textAlign="left" fontWeight="bold" mb={6}>
+          Contactate con nosotros
+        </Typography>
+        <form onSubmit={handleSubmit} noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <TextField
+                id="name"
+                name="name"
+                onChange={handleChange}
+                value={values.name}
+                label="Nombre"
+                fullWidth
+                error={Boolean(errors.name)}
+                helperText={errors.name}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                id="lastname"
+                name="lastname"
+                onChange={handleChange}
+                value={values.lastname}
+                label="Apellido"
+                fullWidth
+                error={Boolean(errors.lastname)}
+                helperText={errors.lastname}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="email"
+                name="email"
+                type="email"
+                onChange={handleChange}
+                value={values.email}
+                label="Email"
+                fullWidth
+                error={Boolean(errors.email)}
+                helperText={errors.email}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="content"
+                name="content"
+                onChange={handleChange}
+                value={values.content}
+                multiline
+                label="Escribe tu consulta..."
+                fullWidth
+                error={Boolean(errors.content)}
+                helperText={errors.content}
+              />
+            </Grid>
+
+            <Grid item>
+              <Button variant="contained" fullWidth type="submit">
+                Enviar
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Box>
+    </Container>
   );
 }
+
+export default Contact;
