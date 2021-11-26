@@ -42,76 +42,78 @@ function Contact() {
   });
 
   return (
-    <Container maxWidth="sm">
-      <Box
-        sx={{ border: 1, paddingX: 5, paddingY: 5, borderRadius: 0.5, borderColor: 'lightgrey' }}
-        justifyContent="center"
-      >
-        <Typography variant="h5" component="h2" textAlign="left" fontWeight="bold" mb={6}>
-          Contactate con nosotros
-        </Typography>
-        <form onSubmit={handleSubmit} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <TextField
-                id="name"
-                name="name"
-                onChange={handleChange}
-                value={values.name}
-                label="Nombre"
-                fullWidth
-                error={Boolean(errors.name)}
-                helperText={errors.name}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                id="lastname"
-                name="lastname"
-                onChange={handleChange}
-                value={values.lastname}
-                label="Apellido"
-                fullWidth
-                error={Boolean(errors.lastname)}
-                helperText={errors.lastname}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="email"
-                name="email"
-                type="email"
-                onChange={handleChange}
-                value={values.email}
-                label="Email"
-                fullWidth
-                error={Boolean(errors.email)}
-                helperText={errors.email}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="content"
-                name="content"
-                onChange={handleChange}
-                value={values.content}
-                multiline
-                label="Escribe tu consulta..."
-                fullWidth
-                error={Boolean(errors.content)}
-                helperText={errors.content}
-              />
-            </Grid>
+    <Box sx={{ my: 'auto' }}>
+      <Container maxWidth="sm">
+        <Box
+          sx={{ border: 1, paddingX: 5, paddingY: 5, borderRadius: 0.5, borderColor: 'lightgrey' }}
+          justifyContent="center"
+        >
+          <Typography variant="h5" component="h2" textAlign="left" fontWeight="bold" mb={6}>
+            Contactate con nosotros
+          </Typography>
+          <form onSubmit={handleSubmit} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  id="name"
+                  name="name"
+                  onChange={handleChange}
+                  value={values.name}
+                  label="Nombre"
+                  fullWidth
+                  error={Boolean(errors.name)}
+                  helperText={errors.name}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id="lastname"
+                  name="lastname"
+                  onChange={handleChange}
+                  value={values.lastname}
+                  label="Apellido"
+                  fullWidth
+                  error={Boolean(errors.lastname)}
+                  helperText={errors.lastname}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="email"
+                  name="email"
+                  type="email"
+                  onChange={handleChange}
+                  value={values.email}
+                  label="Email"
+                  fullWidth
+                  error={Boolean(errors.email)}
+                  helperText={errors.email}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="content"
+                  name="content"
+                  onChange={handleChange}
+                  value={values.content}
+                  multiline
+                  label="Escribe tu consulta..."
+                  fullWidth
+                  error={Boolean(errors.content)}
+                  helperText={errors.content}
+                />
+              </Grid>
 
-            <Grid item>
-              <Button variant="contained" fullWidth type="submit">
-                Enviar
-              </Button>
+              <Grid item>
+                <Button variant="contained" fullWidth type="submit">
+                  Enviar
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </Box>
-    </Container>
+          </form>
+        </Box>
+      </Container>
+    </Box>
   );
 }
 
