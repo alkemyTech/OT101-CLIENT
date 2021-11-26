@@ -1,7 +1,10 @@
 import React from 'react'
-import { Box, TextField, Button } from '@material-ui/core'
-import { useFormik } from 'formik';
-import * as yup from 'yup';
+import { Box, TextField, Button, Container, Typography } from '@material-ui/core'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { withStyles } from '@material-ui/core'
+
+import Styles from '../styles/RegisterFormStyles'
 
 const validationSchema = yup.object({
   name: yup.string().required('Debe ingresar su nombre.'),
@@ -17,7 +20,9 @@ const validationSchema = yup.object({
   })
 })
 
-export default function Register() {
+function Register(props) {
+
+  const {classes} = props
 
   const formik = useFormik({
     initialValues: {
@@ -36,65 +41,74 @@ export default function Register() {
 
   return (
     <div>
-      <h2>Register</h2>
-      <form onSubmit={formik.handleSubmit}>
-        <TextField
-          fullWidth
-          id='name'
-          name='name'
-          label='name'
-          value={formik.values.name}
-          onChange={formik.handleChange}
-          error={formik.touched.name && Boolean(formik.errors.name)}
-          helperText={formik.touched.name && formik.errors.name}
-        />
-        <TextField
-          fullWidth
-          id='lastName'
-          name='lastName'
-          label='lastNmae'
-          value={formik.values.lastName}
-          onChange={formik.handleChange}
-          error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-          helperText={formik.touched.name && formik.errors.lastName}
-        />
-        <TextField
-          fullWidth
-          id='email'
-          name='email'
-          label='email'
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <TextField
-          fullWidth
-          id='password'
-          name='password'
-          label='password'
-          type='password'
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-        />
-        <TextField
-          fullWidth
-          id='confirmPassword'
-          name='confirmPassword'
-          label='confirmPassword'
-          type='password'
-          value={formik.values.confirmPassword}
-          onChange={formik.handleChange}
-          error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-          helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
-        />
-        <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
-        </Button>
-      </form>
+      <Box>
+        <Container maxWidth="sm">
+          <Box className={classes.innerBox}>
+            <Typography variant="h5" component="h2" textAlign="left" fontWeight="bold" mb={6}>
+              Registrarse
+            </Typography>
+            <form onSubmit={formik.handleSubmit} className={classes.form}>
+              <TextField
+                fullWidth
+                id='name'
+                name='name'
+                label='nombre'
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
+              />
+              <TextField
+                fullWidth
+                id='lastName'
+                name='lastName'
+                label='Apellido'
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
+                error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+                helperText={formik.touched.name && formik.errors.lastName}
+              />
+              <TextField
+                fullWidth
+                id='email'
+                name='email'
+                label='Email'
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
+              <TextField
+                fullWidth
+                id='password'
+                name='password'
+                label='Contraseña'
+                type='password'
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={formik.touched.password && Boolean(formik.errors.password)}
+                helperText={formik.touched.password && formik.errors.password}
+              />
+              <TextField
+                fullWidth
+                id='confirmPassword'
+                name='confirmPassword'
+                label='Confirmar contraseña'
+                type='password'
+                value={formik.values.confirmPassword}
+                onChange={formik.handleChange}
+                error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+                helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+              />
+              <Button color="primary" variant="contained" fullWidth type="submit" className={classes.button}>
+                Enviar
+              </Button>
+            </form>
+          </Box>
+        </Container>
+      </Box>
     </div>
   )
 }
 
+export default withStyles(Styles)(Register)
