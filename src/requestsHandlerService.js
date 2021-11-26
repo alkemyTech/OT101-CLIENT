@@ -1,0 +1,64 @@
+//import axios
+import axios from "axios"
+
+//config object for axios to set the headers 
+let config = {}
+
+//if exist token in localStorage, then add it to headers 
+function addToken(){
+  if(localStorage.getItem("token")){
+    config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`
+  }
+}
+
+//handle get requests
+/**
+ * @param {string} url
+ * @param {object} headers
+ * @returns {Promise}
+ * 
+ * this function is used to handle get requests, receives the url and the headers,
+ * if not headers are passed, then the headers object is setted to {}
+ * if token exist in localStorage, then add it to headers
+ */
+export function getRequest(url, headers = {}) {
+  config.headers = headers;
+  addToken();
+  let promise = new Promise((resolve, reject) => {
+    axios.get(url, config)
+    .then(response => {
+      resolve(response.data)
+    })
+    .catch(error => {
+      reject(error)
+    })
+  })
+
+  return promise
+}
+
+//handle get requests
+/**
+ * @param {string} url
+ * @param {object} headers
+ * @returns {Promise}
+ * 
+ * this function is used to handle post requests, receives the url and the headers,
+ * if not headers are passed, then the headers object is setted to {}
+ * if token exist in localStorage, then add it to headers
+ */
+export function postRequest(url, headers = {}){
+  let promise = new Promise((resolve, reject) => {
+    config.headers = headers;
+    addToken();
+    axios.get(url, config)
+    .then(response => {
+      resolve(response.data)
+    })
+    .catch(error => {
+      reject(error)
+    })
+  })
+
+  return promise
+}
