@@ -58,6 +58,7 @@ function Register(props) {
                 onChange={formik.handleChange}
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 helperText={formik.touched.name && formik.errors.name}
+                className={classes.textField}
               />
               <TextField
                 fullWidth
@@ -68,6 +69,7 @@ function Register(props) {
                 onChange={formik.handleChange}
                 error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                 helperText={formik.touched.name && formik.errors.lastName}
+                className={classes.textField}
               />
               <TextField
                 fullWidth
@@ -78,6 +80,7 @@ function Register(props) {
                 onChange={formik.handleChange}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
+                className={classes.textField}
               />
               <TextField
                 fullWidth
@@ -89,6 +92,7 @@ function Register(props) {
                 onChange={formik.handleChange}
                 error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
+                className={classes.textField}
               />
               <TextField
                 fullWidth
@@ -100,6 +104,7 @@ function Register(props) {
                 onChange={formik.handleChange}
                 error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
                 helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                className={classes.textField}
               />
               <Button color="primary" variant="contained" fullWidth type="submit" className={classes.button}>
                 Enviar
