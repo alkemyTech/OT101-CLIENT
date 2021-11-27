@@ -2,29 +2,32 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 const MySwal = withReactContent(Swal);
 
-function useSweetAlert(input) {
-    if(input === 'confirm'){
-        MySwal.fire(
-            'Acción confirmada',
-            '',
-            'success'
-        )
+function useSweetAlert(action) {
+    switch (action) {
+        case 'confirm':
+            MySwal.fire(
+                'Acción confirmada',
+                '',
+                'success'
+            )
+            break;
+        case 'cancel':
+            MySwal.fire(
+                'Acción cancelada',
+                '',
+                'error'
+            )
+            break;
+        case 'info':
+            MySwal.fire(
+                'Información importante',
+                '',
+                'info'
+            )
+            break;
+        default:
+            break;
     }
-    else if(input === 'cancel'){
-        MySwal.fire(
-            'Acción cancelada',
-            '',
-            'error'
-        )
-    }
-    else if(input === 'info'){
-        MySwal.fire(
-            'Información importante',
-            '',
-            'info'
-        )
-    }
-    
 }
 
 export default useSweetAlert
