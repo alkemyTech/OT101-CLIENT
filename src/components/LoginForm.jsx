@@ -1,6 +1,6 @@
 import React from "react"
 import {Formik, Form, Field, ErrorMessage} from 'formik'
-import { Button, Stack, Container, TextField } from '@mui/material'
+import { Button, Stack, Container, InputLabel, Input, FormControl, FormHelperText } from '@mui/material'
 import * as Yup from 'yup'
 
 function LoginForm() {
@@ -17,19 +17,33 @@ function LoginForm() {
                     password: Yup.string().required('Por favor completar')
                 })}
             >
-                {({isSubmitting}) => (
+                {({isSubmitting, errors, touched}) => (
                 <Form>
-                    <Stack spacing={2}>
+                    <Stack spacing={4}>
                   
-                            <label htmlFor="email">Email:</label>
-                            <Field type='text' name='email' /*component={TextField}*//>
-                            <ErrorMessage name='email' component="div" />
+                      
+                            <Field name='email' >
+                                {({field, meta}) => (
+                                    <FormControl variant='standard' error={meta.touched && meta.error ? true : false}>
+                                        <InputLabel htmlFor="email">Name</InputLabel>
+                                        <Input {...field} />
+                                        <ErrorMessage name='email' component={FormHelperText} />
+                                    </FormControl>
+                                )}
+                            </Field>
                 
-                            <label htmlFor="password">Password:</label>
-                            <Field type='password' name='password' /*component={TextField}*/ />
-                            <ErrorMessage name='password' component="div" />
+                      
+                            <Field name='password' >
+                                {({field, meta}) => (
+                                    <FormControl variant='standard' error={meta.touched && meta.error ? true : false}>
+                                        <InputLabel htmlFor="password">Password</InputLabel>
+                                        <Input {...field} />
+                                        <ErrorMessage name='password' component={FormHelperText} />
+                                    </FormControl>
+                                )}
+                            </Field>
 
-                            <Button variant='contained' disabled={isSubmitting} type='submit'>Login</Button>
+                            <Button variant='contained' disabled={isSubmitting} type='submit' color={errors.email || errors.password ? 'error' : 'primary'}>Login</Button>
                     </Stack>
                 </Form>
                 )}
