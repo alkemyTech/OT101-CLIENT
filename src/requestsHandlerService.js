@@ -40,6 +40,7 @@ export function getRequest(url, headers = {}) {
 //handle get requests
 /**
  * @param {string} url
+ * @param {object} data
  * @param {object} headers
  * @returns {Promise}
  * 
@@ -47,11 +48,11 @@ export function getRequest(url, headers = {}) {
  * if not headers are passed, then the headers object is setted to {}
  * if token exist in localStorage, then add it to headers
  */
-export function postRequest(url, headers = {}){
+export function postRequest(url, data ,headers = {}){
   let promise = new Promise((resolve, reject) => {
     config.headers = headers;
     addToken();
-    axios.get(url, config)
+    axios.post(url, data, config)
     .then(response => {
       resolve(response.data)
     })
