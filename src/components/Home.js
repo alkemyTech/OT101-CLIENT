@@ -1,11 +1,37 @@
-import React from 'react'
+import { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
-function Home() {
+import { getRequest } from './requestsHandlerService.js';
+
+
+const Home = ({ title = 'MENSAJE DE BIENVENIDA' }) => {
+    const [state, setstate] = useState([]);
+    useEffect(() => {
+        getRequest('http://Nunca-Me-Senti-Tan-Frustrado.com/activities')
+            .then(res => setstate(res))
+            .catch(err => console.log(err));
+    }, []);
     return (
-        <div>
-            <h1>Home Component</h1>
-        </div>
-    )
-}
+        <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
+            <h1>{title}</h1>
+            <h2>ÚLTIMAS NOVEDADES</h2>
+            <Grid container spacing={2} >
+                <Grid item xs={12} sm={6} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <img src={state[0]?.image || "https://via.placeholder.com/323x239"} alt="" />
+                </Grid>
+                <Grid item xs={12} sm={6} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <img src={state[1]?.image || "https://via.placeholder.com/323x239"} alt="" />
+                </Grid>
+                <Grid item xs={12} sm={6} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <img src={state[2]?.image || "https://via.placeholder.com/323x239"} alt="" />
+                </Grid>
+                <Grid item xs={12} sm={6} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <img src={state[3]?.image || "https://via.placeholder.com/323x239"} alt="" />
+                </Grid>
+            </Grid>
+        </Box>
+    );
+};
 
-export default Home
+export default Home;
