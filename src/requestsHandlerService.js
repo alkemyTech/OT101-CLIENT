@@ -44,7 +44,7 @@ export function getRequest(url, headers = {}) {
  * @param {object} headers
  * @returns {Promise}
  * 
- * this function is used to handle post requests, receives the url and the headers,
+ * this function is used to handle post requests, receives the url, data and headers,
  * if not headers are passed, then the headers object is setted to {}
  * if token exist in localStorage, then add it to headers
  */
