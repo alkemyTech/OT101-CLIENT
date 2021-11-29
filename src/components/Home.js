@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import { getRequest } from './requestsHandlerService.js';
+import Slider from './Slider';
+import { getRequest } from './requestsHandlerService';
 
 
 const Home = ({ title = 'MENSAJE DE BIENVENIDA' }) => {
@@ -15,6 +16,7 @@ const Home = ({ title = 'MENSAJE DE BIENVENIDA' }) => {
     return (
         <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
             <h1>{title}</h1>
+            <Slider />
             <h2>ÚLTIMAS NOVEDADES</h2>
             <Grid container spacing={2} >
                 <Grid item xs={12} sm={6} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
