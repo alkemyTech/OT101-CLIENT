@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import Slider from './Slider';
-import { getRequest } from './requestsHandlerService';
+/* import Slider from './Slider'; */
+import { getRequest } from '../requestsHandlerService';
+import News from './News';
 
 
 const Home = ({ title = 'MENSAJE DE BIENVENIDA' }) => {
@@ -32,8 +33,5 @@ const Home = ({ title = 'MENSAJE DE BIENVENIDA' }) => {
       </div>
     )
 }
-     
-    );
-};
 
 export default Home;
