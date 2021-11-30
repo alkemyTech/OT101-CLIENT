@@ -1,3 +1,4 @@
+import ImageSlider from './ImageSlider/ImageSlider'
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
@@ -15,6 +16,10 @@ const Home = ({ title = 'MENSAJE DE BIENVENIDA' }) => {
             .catch(err => console.log(err));
     }, []);
     return (
+        <div>
+            <h1>Home Component</h1>
+            <ImageSlider/>
+
         <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
             <h1>{title}</h1>
             <h2>ÚLTIMAS NOVEDADES</h2>
@@ -24,6 +29,10 @@ const Home = ({ title = 'MENSAJE DE BIENVENIDA' }) => {
                 }
             </Grid>
         </Box>
+      </div>
+    )
+}
+     
     );
 };
 
