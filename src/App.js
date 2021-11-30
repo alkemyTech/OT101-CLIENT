@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+
 import About from './components/About';
 import Activities from './components/Activities';
 import Contact from './components/Contact';
@@ -13,6 +14,7 @@ import Testimonials from './components/Testimonials';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
