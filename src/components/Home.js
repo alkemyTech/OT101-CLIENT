@@ -6,7 +6,8 @@ import Grid from '@mui/material/Grid';
 
 /* import Slider from './Slider'; */
 import { getRequest } from '../requestsHandlerService';
-import News from './News';
+import News from './News/News';
+import Header from './Header/Header';
 
 
 const Home = ({ title = 'MENSAJE DE BIENVENIDA' }) => {
@@ -17,7 +18,8 @@ const Home = ({ title = 'MENSAJE DE BIENVENIDA' }) => {
             .catch(err => console.log(err));
     }, []);
     return (
-        <div>
+        <>
+        <Header />
             <h1>Home Component</h1>
             <ImageSlider/>
 
@@ -30,7 +32,7 @@ const Home = ({ title = 'MENSAJE DE BIENVENIDA' }) => {
                 }
             </Grid>
         </Box>
-      </div>
+      </>
     )
 }
 
