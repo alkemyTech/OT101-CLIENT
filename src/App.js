@@ -1,57 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
+import About from './components/About';
+import Activities from './components/Activities';
+import Contact from './components/Contact';
+import Contribute from './components/Contribute';
+import Error404 from './components/Error404';
+import Home from './components/Home';
+import Loading from './components/Loading';
+import News from './components/News';
+import Testimonials from './components/Testimonials';
+
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1200)
+  })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <BrowserRouter>
+    {
+      isLoading===true?
+      <Loading />
+      :
+      <Routes>
+        <Route path='/' element={<Home/>} />
+        <Route path='/about' element={<About/>} />
+        <Route path='/activities' element={<Activities/>} />
+        <Route path='/news' element={<News/>} />
+        <Route path='/testimonials' element={<Testimonials/>} />
+        <Route path='/contact' element={<Contact/>} />
+        <Route path='/contribute' element={<Contribute/>} />
+        {/* returns the Erorr404 component in case the path does't exist */}
+        <Route path='*' element={<Error404/>} />
+      </Routes>
+    }
+    </BrowserRouter>
   );
 }
 
