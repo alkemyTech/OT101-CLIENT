@@ -81,19 +81,6 @@ function Contact() {
                   helperText={errors.lastname}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="email"
-                  name="email"
-                  type="email"
-                  onChange={handleChange}
-                  value={values.email}
-                  label="Email"
-                  fullWidth
-                  error={Boolean(errors.email)}
-                  helperText={errors.email}
-                />
-              </Grid>
               <Grid item xs={13}>
                 <TextField
                   id="phone"
@@ -105,6 +92,19 @@ function Contact() {
                   fullWidth
                   error={Boolean(errors.phone)}
                   helperText={errors.phone}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="email"
+                  name="email"
+                  type="email"
+                  onChange={handleChange}
+                  value={values.email}
+                  label="Email"
+                  fullWidth
+                  error={Boolean(errors.email)}
+                  helperText={errors.email}
                 />
               </Grid>
               <Grid item xs={1}>
