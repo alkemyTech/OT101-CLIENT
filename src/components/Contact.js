@@ -9,6 +9,7 @@ function Contact() {
       name: '',
       lastname: '',
       email: '',
+      phone: '',
       content: '',
     },
 
@@ -21,6 +22,9 @@ function Contact() {
 
       if (!values.lastname) {
         errors.lastname = 'Debes ingresar un apellido';
+      }
+      if (!values.phone) {
+        errors.phone = 'Debes ingresar un número de teléfono';
       }
 
       if (!values.email) {
@@ -90,7 +94,20 @@ function Contact() {
                   helperText={errors.email}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={13}>
+                <TextField
+                  id="phone"
+                  name="phone"
+                  type="phone"
+                  onChange={handleChange}
+                  value={values.phone}
+                  label="Phone"
+                  fullWidth
+                  error={Boolean(errors.phone)}
+                  helperText={errors.phone}
+                />
+              </Grid>
+              <Grid item xs={1}>
                 <TextField
                   id="content"
                   name="content"
