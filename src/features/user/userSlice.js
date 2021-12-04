@@ -4,8 +4,12 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: {
     isLogged: false,
+    isTokenVerified: false,
   },
   reducer: {
+    verifyAuth: (state) => {
+      state.isTokenVerified = true;
+    },
     login: (state, action) => {
       state.isLogged = true;
       state.data = action.payload;
@@ -17,5 +21,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, verifyAuth } = userSlice.actions;
 export default userSlice.reducer;
