@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
@@ -11,18 +11,14 @@ import Home from './pages/Home';
 import Loading from './components/Loading';
 import News from './pages/News';
 import Testimonials from './pages/Testimonials';
+import useAuth from './hooks/useAuth';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1200);
-  });
+  const { isLoading, isTokenVerified } = useAuth();
+  
   return (
     <BrowserRouter>
-      {isLoading === true ? (
+      {!isTokenVerified && isLoading ? (
         <Loading />
       ) : (
         <Routes>
@@ -34,7 +30,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/contribute" element={<Contribute />} />
           {/* returns the Erorr404 component in case the path does't exist */}
-          <Route path="*" element={<Error404 />} />a
+          <Route path="*" element={<Error404 />} />
         </Routes>
       )}
     </BrowserRouter>
