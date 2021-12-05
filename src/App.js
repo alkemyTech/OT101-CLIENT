@@ -11,14 +11,14 @@ import Home from './pages/Home';
 import Loading from './components/Loading';
 import News from './pages/News';
 import Testimonials from './pages/Testimonials';
-import useAuth from './hooks/useAuth';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const { isLoading, isTokenVerified } = useAuth();
+  const { isTokenVerified } = useSelector((state) => state.user)
   
   return (
     <BrowserRouter>
-      {!isTokenVerified && isLoading ? (
+      {!isTokenVerified ? (
         <Loading />
       ) : (
         <Routes>
