@@ -36,6 +36,7 @@ export function getRequest(url, headers = {}) {
 
   return promise
 }
+
 //handle post requests
 /**
  * @param {string} url
@@ -47,7 +48,7 @@ export function getRequest(url, headers = {}) {
  * if not headers are passed, then the headers object is setted to {}
  * if token exist in localStorage, then add it to headers
  */
- export function postRequest(url, data ,headers = {}){
+export function postRequest(url, data ,headers = {}){
   let promise = new Promise((resolve, reject) => {
     config.headers = headers;
     addToken();
@@ -62,6 +63,7 @@ export function getRequest(url, headers = {}) {
 
   return promise
 }
+
 //handle patch requests
 /**
  * @param {string} url
