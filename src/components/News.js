@@ -1,11 +1,12 @@
-import React from 'react'
+import Grid from '@mui/material/Grid';
 
-function News() {
-    return (
-        <>
-            <h1>News...</h1>    
-        </>
-    )
-}
+const News = ({ news }) => {
+  console.log(state);
+  return (
+    <Grid item xs={12} sm={6} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+      <img src={news.image} alt={news.title} />
+    </Grid>
+  );
+};
 
-export default News
+export default News;
