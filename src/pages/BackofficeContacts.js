@@ -21,7 +21,7 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import axios from 'axios';
+import { getRequest } from '../services/requestsHandlerService';
 
 function createData(idKey, name, lastname, phone, email) {
   return {
@@ -217,14 +217,11 @@ export default function EnhancedTable() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-        axios.get('http://localhost:3001/backoffice/contacts')
-        .then( data =>
-            setRows(data.forEach( item => createData(item.idKey, item.name, item.lastname, item.phone, item.email)))
-            )
-        .catch( (err) => {
-            console.log(err);
-        })
-    }, [])
+      getRequest('http://localhost:3001/backoffice/contacts')
+      .then( data =>
+        setRows(data.forEach( item => createData(item.idKey, item.name, item.lastname, item.phone, item.email)))
+      )
+  }, [])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
