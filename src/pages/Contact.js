@@ -94,7 +94,7 @@ function Contact() {
                   helperText={errors.email}
                 />
               </Grid>
-              <Grid item xs={13}>
+              <Grid item xs={12}>
                 <TextField
                   id="phone"
                   name="phone"
@@ -107,7 +107,7 @@ function Contact() {
                   helperText={errors.phone}
                 />
               </Grid>
-              <Grid item xs={1}>
+              <Grid item xs={12}>
                 <TextField
                   id="content"
                   name="content"
