@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Loading from './components/Loading';
 import News from './pages/News';
 import Testimonials from './pages/Testimonials';
+import BackofficeContacts from './pages/BackofficeContacts';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,6 +34,7 @@ function App() {
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/contribute" element={<Contribute />} />
+          <Route path="/backoffice/contacts" element={<BackofficeContacts />} />
           {/* returns the Erorr404 component in case the path does't exist */}
           <Route path="*" element={<Error404 />} />a
         </Routes>
