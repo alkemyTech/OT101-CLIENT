@@ -21,6 +21,7 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import axios from 'axios';
 
 function createData(idKey, name, lastname, phone, email) {
   return {
@@ -31,28 +32,6 @@ function createData(idKey, name, lastname, phone, email) {
     email,
   };
 }
-
-/* const [contacts, setContacts] = useState([]); */
-
-const rows = [
-  createData(1, 'Alejandro', 'Pascuale', '+543425054677', 'alegpascuale@gmail.com'),
-  createData(2, 'Javier', 'Keller', '+543425154677', 'javierkeller@gmail.com'),
-  createData(3, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(4, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(5, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(6, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(7, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(8, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(9, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(10, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(11, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(12, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(13, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(14, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(15, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(16, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-  createData(17, 'Esteban', 'Gonzalez', '+543426612794', 'test@gmail.com'),
-];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -235,6 +214,17 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+        axios.get('http://localhost:3001/backoffice/contacts')
+        .then( data =>
+            setRows(data.forEach( item => createData(item.idKey, item.name, item.lastname, item.phone, item.email)))
+            )
+        .catch( (err) => {
+            console.log(err);
+        })
+    }, [])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -243,6 +233,7 @@ export default function EnhancedTable() {
   };
 
   const handleSelectAllClick = (event) => {
+    
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.idKey);
       setSelected(newSelecteds);
