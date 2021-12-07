@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Loading from './components/Loading';
 import News from './pages/News';
 import Testimonials from './pages/Testimonials';
+import Register from './pages/Register';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,6 +36,7 @@ function App() {
           <Route path="/contribute" element={<Contribute />} />
           {/* returns the Erorr404 component in case the path does't exist */}
           <Route path="*" element={<Error404 />} />a
+          <Route path="/register" element={<Register />} />
         </Routes>
       )}
     </BrowserRouter>

@@ -1,10 +1,16 @@
-import React from 'react'
+import {React, useState } from 'react'
+
 import { Box, TextField, Button, Container, Typography } from '@material-ui/core'
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { withStyles } from '@material-ui/core'
 
 import Styles from '../styles/RegisterFormStyles'
+
+import * as authService from '../services/authService'
 
 const validationSchema = yup.object({
   name: yup.string().required('Debe ingresar su nombre.'),
@@ -21,6 +27,7 @@ const validationSchema = yup.object({
 })
 
 function Register(props) {
+  const [status, setStatus] = useState(undefined);
 
   const {classes} = props
 
@@ -34,13 +41,19 @@ function Register(props) {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      //the values object has all the values from the form
-      alert(JSON.stringify(values, null, 2));
+      authService.register(values)
+        .then(() => {
+          setStatus({ type: 'success' });
+        })
+        .catch((error) => {
+          setStatus({ type: 'error', error });
+        });
     },
   });
 
 
   return (
+    <>   
     <div>
       <Box>
         <Container maxWidth="sm">
@@ -106,6 +119,15 @@ function Register(props) {
                 helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                 className={classes.textField}
               />
+              {status?.type === 'success' && <Alert severity="success">
+                <AlertTitle>Usuario Creado</AlertTitle>
+              </Alert>}
+      {status?.type === 'error' && (
+        <Alert severity="error">
+        <AlertTitle>Error al crear Usuario</AlertTitle>
+      
+      </Alert>
+      )}
               <Button color="primary" variant="contained" fullWidth type="submit" className={classes.button}>
                 Enviar
               </Button>
@@ -114,6 +136,7 @@ function Register(props) {
         </Container>
       </Box>
     </div>
+    </>
   )
 }
 
