@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-const Home = ({ title }) => {
+const Home = () => {
   const user = useSelector((state) => state.user);
   return (
     <div>
-      <h1>{user.isLoggin === true? title=`Hola ${user.firstName}, bienvenido a Fundación somos más`: title='Bienvenido a Fundación somos más'}</h1>
+      <h1>{user.isLoggin === true? `Hola ${user.firstName}, bienvenido a Fundación somos más`: 'Bienvenido a Fundación somos más'}</h1>
       <ImageSlider />
 
       <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
