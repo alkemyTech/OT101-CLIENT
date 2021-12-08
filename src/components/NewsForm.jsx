@@ -9,7 +9,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Swal from 'sweetalert2';
 
-import Styles from '../styles/NewsFormStyles'
+import Styles from '../styles/FormStyles'
 import { postRequest, patchRequest } from '../services/requestsHandlerService';
 import Loading from './Loading';
 import ImageInput from './ImageInput'
