@@ -15,8 +15,8 @@ import { useSelector } from 'react-redux';
 import Register from './pages/Register';
 
 function App() {
-  const { isTokenVerified } = useSelector((state) => state.user)
-  
+  const { isTokenVerified } = useSelector((state) => state.user);
+
   return (
     <BrowserRouter>
       {!isTokenVerified ? (
@@ -24,16 +24,15 @@ function App() {
       ) : (
         <Routes>
           <Route path="/" element={<Home />} />
+
           <Route path="/about" element={<About />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/news" element={<News />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/contribute" element={<Contribute />} />
-          {/* returns the Erorr404 component in case the path does't exist */}
-          <Route path="*" element={<Error404 />} />
-          <Route path="*" element={<Error404 />} />a
           <Route path="/register" element={<Register />} />
+          <Route path="*" element={<Error404 />} />
         </Routes>
       )}
     </BrowserRouter>
