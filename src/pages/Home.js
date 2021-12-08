@@ -18,13 +18,15 @@ const Home = () => {
 
   return (
     <div>
-      <h1>{user.isLoggin === true? `Hola ${user.firstName}, bienvenido a Fundación somos más`: 'Bienvenido a Fundación somos más'}</h1>
+      <h1>{user.isLogged === true? `Hola ${user.data.firstName}, bienvenido a Fundación somos más`: 'Bienvenido a Fundación somos más'}</h1>
       <ImageSlider />
 
       <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
         <h2>ÚLTIMAS NOVEDADES</h2>
         { news.map((item, key) => {
-          <News key={key} news={item}/>
+          return (
+            <News key={key} news={item}/>
+          )
         })}
       </Box>
     </div>
