@@ -23,6 +23,7 @@ export async function verifyToken() {
     } catch (err) {
       if (err.response.status === 401) 
         localStorage.clear('token')     
+      throw err;
     }
   }
 }
