@@ -25,7 +25,7 @@ const routes = [
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
   { name: 'Contacto', path: '/contact', element: <Contact /> },
   { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
-  { path: '/backoffice/contacts', element: <Contact />, hidden: true },
+  { path: '/backoffice/contacts', element: <BackofficeContacts />, hidden: true },
   { path: '/register', element: <Register />, hidden: true  },
   { path: '*', element: <Error404 />, hidden: true },
 ];
