@@ -43,14 +43,14 @@ export const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <>
-          <Tooltip title="Delete">
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
           <Tooltip title="Edit">
             <IconButton>
               <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Delete">
+            <IconButton>
+              <DeleteIcon />
             </IconButton>
           </Tooltip>
         </>
