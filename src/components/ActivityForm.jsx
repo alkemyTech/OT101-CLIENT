@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Paper, Button, Container, TextField, Typography } from '@material-ui/core'
@@ -8,7 +8,6 @@ import * as yup from 'yup'
 import { withStyles } from '@material-ui/core'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Swal from 'sweetalert2';
 
 import Styles from '../styles/FormStyles'
 import { postRequest, patchRequest } from '../services/requestsHandlerService';
@@ -16,7 +15,7 @@ import Loading from './Loading';
 import ImageInput from './ImageInput'
 
 
-const ActivityForm = ({classes, activity}) => {
+const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object({
@@ -46,14 +45,15 @@ const ActivityForm = ({classes, activity}) => {
       patchRequest(`http://localhost:3006/activities/${activity.id}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
       postRequest('http://localhost:3006/activities/', dataToSend, {headers: {'content-type': 'multipart/form-data'}});
 
-    apiRequest.then(data => {
+    apiRequest.then(savedActivity => {
         setIsLoading(false);
-        Swal.fire('Actividades', 'Solicitud procesada correctamente', 'success');
-        actions.resetForm( {values: {name: '', content: '', image: null}} );
+
+        onSuccess(savedActivity);
       })
       .catch(err => {
         setIsLoading(false);
-        Swal.fire('Actividades', 'No se pudo procesar la solicitud', 'error');
+
+        onFailure(err);
       })
       .finally(() => actions.setSubmitting(false));
   };
@@ -68,8 +68,17 @@ const ActivityForm = ({classes, activity}) => {
     onSubmit: activitySubmit,
   });
 
+  const formReset = () => {
+    formik.resetForm();
+    onCancel();
+  };
+
   const CKinputHandler = (event, editor) => {
     formik.setFieldValue("content", editor.getData());
+  }
+
+  if (!open) {
+    return (null);
   }
 
   if (isLoading) {
@@ -117,12 +126,19 @@ const ActivityForm = ({classes, activity}) => {
             error={formik.touched.image && formik.errors.image}
           />
           <Button
-            fullWidth
+            variant="contained"
+            type="reset"
+            onClick={()=>formik.resetForm()}
+            className={classes.buttonCancel}
+          >
+            Cancelar
+          </Button>
+          <Button
             disabled={formik.isSubmitting}
             color="primary"
             variant="contained"
             type="submit"
-            className={classes.button}
+            className={classes.buttonOk}
           >
             Enviar
           </Button>
@@ -133,12 +149,22 @@ const ActivityForm = ({classes, activity}) => {
 }
 
 ActivityForm.propTypes = {
-  news: PropTypes.shape({
+  open: PropTypes.bool,
+  activity: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string,
     content: PropTypes.string,
     image: PropTypes.string,
-  })
+  }),
+  onCancel: PropTypes.func,
+  onSuccess: PropTypes.func,
+  onFailure: PropTypes.func,
+};
+
+ActivityForm.defaultProps = {
+  onCancel: () => {},
+  onSuccess: () => {},
+  onFailure: () => {},
 }
 
 export default withStyles(Styles)(ActivityForm)
