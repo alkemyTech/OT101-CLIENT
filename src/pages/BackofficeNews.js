@@ -19,17 +19,17 @@ import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { getRequest } from '../services/requestsHandlerService';
 
-function createData(idKey, name, lastname, phone, email) {
+function createData(idKey, name, image, createAt) {
   return {
     idKey,
     name,
-    lastname,
-    phone,
-    email,
+    image,
+    createAt,
   };
 }
 
@@ -68,7 +68,7 @@ const headCells = [
     id: 'idKey',
     numeric: false,
     disablePadding: true,
-    label: 'Operation nº',
+    label: 'ID',
   },
   {
     id: 'name',
@@ -77,23 +77,17 @@ const headCells = [
     label: 'Name',
   },
   {
-    id: 'lastname',
+    id: 'image',
     numeric: true,
     disablePadding: false,
-    label: 'Last Name',
+    label: 'Image',
   },
   {
-    id: 'phone',
+    id: 'createAt',
     numeric: true,
     disablePadding: false,
-    label: 'Phone',
-  },
-  {
-    id: 'email',
-    numeric: true,
-    disablePadding: false,
-    label: 'Email',
-  },
+    label: 'CreateAt',
+  }
 ];
 
 function EnhancedTableHead(props) {
@@ -182,16 +176,23 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Contacts
+          News
         </Typography>
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        <>
+          <Tooltip title="Delete">
+            <IconButton>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Edit">
+            <IconButton>
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+        </>
       ) : (
         <Tooltip title="Filter list">
           <IconButton>
@@ -209,17 +210,17 @@ EnhancedTableToolbar.propTypes = {
 
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('idKey');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([createData(1, 'Ayuda Escolar', 'imagen de prueba', '24/06/2021'), createData(2, 'Beneficio Comedor', 'imagen de prueba 2', '04/09/2021')]);
 
   useEffect(() => {
-      getRequest('http://localhost:3001/backoffice/contacts')
+      getRequest('http://localhost:3001/news')
       .then( data =>
-        setRows(data.forEach( item => createData(item.idKey, item.name, item.lastname, item.phone, item.email)))
+        setRows(data.forEach( item => createData(item.idKey, item.name, item.image, item.createAt)))
       )
   }, [])
 
@@ -333,9 +334,8 @@ export default function EnhancedTable() {
                         {row.idKey}
                       </TableCell>
                       <TableCell align="right">{row.name}</TableCell>
-                      <TableCell align="right">{row.lastname}</TableCell>
-                      <TableCell align="right">{row.phone}</TableCell>
-                      <TableCell align="right">{row.email}</TableCell>
+                      <TableCell align="right">{row.image}</TableCell>
+                      <TableCell align="right">{row.createAt}</TableCell>
                     </TableRow>
                   );
                 })}
