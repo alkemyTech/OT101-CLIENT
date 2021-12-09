@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import { Link, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,76 +7,89 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { Button, Container } from '@mui/material';
 
-const Header = ({ logo = '', links = [{ name: 'home', url: '/' }] }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
+const Header = ({ logo = '', routes = [{ name: 'home', path: '/' }] }) => {
+  const location = useLocation();
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
-  let navigate = useNavigate();
-
-  const theme = useTheme();
-
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
   };
 
-  const handleMenuClick = (page) => {
-    navigate(page);
-    setAnchorEl(null);
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
   };
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{ justifyContent: 'space-between', padding: 1 }}>
-        <img
-          src={logo}
-          alt="Logotipo Somos Más"
-          onClick={() => handleMenuClick('/')}
-        />
-        <Box sx={{ display: 'flex' }}>
-          {
-            isMobile ?
-              <>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={() => setAnchorEl(null)}
-                >
-                  {
-                    links.map((link, index) => (
-                      <MenuItem onClick={() => handleMenuClick(link.url)} key={index}>{link.name}</MenuItem>
-                    ))
-                  }
-                </Menu>
-              </>
-              :
-              links.map((link, index) => (
-                <MenuItem onClick={() => handleMenuClick(link.url)} key={index}>{link.name}</MenuItem>
-              ))
-          }
-        </Box>
-      </Toolbar>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
+          <img src={logo} alt="Logotipo Somos Más" />
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="inherit"
+              onClick={handleOpenNavMenu}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {routes.map(
+                ({ name, path, hidden }) =>
+                  !hidden &&
+                  name && (
+                    <MenuItem
+                      key={name}
+                      onClick={handleCloseNavMenu}
+                      to={path}
+                      component={Link}
+                      sx={{ color: location.pathname === path ? 'black' : '#474747' }}
+                    >
+                      {name}
+                    </MenuItem>
+                  )
+              )}
+            </Menu>
+          </Box>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            {routes.map(
+              ({ name, path, hidden }) =>
+                !hidden &&
+                name && (
+                  <Button
+                    key={name}
+                    sx={{ color: location.pathname === path ? 'white' : 'lightgray' }}
+                    to={path}
+                    LinkComponent={Link}
+                  >
+                    {name}
+                  </Button>
+                )
+            )}
+          </Box>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 };

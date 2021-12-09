@@ -14,6 +14,21 @@ import Testimonials from './pages/Testimonials';
 import BackofficeContacts from './pages/BackofficeContacts';
 import { useSelector } from 'react-redux';
 import Register from './pages/Register';
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+const routes = [
+  { name: 'Inicio', path: '/', element: <Home /> },
+  { name: 'Sobre nosotros', path: '/about', element: <About /> },
+  { name: 'Actividades', path: '/activities', element: <Activities /> },
+  { name: 'Novedades', path: '/news', element: <News /> },
+  { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
+  { name: 'Contacto', path: '/contact', element: <Contact /> },
+  { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
+  { path: '/backoffice/contacts', element: <Contact />, hidden: true },
+  { path: '/register', element: <Register />, hidden: true  },
+  { path: '*', element: <Error404 />, hidden: true },
+];
 
 function App() {
   const { isTokenVerified } = useSelector((state) => state.user);
@@ -23,19 +38,16 @@ function App() {
       {!isTokenVerified ? (
         <Loading />
       ) : (
-        <Routes>
-          <Route path="/" element={<Home />} />
+        <>
+          <Header routes={routes} />
 
-          <Route path="/about" element={<About />} />
-          <Route path="/activities" element={<Activities />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/testimonials" element={<Testimonials />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/contribute" element={<Contribute />} />
-          <Route path="/backoffice/contacts" element={<BackofficeContacts />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<Error404 />} />
-        </Routes>
+          <Routes>
+            {routes.map(({ path, element }) => (
+              <Route {...{ path, element }} />
+            ))}
+          </Routes>
+          <Footer />
+        </>
       )}
     </BrowserRouter>
   );
