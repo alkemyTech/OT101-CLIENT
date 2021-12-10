@@ -56,8 +56,8 @@ const Header = ({ logo = '', routes = [{ name: 'home', path: '/' }] }) => {
               }}
             >
               {routes.map(
-                ({ name, path, hidden }) =>
-                  !hidden &&
+                ({ name, path, protect }) =>
+                  !protect &&
                   name && (
                     <MenuItem
                       key={name}
@@ -74,8 +74,8 @@ const Header = ({ logo = '', routes = [{ name: 'home', path: '/' }] }) => {
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {routes.map(
-              ({ name, path, hidden }) =>
-                !hidden &&
+              ({ name, path, protect }) =>
+                !protect &&
                 name && (
                   <Button
                     key={name}
