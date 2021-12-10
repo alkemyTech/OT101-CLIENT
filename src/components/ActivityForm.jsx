@@ -1,38 +1,37 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Paper, Button, Container, MenuItem, TextField, Typography } from '@material-ui/core'
+
+import { Paper, Button, Container, TextField, Typography } from '@material-ui/core'
 import { FormControl, FormLabel, FormHelperText } from '@material-ui/core'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { withStyles } from '@material-ui/core'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Swal from 'sweetalert2';
 
 import Styles from '../styles/FormStyles'
 import { postRequest, patchRequest } from '../services/requestsHandlerService';
 import Loading from './Loading';
 import ImageInput from './ImageInput'
 
-const validationSchema = yup.object({
-  name: yup
-    .string()
-    .required('Debe ingresar un título.'),
-  content: yup
-    .string()
-    .required('Debe ingresar contenido.'),
-  categoryId: yup
-    .string()
-    .required('Debe seleccionar una categoría'),
-  image: yup
-    .mixed().required('Debe seleccionar una imagen'),
-});
 
-
-const NewsForm = ({classes, news}) => {
+const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure}) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const newsSubmit = (values, actions) => {
+  const validationSchema = yup.object({
+    name: yup
+      .string()
+      .required('Debe ingresar un título.'),
+    content: yup
+      .string()
+      .required('Debe ingresar contenido.'),
+    // don't require image if activity already have one
+    image: activity && activity.image ? null : yup
+      .mixed()
+      .required('Debe seleccionar una imagen'),
+  });
+
+  const activitySubmit = (values, actions) => {
     setIsLoading(true);
 
     const dataToSend = new FormData();
@@ -42,35 +41,44 @@ const NewsForm = ({classes, news}) => {
       dataToSend.append(key, values[key]);
     });
 
-    const apiRequest = news && news.id ?
-      patchRequest(`/news/{news.id}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
-      postRequest('/news/', dataToSend, {headers: {'content-type': 'multipart/form-data'}});
+    const apiRequest = activity && activity.id ?
+      patchRequest(`http://localhost:3006/activities/${activity.id}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
+      postRequest('http://localhost:3006/activities/', dataToSend, {headers: {'content-type': 'multipart/form-data'}});
 
-    apiRequest.then(data => {
+    apiRequest.then(savedActivity => {
         setIsLoading(false);
-        Swal.fire('News', 'Solicitud procesada correctamente', 'success');
-        actions.resetForm( {values: {name: '', content: '', image: null, categoryId: ''}} );
+
+        onSuccess(savedActivity);
       })
       .catch(err => {
         setIsLoading(false);
-        Swal.fire('News', 'No se pudo procesar la solicitud', 'error');
+
+        onFailure(err);
       })
       .finally(() => actions.setSubmitting(false));
   };
 
   const formik = useFormik({
     initialValues: {
-      name: news ? news.name : '',
+      name: activity ? activity.name : '',
       image: null,
-      content: news ? news.content : '',
-      categoryId: news ? news.categoryId : '',
+      content: activity ? activity.content : '',
     },
     validationSchema: validationSchema,
-    onSubmit: newsSubmit,
+    onSubmit: activitySubmit,
   });
+
+  const formReset = () => {
+    formik.resetForm();
+    onCancel();
+  };
 
   const CKinputHandler = (event, editor) => {
     formik.setFieldValue("content", editor.getData());
+  }
+
+  if (!open) {
+    return (null);
   }
 
   if (isLoading) {
@@ -81,7 +89,7 @@ const NewsForm = ({classes, news}) => {
     <Container maxWidth="sm">
       <Paper elevation={3} className={classes.innerBox}>
         <Typography variant="h5" component="h2" fontWeight="bold" mb={6}>
-          {news && news.id ? "Modificar" : "Crear" } Novedad
+          {activity && activity.id ? "Modificar" : "Crear" } Actividades
         </Typography>
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <TextField
@@ -111,35 +119,26 @@ const NewsForm = ({classes, news}) => {
             {formik.touched.content && formik.errors.content}
             </FormHelperText>
           </FormControl>
-          <TextField
-            select
-            fullWidth
-            id="categoryId"
-            name="categoryId"
-            label="Categoría"
-            value={formik.values.categoryId}
-            onChange={formik.handleChange}
-            error={formik.touched.categoryId && Boolean(formik.errors.categoryId)}
-            helperText={formik.touched.categoryId && formik.errors.categoryId}
-            className={classes.textField}
-          >
-              <MenuItem key="news" value="1">
-                News
-              </MenuItem>
-          </TextField>
           <ImageInput
             name="image"
-            image={news ? news.image : null}
+            image={activity ? activity.image : null}
             onChange={file => formik.setFieldValue("image", file)}
             error={formik.touched.image && formik.errors.image}
           />
           <Button
-            fullWidth
+            variant="contained"
+            type="reset"
+            onClick={()=>formik.resetForm()}
+            className={classes.buttonCancel}
+          >
+            Cancelar
+          </Button>
+          <Button
             disabled={formik.isSubmitting}
             color="primary"
             variant="contained"
             type="submit"
-            className={classes.button}
+            className={classes.buttonOk}
           >
             Enviar
           </Button>
@@ -149,14 +148,23 @@ const NewsForm = ({classes, news}) => {
   )
 }
 
-NewsForm.propTypes = {
-  news: PropTypes.shape({
+ActivityForm.propTypes = {
+  open: PropTypes.bool,
+  activity: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string,
     content: PropTypes.string,
     image: PropTypes.string,
-    categoryId: PropTypes.number
-  })
+  }),
+  onCancel: PropTypes.func,
+  onSuccess: PropTypes.func,
+  onFailure: PropTypes.func,
+};
+
+ActivityForm.defaultProps = {
+  onCancel: () => {},
+  onSuccess: () => {},
+  onFailure: () => {},
 }
 
-export default withStyles(Styles)(NewsForm)
+export default withStyles(Styles)(ActivityForm)
