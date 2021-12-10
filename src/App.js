@@ -19,10 +19,10 @@ import Footer from './components/Footer';
 import RouteProtection from './components/RouteProtection';
 
 /* Routes settings
-  name: Name of the route, if not set will not be show
+  name: Name of the route, if not set will not show
   path: Route pathname
   element: Route Component
-  protect: If set true, the Route will be wrapped with a RouteProtection component and will not be show in public header
+  protect: If set true, the Route will be wrapped with a RouteProtection component and will not show in public header
   roles: Array of roles, will be pass to the RouteProtection
 */
 const routes = [
