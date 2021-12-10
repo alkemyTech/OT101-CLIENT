@@ -1,6 +1,7 @@
 import {React, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
-import { Box, TextField, Button, Container, Typography } from '@material-ui/core'
+import { Box, TextField, Button, Container, Typography , CircularProgress, Backdrop } from '@material-ui/core'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 
@@ -28,8 +29,8 @@ const validationSchema = yup.object({
 
 function Register(props) {
   const [status, setStatus] = useState(undefined);
-
-  const {classes} = props
+  const navigate = useNavigate();
+  const {classes} = props;
 
   const formik = useFormik({
     initialValues: {
@@ -41,9 +42,11 @@ function Register(props) {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      setStatus({ type: 'waiting' });
       authService.register(values)
         .then(() => {
           setStatus({ type: 'success' });
+          setTimeout(function(){ navigate('/'); }, 2000); //TimeOut used to simulate DB delay
         })
         .catch((error) => {
           setStatus({ type: 'error', error });
@@ -119,8 +122,13 @@ function Register(props) {
                 helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                 className={classes.textField}
               />
+              {status?.type === 'waiting' && <CircularProgress />
+              }
               {status?.type === 'success' && <Alert severity="success">
                 <AlertTitle>Usuario Creado</AlertTitle>
+                <Typography variant="h5" component="h3" textAlign="left" fontWeight="bold" mb={6}>
+              Redirigiendo...
+            </Typography>
               </Alert>}
       {status?.type === 'error' && (
         <Alert severity="error">

@@ -1,16 +1,33 @@
-import React from "react"
+import { React , useState} from "react"
+import { useNavigate } from "react-router-dom"
 import {Formik, Form, Field, ErrorMessage} from 'formik'
-import { Button, Stack, Container, InputLabel, Input, FormControl, FormHelperText } from '@mui/material'
+import { Button, Stack, Container, InputLabel, Input, FormControl, FormHelperText, Typography, AlertTitle, Alert, CircularProgress } from '@mui/material'
 import * as Yup from 'yup'
+import * as authService from '../services/authService'
 
 function LoginForm() {
+    const navigate = useNavigate();
+    const [status, setStatus] = useState(undefined);
+
     return (
         <Container maxWidth='xs'>
             <Formik 
                 initialValues={{ email: '', password: ''}}
                 onSubmit={async (values) => {
                     await new Promise((r) => setTimeout(r, 500));
-                    alert(JSON.stringify(values, null, 2));
+                    authService.login(values)
+                        .then((response) => {
+                        if(response.email === undefined){
+                            setStatus({ type: 'error' });
+                        }else{
+                            setStatus({ type: 'success' });
+                            setTimeout(function(){ navigate('/'); }, 2000); //TimeOut used to simulate DB delay
+                        }
+                        })
+                        .catch((error) => {
+                        throw(error);
+                        });
+                    // alert(JSON.stringify(values, null, 2));
                   }}
                 validationSchema={Yup.object({
                     email: Yup.string().required('Por favor completar!').email('Por favor ingresa un email valido'),
@@ -42,7 +59,17 @@ function LoginForm() {
                                     </FormControl>
                                 )}
                             </Field>
-
+                            {status?.type === 'waiting' && <CircularProgress />
+              }
+              {status?.type === 'success' && <Alert severity="success">
+                <AlertTitle>Usuario Encontrado...redirigiendo</AlertTitle>
+              </Alert>}
+      {status?.type === 'error' && (
+        <Alert severity="error">
+        <AlertTitle>Usuario o contraseña incorrectas</AlertTitle>
+      
+      </Alert>
+      )}
                             <Button variant='contained' disabled={isSubmitting} type='submit' color={errors.email || errors.password ? 'error' : 'primary'}>Login</Button>
                     </Stack>
                 </Form>
