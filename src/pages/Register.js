@@ -1,7 +1,9 @@
 import {React, useState } from 'react'
+
 import { useNavigate } from "react-router-dom";
 
 import { Box, TextField, Button, Container, Typography , CircularProgress, Backdrop } from '@material-ui/core'
+
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 
@@ -29,8 +31,10 @@ const validationSchema = yup.object({
 
 function Register(props) {
   const [status, setStatus] = useState(undefined);
+
   const navigate = useNavigate();
   const {classes} = props;
+
 
   const formik = useFormik({
     initialValues: {
@@ -122,6 +126,7 @@ function Register(props) {
                 helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                 className={classes.textField}
               />
+
               {status?.type === 'waiting' && <CircularProgress />
               }
               {status?.type === 'success' && <Alert severity="success">

@@ -18,8 +18,6 @@ function ImageSlider() {
         text: 'img3'
     }]
 
-    console.log(currentImg);
-
     return (
         <div className='carousel-outer'>
             <div className='carousel-inner' style={{background: `url(${images[currentImg].imageUrl})`}}>

@@ -37,7 +37,7 @@ export function getRequest(url, headers = {}) {
   return promise
 }
 
-//handle get requests
+//handle post requests
 /**
  * @param {string} url
  * @param {object} data
@@ -63,3 +63,31 @@ export function postRequest(url, data ,headers = {}){
 
   return promise
 }
+
+//handle patch requests
+/**
+ * @param {string} url
+ * @param {object} data
+ * @param {object} headers
+ * @returns {Promise}
+ * 
+ * this function is used to handle patch requests, receives the url, data and headers,
+ * if not headers are passed, then the headers object is setted to {}
+ * if token exist in localStorage, then add it to headers
+ */
+export function patchRequest(url, data ,headers = {}){
+  let promise = new Promise((resolve, reject) => {
+    config.headers = headers;
+    addToken();
+    axios.patch(url, data, config)
+    .then(response => {
+      resolve(response.data)
+    })
+    .catch(error => {
+      reject(error)
+    })
+  })
+
+  return promise
+}
+
