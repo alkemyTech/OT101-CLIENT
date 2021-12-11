@@ -25,6 +25,7 @@ export default function BackofficeUsers() {
 	const deleteUser = async id => {
 		alert("Eliminar usuario con ID: " + id)
 
+		// TODO make the delete work, and probably should check that the token matches the user id sent, or that the token belongs to an admin. Just to make sure you cant delete another users account.
 		// await deleteRequest(`..../users/${id}`)
 	}
 
