@@ -8,10 +8,7 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { Button, Container, Link, Box } from "@mui/material"
 import { Link as RouterLink } from "react-router-dom"
-
-function createData(name, calories, fat, carbs, protein) {
-	return { name, calories, fat, carbs, protein }
-}
+import { deleteRequest } from "../services/requestsHandlerService"
 
 const rows = [
 	{ firstName: "John", lastName: "Smith", email: "john@smith.com", id: 1 },
@@ -27,6 +24,8 @@ const rows = [
 export default function BackofficeUsers() {
 	const deleteUser = async id => {
 		alert("Eliminar usuario con ID: " + id)
+
+		// await deleteRequest(`..../users/${id}`)
 	}
 
 	return (
