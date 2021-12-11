@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import PublicLayout from '../components/PublicLayout';
 
 function Activities() {
-    return (
-        <>
-            <h1>Activities...</h1>    
-        </>
-    )
+  return (
+    <PublicLayout>
+      <h1>Activities...</h1>
+    </PublicLayout>
+  );
 }
 
-export default Activities
+export default Activities;
