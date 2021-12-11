@@ -2,18 +2,20 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-import Loading from './components/Loading';
 import { useSelector } from 'react-redux';
 import RouteProtection from './components/RouteProtection';
 import routes from './routes';
-
+import CircularProgress from '@mui/material/CircularProgress';
+import { Box } from '@mui/system';
 function App() {
   const { isTokenVerified } = useSelector((state) => state.user);
 
   return (
     <BrowserRouter>
       {!isTokenVerified ? (
-        <Loading />
+        <Box sx={{ height: '100vh', display: 'flex' }}>
+          <CircularProgress sx={{ mx: 'auto', my: 'auto', display: 'block'}} size={64} />
+        </Box>
       ) : (
         <Routes>
           {routes.map(({ path, element, protect, roles }) => (
