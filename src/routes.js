@@ -13,10 +13,8 @@ import Register from './pages/Register';
   name: Name of the route, if not set will not show
   path: Route pathname
   element: Route Component
-  protect: If set true, the Route will be wrapped with a RouteProtection component and will not show in public header
-  roles: Array of roles, will be pass to the RouteProtection
 */
-const routes = [
+const publicRoutes = [
   { name: 'Inicio', path: '/', element: <Home /> },
   { name: 'Sobre nosotros', path: '/about', element: <About /> },
   { name: 'Actividades', path: '/activities', element: <Activities /> },
@@ -24,15 +22,24 @@ const routes = [
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
   { name: 'Contacto', path: '/contact', element: <Contact /> },
   { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
-  {
-    name: 'Backoffice',
-    path: '/backoffice/contacts',
-    element: <BackofficeContacts />,
-    protect: true,
-    roles: ['admin'],
-  },
   { path: '/register', element: <Register /> },
   { path: '*', element: <Error404 /> },
 ];
 
-export default routes;
+/* Routes settings
+  name: Name of the route, if not set will not show
+  path: Route pathname
+  element: Route Component
+  roles: Array of roles, will pass to the RouteProtection
+*/
+// Siempre protegidas con <RouteProtection/>
+const backofficeRoutes = [
+  {
+    name: 'Backoffice',
+    path: '/backoffice/contacts',
+    element: <BackofficeContacts />,
+    roles: ['admin'],
+  },
+];
+
+export { publicRoutes, backofficeRoutes };
