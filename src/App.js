@@ -17,6 +17,7 @@ import Register from './pages/Register';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import RouteProtection from './components/RouteProtection';
+import EditOrganization from './pages/EditOrganization';
 
 /* Routes settings
   name: Name of the route, if not set will not show
@@ -38,6 +39,13 @@ const routes = [
     path: '/backoffice/contacts',
     element: <BackofficeContacts />,
     protect: true,
+    roles: ['admin'],
+  },
+  {
+    name: 'Edit Organization',
+    path: '/backoffice/edit-organization',
+    element: <EditOrganization />,
+    protect: false,
     roles: ['admin'],
   },
   { path: '/register', element: <Register /> },
