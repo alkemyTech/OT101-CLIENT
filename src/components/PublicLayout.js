@@ -1,10 +1,10 @@
 import Footer from './Footer';
 import Header from './Header';
-import routes from '../routes';
 import { Container } from '@mui/material';
 import { Box } from '@mui/system';
+import { Outlet } from "react-router-dom";
 
-export default function PublicLayout({ children }) {
+export default function PublicLayout({ children, routes }) {
   return (
     <Box
       sx={{
@@ -16,7 +16,7 @@ export default function PublicLayout({ children }) {
       }}
     >
       <Header routes={routes} />
-      <Container sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', py: 10 }}>{children}</Container>
+      <Container sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', py: 10 }}>{<Outlet/>}</Container>
       <Footer />
     </Box>
   );
