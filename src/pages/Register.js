@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 
-import { Box, TextField, Button, Container, Typography } from '@material-ui/core';
+import { TextField, Button, Container, Typography } from '@material-ui/core';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 
@@ -11,7 +11,6 @@ import { withStyles } from '@material-ui/core';
 import Styles from '../styles/RegisterFormStyles';
 
 import * as authService from '../services/authService';
-import PublicLayout from '../components/PublicLayout';
 
 const validationSchema = yup.object({
   name: yup.string().required('Debe ingresar su nombre.'),
@@ -57,85 +56,83 @@ function Register(props) {
   });
 
   return (
-    <PublicLayout>
-      <Container maxWidth="sm" className={classes.innerBox}>
-        <Typography variant="h5" component="h2" textAlign="left" fontWeight="bold" mb={6}>
-          Registrarse
-        </Typography>
-        <form onSubmit={formik.handleSubmit} className={classes.form}>
-          <TextField
-            fullWidth
-            id="name"
-            name="name"
-            label="Nombre"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            error={formik.touched.name && Boolean(formik.errors.name)}
-            helperText={formik.touched.name && formik.errors.name}
-            className={classes.textField}
-          />
-          <TextField
-            fullWidth
-            id="lastName"
-            name="lastName"
-            label="Apellido"
-            value={formik.values.lastName}
-            onChange={formik.handleChange}
-            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-            helperText={formik.touched.name && formik.errors.lastName}
-            className={classes.textField}
-          />
-          <TextField
-            fullWidth
-            id="email"
-            name="email"
-            label="Email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-            className={classes.textField}
-          />
-          <TextField
-            fullWidth
-            id="password"
-            name="password"
-            label="Contraseña"
-            type="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-            className={classes.textField}
-          />
-          <TextField
-            fullWidth
-            id="confirmPassword"
-            name="confirmPassword"
-            label="Confirmar contraseña"
-            type="password"
-            value={formik.values.confirmPassword}
-            onChange={formik.handleChange}
-            error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-            helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
-            className={classes.textField}
-          />
-          {status?.type === 'success' && (
-            <Alert severity="success">
-              <AlertTitle>Usuario Creado</AlertTitle>
-            </Alert>
-          )}
-          {status?.type === 'error' && (
-            <Alert severity="error">
-              <AlertTitle>Error al crear Usuario</AlertTitle>
-            </Alert>
-          )}
-          <Button color="primary" variant="contained" fullWidth type="submit" className={classes.button}>
-            Enviar
-          </Button>
-        </form>
-      </Container>
-    </PublicLayout>
+    <Container maxWidth="sm" className={classes.innerBox}>
+      <Typography variant="h5" component="h2" textAlign="left" fontWeight="bold" mb={6}>
+        Registrarse
+      </Typography>
+      <form onSubmit={formik.handleSubmit} className={classes.form}>
+        <TextField
+          fullWidth
+          id="name"
+          name="name"
+          label="Nombre"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          error={formik.touched.name && Boolean(formik.errors.name)}
+          helperText={formik.touched.name && formik.errors.name}
+          className={classes.textField}
+        />
+        <TextField
+          fullWidth
+          id="lastName"
+          name="lastName"
+          label="Apellido"
+          value={formik.values.lastName}
+          onChange={formik.handleChange}
+          error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+          helperText={formik.touched.name && formik.errors.lastName}
+          className={classes.textField}
+        />
+        <TextField
+          fullWidth
+          id="email"
+          name="email"
+          label="Email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
+          className={classes.textField}
+        />
+        <TextField
+          fullWidth
+          id="password"
+          name="password"
+          label="Contraseña"
+          type="password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
+          className={classes.textField}
+        />
+        <TextField
+          fullWidth
+          id="confirmPassword"
+          name="confirmPassword"
+          label="Confirmar contraseña"
+          type="password"
+          value={formik.values.confirmPassword}
+          onChange={formik.handleChange}
+          error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+          helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+          className={classes.textField}
+        />
+        {status?.type === 'success' && (
+          <Alert severity="success">
+            <AlertTitle>Usuario Creado</AlertTitle>
+          </Alert>
+        )}
+        {status?.type === 'error' && (
+          <Alert severity="error">
+            <AlertTitle>Error al crear Usuario</AlertTitle>
+          </Alert>
+        )}
+        <Button color="primary" variant="contained" fullWidth type="submit" className={classes.button}>
+          Enviar
+        </Button>
+      </form>
+    </Container>
   );
 }
 

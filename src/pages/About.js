@@ -1,12 +1,7 @@
-import React from 'react'
-import PublicLayout from "../components/PublicLayout"
+import React from 'react';
 
 function About() {
-    return (
-        <PublicLayout>
-         <h1>About us...</h1>   
-        </PublicLayout>
-    )
+  return <h1>About us...</h1>;
 }
 
-export default About
+export default About;

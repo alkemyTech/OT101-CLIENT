@@ -1,12 +1,7 @@
-import React from 'react'
-import PublicLayout from "../components/PublicLayout"
+import React from 'react';
 
 function Contribute() {
-    return (
-        <PublicLayout>
-            <h1>Contribute...</h1>    
-        </PublicLayout>
-    )
+  return <h1>Contribute...</h1>;
 }
 
-export default Contribute
+export default Contribute;
