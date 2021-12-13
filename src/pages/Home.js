@@ -1,6 +1,10 @@
 import ImageSlider from '../components/ImageSlider/ImageSlider';
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+=======
+import React from 'react';
+>>>>>>> develop
 import Box from '@mui/material/Box';
 import { getRequest } from '../services/requestsHandlerService'
 import News from '../components/News';
@@ -18,7 +22,10 @@ const Home = () => {
 
   return (
     <div>
+<<<<<<< HEAD
       <h1>{user.isLogged === true? `Hola ${user.data.firstName}, bienvenido a Fundación somos más`: 'Bienvenido a Fundación somos más'}</h1>
+=======
+>>>>>>> develop
       <ImageSlider />
 
       <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
