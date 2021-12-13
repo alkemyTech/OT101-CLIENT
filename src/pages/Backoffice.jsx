@@ -9,6 +9,7 @@ import MuiAppBar from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -106,6 +107,10 @@ export default function Backoffice({children}) {
                     <Toolbar />
                     <List>
                         { privateRoutes.map(route => (
+                            <Tooltip 
+                                placement='right'
+                                title={open ? '' : route.name}
+                            >
                                 <ListItemButton
                                     key={route.name}
                                     component={Link}
@@ -116,6 +121,7 @@ export default function Backoffice({children}) {
                                     </ListItemIcon>
                                     <ListItemText primary={route.name} />
                                 </ListItemButton>
+                            </Tooltip>
                         ))
                     }
                     </List>
