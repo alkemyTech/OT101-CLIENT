@@ -40,6 +40,12 @@ const backofficeRoutes = [
     element: <BackofficeContacts />,
     roles: ['admin'],
   },
+  {
+    name: 'Activities List',
+    path: '/backoffice/activities',
+    element: <BackofficeActivities />,
+    roles: ['admin'],
+  },
 ];
 
 export { publicRoutes, backofficeRoutes };
