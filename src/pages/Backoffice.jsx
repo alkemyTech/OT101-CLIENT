@@ -108,11 +108,11 @@ export default function Backoffice({children}) {
                     <List>
                         { privateRoutes.map(route => (
                             <Tooltip 
+                                key={route.name}
                                 placement='right'
                                 title={open ? '' : route.name}
                             >
                                 <ListItemButton
-                                    key={route.name}
                                     component={Link}
                                     to={route.path}
                                 >
