@@ -83,7 +83,7 @@ const EditOrganization = () => {
                   helperText={errors.name}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} >
                 <TextField
                   id="logo"
                   name="logo"
@@ -96,8 +96,8 @@ const EditOrganization = () => {
                   helperText={errors.logo}
                 />
               </Grid>
-              <Grid item>
-                <Button variant="contained" fullWidth type="submit" disabled={isSubmitting}>
+              <Grid item style={{margin: 'auto'}}>
+                <Button variant="contained" fullWidth type="submit" disabled={isSubmitting} >
                 { isSubmitting ? 'Enviando' : 'Enviar' }
                 </Button>
               </Grid>
