@@ -45,7 +45,7 @@ const routes = [
     name: 'Edit Organization',
     path: '/backoffice/edit-organization',
     element: <EditOrganization />,
-    protect: false,
+    protect: true,
     roles: ['admin'],
   },
   { path: '/register', element: <Register /> },
