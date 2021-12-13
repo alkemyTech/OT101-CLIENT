@@ -8,6 +8,7 @@ import News from './pages/News';
 import Testimonials from './pages/Testimonials';
 import BackofficeContacts from './pages/BackofficeContacts';
 import Register from './pages/Register';
+import BackofficeActivities from './pages/BackofficeActivities';
 
 /* Routes settings
   name: Name of the route, if not set will not show
@@ -44,7 +45,7 @@ const backofficeRoutes = [
     name: 'Activities List',
     path: '/backoffice/activities',
     element: <BackofficeActivities />,
-    roles: ['admin'],
+    /* roles: ['admin'], */
   },
 ];
 
