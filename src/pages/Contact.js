@@ -1,46 +1,44 @@
-import React from 'react';
 import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { postRequest } from '../services/requestsHandlerService';
+import Swal from 'sweetalert2';
 
-function Contact() {
-  const { handleChange, handleSubmit, values, errors } = useFormik({
+const validationSchema = yup.object({
+  name: yup.string().required('Debe ingresar un nombre.').max(250, 'Máximo 250 caracteres'),
+  email: yup
+    .string()
+    .required('Debe ingresar un email.')
+    .max(250, 'Maximo 250 caracteres')
+    .email('Debe ingresar un email válido.'),
+  phone: yup.string().max(250, 'Maximo 250 caracteres'),
+  message: yup.string().required('Debe ingresar la consulta'),
+});
+
+const Contact = () => {
+  const doSubmit = (values, actions) => {
+    const apiRequest = postRequest('http://localhost:3006/contacts/', values);
+
+    apiRequest
+      .then((data) => {
+        Swal.fire('Contacto', 'Solicitud procesada correctamente', 'success');
+        actions.resetForm();
+      })
+      .catch((err) => {
+        Swal.fire('Contacto', 'No se pudo procesar la solicitud', 'error');
+      })
+      .finally(() => actions.setSubmitting(false));
+  };
+
+  const { handleChange, handleSubmit, values, errors, isSubmitting } = useFormik({
     initialValues: {
       name: '',
-      lastname: '',
       email: '',
       phone: '',
-      content: '',
+      message: '',
     },
-
-    validate: (values) => {
-      const errors = {};
-
-      if (!values.name) {
-        errors.name = 'Debes ingresar un nombre';
-      }
-
-      if (!values.lastname) {
-        errors.lastname = 'Debes ingresar un apellido';
-      }
-      if (!values.phone) {
-        errors.phone = 'Debes ingresar un número de teléfono';
-      }
-
-      if (!values.email) {
-        errors.email = 'Debes ingresar un email';
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Ingresa un email válido';
-      }
-
-      if (!values.content) {
-        errors.content = 'Debes ingresar la consulta';
-      }
-
-      return errors;
-    },
-    onSubmit: (values) => {
-      //Agregar llamada a servicio de contacto
-    },
+    validationSchema: validationSchema,
+    onSubmit: doSubmit,
     validateOnChange: false,
   });
 
@@ -55,7 +53,7 @@ function Contact() {
       </Typography>
       <form onSubmit={handleSubmit} noValidate>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <TextField
               id="name"
               name="name"
@@ -67,19 +65,7 @@ function Contact() {
               helperText={errors.name}
             />
           </Grid>
-          <Grid item xs={6}>
-            <TextField
-              id="lastname"
-              name="lastname"
-              onChange={handleChange}
-              value={values.lastname}
-              label="Apellido"
-              fullWidth
-              error={Boolean(errors.lastname)}
-              helperText={errors.lastname}
-            />
-          </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} md={6}>
             <TextField
               id="email"
               name="email"
@@ -92,14 +78,14 @@ function Contact() {
               helperText={errors.email}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} md={6}>
             <TextField
               id="phone"
               name="phone"
               type="phone"
               onChange={handleChange}
               value={values.phone}
-              label="Phone"
+              label="Teléfono"
               fullWidth
               error={Boolean(errors.phone)}
               helperText={errors.phone}
@@ -107,27 +93,28 @@ function Contact() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              id="content"
-              name="content"
+              id="message"
+              name="message"
               onChange={handleChange}
-              value={values.content}
+              value={values.message}
               multiline
-              label="Escribe tu consulta..."
+              rows={6}
+              label="Escribe tu mensaje..."
               fullWidth
-              error={Boolean(errors.content)}
-              helperText={errors.content}
+              error={Boolean(errors.message)}
+              helperText={errors.message}
             />
           </Grid>
 
           <Grid item>
-            <Button variant="contained" fullWidth type="submit">
-              Enviar
+            <Button variant="contained" fullWidth type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Enviando' : 'Enviar'}
             </Button>
           </Grid>
         </Grid>
       </form>
     </Container>
   );
-}
+};
 
 export default Contact;
