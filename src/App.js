@@ -1,7 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
-
 import About from './pages/About';
 import Activities from './pages/Activities';
 import Contact from './pages/Contact';
@@ -14,7 +12,12 @@ import Testimonials from './pages/Testimonials';
 import BackofficeContacts from './pages/BackofficeContacts';
 import BackofficeNews from './pages/BackofficeNews';
 import { useSelector } from 'react-redux';
-import Register from './pages/Register';
+//import RouteProtection from './components/RouteProtection';
+import CircularProgress from '@mui/material/CircularProgress';
+import { Box } from '@mui/system';
+import { publicRoutes, backofficeRoutes } from './routes';
+import PublicLayout from './components/PublicLayout';
+import Backoffice from './pages/Backoffice';
 
 function App() {
   const { isTokenVerified } = useSelector((state) => state.user);
@@ -22,7 +25,9 @@ function App() {
   return (
     <BrowserRouter>
       {!isTokenVerified ? (
-        <Loading />
+        <Box sx={{ height: '100vh', display: 'flex' }}>
+          <CircularProgress sx={{ mx: 'auto', my: 'auto', display: 'block' }} size={64} />
+        </Box>
       ) : (
         <Routes>
           <Route path="/" element={<Home />} />
@@ -37,8 +42,35 @@ function App() {
           <Route path="/backoffice/news" element={<BackofficeNews />} />
           {/* returns the Erorr404 component in case the path does't exist */}
           <Route path="*" element={<Error404 />} />
-
           <Route path="/register" element={<Register />} />
+          <Route path="/" element={<PublicLayout routes={publicRoutes} />}>
+            {publicRoutes.map(({ path, element }) => (
+              <Route key={path} path={path} element={element} />
+            ))}
+          </Route>
+          { /* Code to use when login process is functional
+          <Route
+            path="/backoffice"
+            element={
+              <RouteProtection roles={['user', 'admin']}>
+                <Backoffice routes={backofficeRoutes} />
+              </RouteProtection>
+            }
+          >
+            {backofficeRoutes.map(({ path, element, roles }) => (
+              <Route
+                key={path}
+                path={path}
+                element={<RouteProtection roles={roles}>{element}</RouteProtection>}
+              />
+            ))}
+          </Route>
+          */ }
+          <Route path="/backoffice" element={<Backoffice routes={backofficeRoutes} />}>
+            {backofficeRoutes.map(({ path, element, roles }) => (
+              <Route key={path} path={path} element={element} />
+            ))}
+          </Route>
         </Routes>
       )}
     </BrowserRouter>
