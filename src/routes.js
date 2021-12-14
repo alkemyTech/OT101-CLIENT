@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import BackofficeHome from './pages/backoffice/BackofficeHome';
 import BackofficeDummy from './pages/backoffice/BackofficeDummy';
 import BackofficeContacts from './pages/BackofficeContacts';
+import BackofficeNews from './pages/BackofficeNews';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -78,7 +79,7 @@ const backofficeRoutes = [
   {
     name: 'Novedades',
     path: 'news',
-    element: <BackofficeDummy />,
+    element: <BackofficeNews />,
     roles: ['admin'],
     icon: <FeedIcon />,
   },
