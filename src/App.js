@@ -2,11 +2,12 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
-import RouteProtection from './components/RouteProtection';
+//import RouteProtection from './components/RouteProtection';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Box } from '@mui/system';
 import { publicRoutes, backofficeRoutes } from './routes';
 import PublicLayout from './components/PublicLayout';
+import Backoffice from './pages/Backoffice';
 
 function App() {
   const { isTokenVerified } = useSelector((state) => state.user);
@@ -21,12 +22,30 @@ function App() {
         <Routes>
           <Route path="/" element={<PublicLayout routes={publicRoutes} />}>
             {publicRoutes.map(({ path, element }) => (
-              <Route path={path} element={element} />
+              <Route key={path} path={path} element={element} />
             ))}
           </Route>
-          <Route path="/backoffice">
+          { /* Code to use when login process is functional
+          <Route
+            path="/backoffice"
+            element={
+              <RouteProtection roles={['user', 'admin']}>
+                <Backoffice routes={backofficeRoutes} />
+              </RouteProtection>
+            }
+          >
             {backofficeRoutes.map(({ path, element, roles }) => (
-              <Route path={path} element={<RouteProtection roles={roles}>{element}</RouteProtection>} />
+              <Route
+                key={path}
+                path={path}
+                element={<RouteProtection roles={roles}>{element}</RouteProtection>}
+              />
+            ))}
+          </Route>
+          */ }
+          <Route path="/backoffice" element={<Backoffice routes={backofficeRoutes} />}>
+            {backofficeRoutes.map(({ path, element, roles }) => (
+              <Route key={path} path={path} element={element} />
             ))}
           </Route>
         </Routes>
