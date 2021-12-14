@@ -7,7 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-export const EnhancedTableToolbar = (props) => {
+export const EnhancedTableToolbar = (props, {title}) => {
   const { numSelected } = props;
 
   return (
@@ -37,7 +37,7 @@ export const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          News
+          {props.title}
         </Typography>
       )}
 
