@@ -45,7 +45,7 @@ const backofficeRoutes = [
     name: 'Activities List',
     path: '/backoffice/activities',
     element: <BackofficeActivities />,
-    /* roles: ['admin'], */
+    roles: ['admin'],
   },
 ];
 
