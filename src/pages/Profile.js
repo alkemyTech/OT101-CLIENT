@@ -1,13 +1,30 @@
 import { Button, Container, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
+import { deleteAccount, editProfile } from '../features/user/userSlice';
 
 export default function Profile() {
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  const handleEditProfile = () => {};
+  const handleEditProfile = () => {
+    //Vincular con el formulario de edición de usuario (57)
+  };
 
-  const handleDeleteAccount = () => {};
+  const handleDeleteAccount = () => {
+    Swal.fire({
+      title: '¿Estás seguro de que deseas borrar la cuenta?',
+      showCancelButton: true,
+      icon: 'warning',
+      confirmButtonText: 'Borrar cuenta',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+    }).then((result) => {
+      if (result.isConfirmed) dispatch(deleteAccount(user.id));
+    });
+  };
 
   return (
     <Container
