@@ -31,3 +31,12 @@ export async function verifyToken() {
 export function logout() {
   localStorage.clear('token');
 }
+
+export async function editProfile(id, data) {
+  return httpService.patchRequest(`localhost:3000/users/${id}`, data);
+
+}
+
+export async function deleteAccount(id) {
+  return httpService.deleteRequest(`localhost:3000/users/${id}`);
+}
