@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+//import { useSelector } from 'react-redux';
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,8 +19,6 @@ import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuIcon from '@mui/icons-material/Menu';
-
-import privateRoutes from '../privateRoutes';
 
 
 const drawerWidth = 200;
@@ -62,8 +61,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-export default function Backoffice({children}) {
+export default function Backoffice({routes}) {
     const [open, setOpen] = useState(false);
+//    const { role } = useSelector((state) => state.user);
+    const role = 'admin'; // temporary until login fully functional
+    const allowedRoutes = routes.filter(route => route.roles.includes(role));
+
     const toggleDrawer = () => {
         setOpen(!open);
     };
@@ -106,7 +109,7 @@ export default function Backoffice({children}) {
                 <Drawer variant="permanent" open={open}>
                     <Toolbar />
                     <List>
-                        { privateRoutes.map(route => (
+                        { allowedRoutes.map(route => (
                             <Tooltip 
                                 key={route.name}
                                 placement='right'
