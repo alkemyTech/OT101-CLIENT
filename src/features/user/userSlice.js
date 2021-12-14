@@ -3,7 +3,10 @@ import * as authService from '../../services/authService';
 
 const login = createAsyncThunk('users/login', (data) => authService.login(data));
 
-const verifyToken = createAsyncThunk('users/verifyToken', () => authService.verifyToken());
+const verifyToken = createAsyncThunk('users/verifyToken', authService.verifyToken);
+
+const deleteAccount = createAsyncThunk('users/deleteAccount', (id) => authService.deleteAccount(id));
+const editProfile = createAsyncThunk('users/edit', ({ id, data }) => authService.editProfile(id, data));
 
 export const userSlice = createSlice({
   name: 'user',
@@ -18,23 +21,33 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(login.fulfilled, (state, action) => {
+    builder.addCase(login.fulfilled, (state, { payload }) => {
       state.isLogged = true;
-      state.data = action.payload;
+      state.data = payload;
     });
 
-    builder.addCase(verifyToken.fulfilled, (state, action) => {
+    builder.addCase(verifyToken.fulfilled, (state, { payload }) => {
       state.isLogged = true;
-      state.data = action.payload;
+      state.data = payload;
     });
-    
+
+    builder.addCase(deleteAccount.fulfilled, (state, action) => {
+      state.isLogged = false;
+      state.data = null;
+    });
+
+    builder.addCase(editProfile.fulfilled, (state, { payload }) => {
+      state.data.firstName = payload.firstName;
+      state.data.lastName = payload.lastName;
+      state.data.email = payload.email;
+    });
+
     builder.addMatcher(isAnyOf(verifyToken.fulfilled, verifyToken.rejected), (state) => {
       state.isTokenVerified = true;
     });
-
   },
 });
 
 export const { clearData } = userSlice.actions;
-export { login, verifyToken };
+export { login, verifyToken, deleteAccount, editProfile };
 export default userSlice.reducer;
