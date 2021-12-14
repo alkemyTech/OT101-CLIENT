@@ -6,9 +6,22 @@ import Error404 from './pages/Error404';
 import Home from './pages/Home';
 import News from './pages/News';
 import Testimonials from './pages/Testimonials';
-import BackofficeContacts from './pages/BackofficeContacts';
 import Register from './pages/Register';
 import EditOrganization from './pages/EditOrganization';
+
+import BackofficeHome from './pages/backoffice/BackofficeHome';
+import BackofficeDummy from './pages/backoffice/BackofficeDummy';
+import BackofficeContacts from './pages/BackofficeContacts';
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import BusinessIcon from '@mui/icons-material/Business';
+import CategoryIcon from '@mui/icons-material/Category';
+import ContactsIcon from '@mui/icons-material/Contacts';
+import FeedIcon from '@mui/icons-material/Feed';
+import GroupsIcon from '@mui/icons-material/Groups';
+import HomeIcon from '@mui/icons-material/Home';
+import MessageIcon from '@mui/icons-material/Message';
 
 /* Routes settings
   name: Name of the route, if not set will not show
@@ -36,10 +49,67 @@ const publicRoutes = [
 // Siempre protegidas con <RouteProtection/>
 const backofficeRoutes = [
   {
+    name: 'Inicio',
+    path: '/backoffice',
+    element: <BackofficeHome />,
+    roles: ['admin', 'user'],
+    icon: <HomeIcon />,
+  },
+  {
+    name: 'Categorías',
+    path: 'categories',
+    element: <BackofficeDummy />,
+    roles: ['admin'],
+    icon: <CategoryIcon />,
+  },
+  {
     name: 'Backoffice Contacts',
     path: '/backoffice/contacts',
     element: <BackofficeContacts />,
     roles: ['admin'],
+    icon: <ContactsIcon />,
+  },
+  {
+    name: 'Miembros',
+    path: 'members',
+    element: <BackofficeDummy />,
+    roles: ['admin'],
+    icon: <AccountTreeIcon />,
+  },
+  {
+    name: 'Novedades',
+    path: 'news',
+    element: <BackofficeDummy />,
+    roles: ['admin'],
+    icon: <FeedIcon />,
+  },
+  {
+    name: 'Organización',
+    path: 'activities',
+    element: <BackofficeDummy />,
+    roles: ['admin'],
+    icon: <BusinessIcon />,
+  },
+  {
+    name: 'Testimonios',
+    path: 'testimonials',
+    element: <BackofficeDummy />,
+    roles: ['admin'],
+    icon: <MessageIcon />,
+  },
+  {
+    name: 'Usuarios',
+    path: 'users',
+    element: <BackofficeDummy />,
+    roles: ['admin'],
+    icon: <GroupsIcon />,
+  },
+  {
+    name: 'Mi Perfil',
+    path: 'profile',
+    element: <BackofficeDummy />,
+    roles: ['admin', 'user'],
+    icon: <AccountCircleIcon />,
   },
   {
     name: 'Backoffice Edit Organization',
