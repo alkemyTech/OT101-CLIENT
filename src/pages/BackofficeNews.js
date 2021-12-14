@@ -13,7 +13,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { getRequest } from '../services/requestsHandlerService';
 import { EnhancedTableToolbar } from '../components/ScreenTables/EnhancedTableToolbar';
-import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHead';
+import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHeadNews';
 
 function createData(idKey, name, image, createAt) {
   return {
@@ -65,7 +65,7 @@ EnhancedTableHead.propTypes = {
 };
 
 
-<EnhancedTableToolbar />
+<EnhancedTableToolbar title='News' />
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };

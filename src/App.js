@@ -6,7 +6,6 @@ import Contact from './pages/Contact';
 import Contribute from './pages/Contribute';
 import Error404 from './pages/Error404';
 import Home from './pages/Home';
-import Loading from './components/Loading';
 import News from './pages/News';
 import Testimonials from './pages/Testimonials';
 import BackofficeContacts from './pages/BackofficeContacts';

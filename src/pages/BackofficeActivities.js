@@ -66,7 +66,7 @@ EnhancedTableHead.propTypes = {
 };
 
 
-<EnhancedTableToolbar />
+<EnhancedTableToolbar title='Activities'/>
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
