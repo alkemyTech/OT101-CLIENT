@@ -13,14 +13,15 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { getRequest } from '../services/requestsHandlerService';
 import { EnhancedTableToolbar } from '../components/ScreenTables/EnhancedTableToolbar';
-import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHeadNews';
+import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHeadActivities';
 
-function createData(idKey, name, image, createAt) {
+function createData(idKey, name, image, content, deleteAt) {
   return {
     idKey,
     name,
     image,
-    createAt,
+    content,
+    deleteAt,
   };
 }
 
@@ -65,25 +66,26 @@ EnhancedTableHead.propTypes = {
 };
 
 
-<EnhancedTableToolbar title='News' />
+<EnhancedTableToolbar title='Activities'/>
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
 
-export default function EnhancedTable() {
+export default function BackofficeActivities () {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('idKey');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setRows] = useState([createData(1, 'Ayuda Escolar', 'imagen de prueba', '24/06/2021'), createData(2, 'Beneficio Comedor', 'imagen de prueba 2', '04/09/2021')]);
+  const [rows, setRows] = useState([createData(1, 'Dia del niño', 'imagen de prueba', 'contenido de prueba', ''), createData(2, 'Jornada de Lectura infantil', 'imagen de prueba 2', 'contenido de prueba 2', '')]);
 
+  const activitiesRequest = ''; /* add url to this statement  */
   useEffect(() => {
-      getRequest('http://localhost:3001/news')
+      getRequest(activitiesRequest)
       .then( data =>
-        setRows(data.forEach( item => createData(item.idKey, item.name, item.image, item.createAt)))
+        setRows(data.forEach( item => createData(item.idKey, item.name, item.image, item.content, item.deleteAt)))
       )
   }, [])
 
@@ -145,7 +147,7 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} title='Activities' />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -198,7 +200,8 @@ export default function EnhancedTable() {
                       </TableCell>
                       <TableCell align="right">{row.name}</TableCell>
                       <TableCell align="right">{row.image}</TableCell>
-                      <TableCell align="right">{row.createAt}</TableCell>
+                      <TableCell align="right">{row.content}</TableCell>
+                      <TableCell align="right">{row.deleteAt}</TableCell>
                     </TableRow>
                   );
                 })}

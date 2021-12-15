@@ -7,6 +7,7 @@ import { Box } from '@mui/system';
 import { publicRoutes, backofficeRoutes } from './routes';
 import PublicLayout from './components/PublicLayout';
 import Backoffice from './pages/Backoffice';
+import Register from './pages/Register';
 
 function App() {
 	const { isTokenVerified } = useSelector(state => state.user)

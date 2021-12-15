@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import News from './pages/News';
 import Testimonials from './pages/Testimonials';
 import Register from './pages/Register';
+import BackofficeActivities from './pages/BackofficeActivities';
 
 import BackofficeHome from './pages/backoffice/BackofficeHome';
 import BackofficeDummy from './pages/backoffice/BackofficeDummy';
@@ -110,6 +111,12 @@ const backofficeRoutes = [
     element: <BackofficeDummy />,
     roles: ['admin', 'user'],
     icon: <AccountCircleIcon />,
+  },
+  {
+    name: 'Activities List',
+    path: '/backoffice/activities',
+    element: <BackofficeActivities />,
+    roles: ['admin'],
   },
 ];
 
