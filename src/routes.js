@@ -20,6 +20,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import CategoryIcon from '@mui/icons-material/Category';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import FeedIcon from '@mui/icons-material/Feed';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import GroupsIcon from '@mui/icons-material/Groups';
 import HomeIcon from '@mui/icons-material/Home';
 import MessageIcon from '@mui/icons-material/Message';
@@ -57,6 +58,13 @@ const backofficeRoutes = [
     icon: <HomeIcon />,
   },
   {
+    name: 'Actividades',
+    path: 'activities',
+    element: <BackofficeActivities />,
+    roles: ['admin'],
+    icon: <FormatListBulletedIcon />,
+  },
+  {
     name: 'Categorías',
     path: 'categories',
     element: <BackofficeDummy />,
@@ -86,7 +94,7 @@ const backofficeRoutes = [
   },
   {
     name: 'Organización',
-    path: 'activities',
+    path: 'testing',
     element: <BackofficeDummy />,
     roles: ['admin'],
     icon: <BusinessIcon />,
@@ -111,12 +119,6 @@ const backofficeRoutes = [
     element: <BackofficeDummy />,
     roles: ['admin', 'user'],
     icon: <AccountCircleIcon />,
-  },
-  {
-    name: 'Activities List',
-    path: '/backoffice/activities',
-    element: <BackofficeActivities />,
-    roles: ['admin'],
   },
 ];
 

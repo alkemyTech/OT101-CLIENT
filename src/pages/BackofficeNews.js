@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,7 +13,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { getRequest } from '../services/requestsHandlerService';
 import { EnhancedTableToolbar } from '../components/ScreenTables/EnhancedTableToolbar';
-import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHeadNews';
+import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHead';
+import headCellNews from '../components/ScreenTables/HeadCellsNews';
 
 function createData(idKey, name, image, createAt) {
   return {
@@ -54,21 +55,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-<EnhancedTableHead />
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
-
-
-<EnhancedTableToolbar title='News' />
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
 
 
 export default function EnhancedTable() {
@@ -145,7 +131,7 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} title='News' />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -154,6 +140,7 @@ export default function EnhancedTable() {
           >
             <EnhancedTableHead
               numSelected={selected.length}
+              headCells={headCellNews}
               order={order}
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}

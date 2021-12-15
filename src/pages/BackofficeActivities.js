@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,7 +13,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { getRequest } from '../services/requestsHandlerService';
 import { EnhancedTableToolbar } from '../components/ScreenTables/EnhancedTableToolbar';
-import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHeadActivities';
+import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHead';
+import HeadCellsActivities from '../components/ScreenTables/HeadCellsActivities';
 
 function createData(idKey, name, image, content, deleteAt) {
   return {
@@ -54,22 +55,6 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
-<EnhancedTableHead />
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
-
-
-<EnhancedTableToolbar title='Activities'/>
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
 
 
 export default function BackofficeActivities () {
@@ -161,6 +146,7 @@ export default function BackofficeActivities () {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
+              headCells={HeadCellsActivities}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
