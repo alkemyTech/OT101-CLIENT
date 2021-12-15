@@ -5,7 +5,7 @@ import Checkbox from '@mui/material/Checkbox';
 import TableHead from '@mui/material/TableHead';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
-import headCells from './headCellsNews';
+import headCells from './HeadCellsNews';
 
 
 

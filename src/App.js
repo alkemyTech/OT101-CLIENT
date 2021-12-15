@@ -6,7 +6,6 @@ import Contact from './pages/Contact';
 import Contribute from './pages/Contribute';
 import Error404 from './pages/Error404';
 import Home from './pages/Home';
-import Loading from './components/Loading';
 import News from './pages/News';
 import Testimonials from './pages/Testimonials';
 import BackofficeContacts from './pages/BackofficeContacts';
@@ -18,6 +17,7 @@ import { Box } from '@mui/system';
 import { publicRoutes, backofficeRoutes } from './routes';
 import PublicLayout from './components/PublicLayout';
 import Backoffice from './pages/Backoffice';
+import Register from './pages/Register';
 
 function App() {
   const { isTokenVerified } = useSelector((state) => state.user);
