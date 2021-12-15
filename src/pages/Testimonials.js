@@ -1,3 +1,4 @@
+
 import React from "react"
 
 function Testimonials() {
@@ -8,4 +9,4 @@ function Testimonials() {
 	)
 }
 
-export default Testimonials
+export default Testimonials;
