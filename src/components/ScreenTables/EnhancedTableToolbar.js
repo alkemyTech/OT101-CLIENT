@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { alpha } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -63,4 +65,9 @@ export const EnhancedTableToolbar = (props, {title}) => {
       )}
     </Toolbar>
   );
+};
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+  title: PropTypes.string,
 };
