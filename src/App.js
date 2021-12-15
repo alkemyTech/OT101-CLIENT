@@ -9,8 +9,8 @@ import PublicLayout from './components/PublicLayout';
 import Backoffice from './pages/Backoffice';
 
 function App() {
-  const { isTokenVerified } = useSelector((state) => state.user);
-
+	const { isTokenVerified } = useSelector(state => state.user)
+  
   return (
     <BrowserRouter>
       {!isTokenVerified ? (
@@ -53,4 +53,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
