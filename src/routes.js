@@ -32,7 +32,7 @@ const publicRoutes = [
   { name: 'Inicio', path: '/', element: <Home /> },
   { name: 'Sobre nosotros', path: '/about', element: <About /> },
   { name: 'Actividades', path: '/activities', element: <Activities /> },
-  { name: 'Novedades', path: '/news', element: <News /> },
+  { name: 'Novedades', path: '/Novedades', element: <News /> },
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
   { name: 'Contacto', path: '/contact', element: <Contact /> },
   { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
