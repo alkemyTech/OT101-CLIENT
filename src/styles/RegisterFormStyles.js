@@ -1,4 +1,4 @@
-export default {
+const Styles = {
   innerBox: {
     border: '1px',
     padding: '40px',
@@ -16,4 +16,6 @@ export default {
     marginTop: '30px',
     padding: '10px',
   }
-}
+};
+
+export default Styles;

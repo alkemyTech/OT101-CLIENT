@@ -1,48 +1,45 @@
-import {React, useState } from 'react'
-
+import { React, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
 import { Box, TextField, Button, Container, Typography , CircularProgress, Backdrop } from '@material-ui/core'
-
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { withStyles } from '@material-ui/core';
 
-import { useFormik } from 'formik'
-import * as yup from 'yup'
-import { withStyles } from '@material-ui/core'
+import Styles from '../styles/RegisterFormStyles';
 
-import Styles from '../styles/RegisterFormStyles'
-
-import * as authService from '../services/authService'
+import * as authService from '../services/authService';
 
 const validationSchema = yup.object({
   name: yup.string().required('Debe ingresar su nombre.'),
   lastName: yup.string().required('Debe ingresar su apellido.'),
   email: yup.string().email('Debe ingresar un email valido.').required('Debe ingresar un email.'),
-  password: yup.string().min(6, 'La contraseña debe tener al menos 6 caracteres').required('Debe ingresar una contraseña.'),
-  confirmPassword: yup.string().required('Debe confirmar su contraseña.').when("password", {
-    is: val => (val && val.length > 0 ? true : false),
-    then: yup.string().oneOf(
-      [yup.ref("password")],
-      "Las contraseñas no coinciden"
-    )
-  })
-})
+  password: yup
+    .string()
+    .min(6, 'La contraseña debe tener al menos 6 caracteres')
+    .required('Debe ingresar una contraseña.'),
+  confirmPassword: yup
+    .string()
+    .required('Debe confirmar su contraseña.')
+    .when('password', {
+      is: (val) => (val && val.length > 0 ? true : false),
+      then: yup.string().oneOf([yup.ref('password')], 'Las contraseñas no coinciden'),
+    }),
+});
 
 function Register(props) {
   const [status, setStatus] = useState(undefined);
-
   const navigate = useNavigate();
   const {classes} = props;
-
-
+  
   const formik = useFormik({
     initialValues: {
       name: '',
       lastName: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -57,7 +54,6 @@ function Register(props) {
         });
     },
   });
-
 
   return (
     <>   
@@ -153,4 +149,4 @@ function Register(props) {
   )
 }
 
-export default withStyles(Styles)(Register)
+export default withStyles(Styles)(Register);
