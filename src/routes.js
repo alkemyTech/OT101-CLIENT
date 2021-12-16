@@ -13,6 +13,7 @@ import BackofficeHome from './pages/backoffice/BackofficeHome';
 import BackofficeDummy from './pages/backoffice/BackofficeDummy';
 import BackofficeContacts from './pages/BackofficeContacts';
 import BackofficeNews from './pages/BackofficeNews';
+import BackofficeTestimonials from './pages/BackofficeTestimonials';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -102,7 +103,7 @@ const backofficeRoutes = [
   {
     name: 'Testimonios',
     path: 'testimonials',
-    element: <BackofficeDummy />,
+    element: <BackofficeTestimonials />,
     roles: ['admin'],
     icon: <MessageIcon />,
   },
