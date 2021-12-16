@@ -16,7 +16,7 @@ export default function PublicLayout({ children, routes }) {
       }}
     >
       <Header routes={routes} />
-      <Container sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', py: 10 }}>{<Outlet/>}</Container>
+      <Container sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>{<Outlet/>}</Container>
       <Footer />
     </Box>
   );

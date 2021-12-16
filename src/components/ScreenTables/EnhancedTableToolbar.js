@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { alpha } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -7,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-export const EnhancedTableToolbar = (props) => {
+export const EnhancedTableToolbar = (props, {title}) => {
   const { numSelected } = props;
 
   return (
@@ -37,7 +39,7 @@ export const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          News
+          {props.title}
         </Typography>
       )}
 
@@ -63,4 +65,9 @@ export const EnhancedTableToolbar = (props) => {
       )}
     </Toolbar>
   );
+};
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+  title: PropTypes.string,
 };
