@@ -4,8 +4,8 @@ import { CircularProgress, Container } from '@mui/material';
 import { Box } from '@mui/system';
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from "../features/organization/organizationSlice";
-import { useEffect } from "react";
+import { fetchData } from '../features/organization/organizationSlice';
+import { useEffect } from 'react';
 
 export default function PublicLayout({ children, routes }) {
   const organization = useSelector((state) => state.organization);
@@ -14,7 +14,7 @@ export default function PublicLayout({ children, routes }) {
   useEffect(() => {
     dispatch(fetchData());
   }, []);
-  
+
   return organization.isFetching ? (
     <Box sx={{ height: '100vh', display: 'flex' }}>
       <CircularProgress
@@ -36,7 +36,7 @@ export default function PublicLayout({ children, routes }) {
       <Container sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         {<Outlet />}
       </Container>
-      <Footer />
+      <Footer routes={routes} />
     </Box>
   );
 }
