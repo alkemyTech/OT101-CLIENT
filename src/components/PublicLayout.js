@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../features/organization/organizationSlice';
 import { useEffect } from 'react';
 
-export default function PublicLayout({ children, routes }) {
+export default function PublicLayout({ routes }) {
   const organization = useSelector((state) => state.organization);
   const dispatch = useDispatch();
 
