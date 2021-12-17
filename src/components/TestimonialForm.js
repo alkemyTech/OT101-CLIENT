@@ -16,7 +16,7 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
   /* const [isLoading, setIsLoading] = useState(false); */
 
   const validationSchema = yup.object({
-    name: yup
+    nombre: yup
       .string()
       .required('Debe ingresar un título.'),
     content: yup
@@ -57,7 +57,7 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
 
   const formik = useFormik({
     initialValues: {
-      name: testimonial ? testimonial.name : '',
+      nombre: testimonial ? testimonial.nombre : '',
       image: null,
       content: testimonial ? testimonial.content : '',
     },
@@ -91,13 +91,13 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <TextField
             fullWidth
-            id='name'
-            name='name'
+            id='nombre'
+            name='nombre'
             label='Título'
-            value={formik.values.name}
+            value={formik.values.nombre}
             onChange={formik.handleChange}
-            error={formik.touched.name && Boolean(formik.errors.name)}
-            helperText={formik.touched.name && formik.errors.name}
+            error={formik.touched.nombre && Boolean(formik.errors.nombre)}
+            helperText={formik.touched.nombre && formik.errors.nombre}
             className={classes.textField}
           />
           <FormControl
@@ -149,7 +149,7 @@ TestimonialForm.propTypes = {
   open: PropTypes.bool,
   testimonial: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    name: PropTypes.string,
+    nombre: PropTypes.string,
     content: PropTypes.string,
     image: PropTypes.string,
   }),
