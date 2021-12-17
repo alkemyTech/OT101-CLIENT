@@ -24,7 +24,6 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import GroupsIcon from '@mui/icons-material/Groups';
 import HomeIcon from '@mui/icons-material/Home';
 import MessageIcon from '@mui/icons-material/Message';
-import TestimonialsForm from './components/TestimonialsForm';
 
 /* Routes settings
   name: Name of the route, if not set will not show
@@ -40,7 +39,6 @@ const publicRoutes = [
   { name: 'Contacto', path: '/contact', element: <Contact /> },
   { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
   { path: '/register', element: <Register /> },
-  { path: '/testForm', element: <TestimonialsForm /> },
   { path: '*', element: <Error404 /> },
 ];
 
