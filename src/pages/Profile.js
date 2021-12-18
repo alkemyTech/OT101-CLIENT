@@ -2,15 +2,17 @@ import { Button, Container, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-import { deleteAccount, editProfile } from '../features/user/userSlice';
+import EditUserForm from '../components/EditUserForm';
+import { deleteAccount } from '../features/user/userSlice';
+import { Modal } from '@mui/material';
+import { useState } from 'react';
 
 export default function Profile() {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.data);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const handleEditProfile = () => {
-    //Vincular con el formulario de edición de usuario (57)
-  };
+  const handleEditProfile = () => setIsFormOpen(true);
 
   const handleDeleteAccount = () => {
     Swal.fire({
@@ -26,10 +28,19 @@ export default function Profile() {
     });
   };
 
+  const handleFormClose = () => setIsFormOpen(false);
+
   return (
     <Container
       maxWidth="sm"
-      sx={{ border: 1, paddingX: 5, paddingY: 5, borderRadius: 0.5, borderColor: 'lightgrey', marginTop: 16 }}
+      sx={{
+        border: 1,
+        paddingX: 5,
+        paddingY: 5,
+        borderRadius: 0.5,
+        borderColor: 'lightgrey',
+        marginTop: 16,
+      }}
     >
       <Box>
         <Typography variant="h5" component="h2">
@@ -37,6 +48,7 @@ export default function Profile() {
         </Typography>
         <Typography variant="subtitle1">{user.email}</Typography>
       </Box>
+
       <Box sx={{ marginTop: 4, gap: 2, display: 'flex' }}>
         <Button color="primary" variant="contained" onClick={handleEditProfile}>
           Editar perfil
@@ -45,6 +57,23 @@ export default function Profile() {
           Borrar cuenta
         </Button>
       </Box>
+
+      <Modal
+        open={isFormOpen}
+        onClose={handleFormClose}
+        sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}
+      >
+        <Container
+          sx={{
+            backgroundColor: 'white',
+            borderRadius: 0.5,
+            borderColor: 'lightgrey',
+          }}
+          maxWidth="sm"
+        >
+          <EditUserForm user={user}/>
+        </Container>
+      </Modal>
     </Container>
   );
 }

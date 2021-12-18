@@ -1,18 +1,34 @@
 import { createSlice, createAsyncThunk, isAnyOf } from '@reduxjs/toolkit';
 import * as authService from '../../services/authService';
 
-const login = createAsyncThunk('users/login', (data) => authService.login(data));
+const login = createAsyncThunk('users/login', (data) =>
+  authService.login(data)
+);
 
-const verifyToken = createAsyncThunk('users/verifyToken', authService.verifyToken);
+const verifyToken = createAsyncThunk(
+  'users/verifyToken',
+  authService.verifyToken
+);
 
-const deleteAccount = createAsyncThunk('users/deleteAccount', (id) => authService.deleteAccount(id));
-const editProfile = createAsyncThunk('users/edit', ({ id, data }) => authService.editProfile(id, data));
+const deleteAccount = createAsyncThunk('users/deleteAccount', (id) =>
+  authService.deleteAccount(id)
+);
+const editProfile = createAsyncThunk('users/edit', ({ id, data }) =>
+  authService.editProfile(id, data)
+);
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
     isLogged: false,
     isTokenVerified: false,
+    data: { // TEMP
+      firstName: 'Test firstname',
+      lastName: 'Test lastname',
+      email: 'test@email',
+      image: '',
+      role: { name: 'Admin' },
+    },
   },
   reducer: {
     clearData: (state) => {
@@ -42,9 +58,12 @@ export const userSlice = createSlice({
       state.data.email = payload.email;
     });
 
-    builder.addMatcher(isAnyOf(verifyToken.fulfilled, verifyToken.rejected), (state) => {
-      state.isTokenVerified = true;
-    });
+    builder.addMatcher(
+      isAnyOf(verifyToken.fulfilled, verifyToken.rejected),
+      (state) => {
+        state.isTokenVerified = true;
+      }
+    );
   },
 });
 
