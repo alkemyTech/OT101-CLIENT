@@ -35,18 +35,19 @@ export default function Profile() {
       maxWidth="sm"
       sx={{
         border: 1,
-        paddingX: 5,
-        paddingY: 5,
+        padding:3,
         borderRadius: 0.5,
         borderColor: 'lightgrey',
         marginTop: 16,
       }}
     >
       <Box>
-        <Typography variant="h5" component="h2">
-          {user.firstName} {user.lastName}
+        <Typography variant="h4" component="h2" sx={{marginBottom: 2}}>
+          Tu perfil
         </Typography>
-        <Typography variant="subtitle1">{user.email}</Typography>
+        <Typography variant="subtitle1">Nombre: {user.firstName}</Typography>
+        <Typography variant="subtitle1">Apellido: {user.lastName}</Typography>
+        <Typography variant="subtitle1">Emai: {user.email}</Typography>
       </Box>
 
       <Box sx={{ marginTop: 4, gap: 2, display: 'flex' }}>
