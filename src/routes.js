@@ -11,6 +11,7 @@ import BackofficeActivities from './pages/BackofficeActivities';
 
 import BackofficeHome from './pages/backoffice/BackofficeHome';
 import BackofficeDummy from './pages/backoffice/BackofficeDummy';
+import BackofficeCategories from './pages/BackofficeCategories';
 import BackofficeContacts from './pages/BackofficeContacts';
 import BackofficeNews from './pages/BackofficeNews';
 
@@ -67,7 +68,7 @@ const backofficeRoutes = [
   {
     name: 'Categorías',
     path: 'categories',
-    element: <BackofficeDummy />,
+    element: <BackofficeCategories />,
     roles: ['admin'],
     icon: <CategoryIcon />,
   },
