@@ -27,14 +27,17 @@ export default function BackofficeCategories () {
   const [dense, setDense] = React.useState(false);
   const [rows, setRows] = useState(sampleData);
 
-
-  useEffect(() => {
-      getRequest('http://localhost:3001/categories')
+  const getRequestCategories = () => {
+    getRequest('http://localhost:3001/categories')
       .then( data => setRows(
         data.map( item => createData(item.id, item.name, item.description)
       ))
       )
       .catch(err => console.log(err))
+  }
+  
+  useEffect(() => {
+      getRequestCategories();
   }, [rows])
 
 
@@ -52,12 +55,7 @@ export default function BackofficeCategories () {
       console.log(`Delete element number ${i}!!`, category);
       sweetAlertServices('confirm', 'Eliminando categoría', 'Categoría eliminada exitosamente');
       deleteRequest(`http://localhost:3001/categories/${category}`)
-      getRequest('http://localhost:3001/categories')
-        .then( data => setRows(
-          data.map( item => createData(item.id, item.name, item.description)
-        ))
-        )
-        .catch(err => console.log(err))
+      getRequestCategories();
     }
   };
 
