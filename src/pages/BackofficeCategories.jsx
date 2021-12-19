@@ -47,9 +47,12 @@ export default function BackofficeCategories () {
   };
 
   const handleDelete = (selectedRows) => {
-    console.log('Delete pressed!!', selectedRows);
-    sweetAlertServices('confirm', 'Eliminando categoría', 'Categoría eliminada exitosamente');
-    deleteRequest(`http://localhost:3001/categories/${selectedRows[0]}`)
+    for (let i = 0; i < selectedRows.length; i++) {
+      const category = selectedRows[i];
+      console.log(`Delete element number ${i}!!`, category);
+      sweetAlertServices('confirm', 'Eliminando categoría', 'Categoría eliminada exitosamente');
+      deleteRequest(`http://localhost:3001/categories/${category}`)
+    }
   };
 
   return (
