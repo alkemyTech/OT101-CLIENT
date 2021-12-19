@@ -35,7 +35,7 @@ export default function BackofficeCategories () {
       ))
       )
       .catch(err => console.log(err))
-  }, [])
+  }, [rows])
 
 
   const handleChangeDense = (event) => {
@@ -52,6 +52,12 @@ export default function BackofficeCategories () {
       console.log(`Delete element number ${i}!!`, category);
       sweetAlertServices('confirm', 'Eliminando categoría', 'Categoría eliminada exitosamente');
       deleteRequest(`http://localhost:3001/categories/${category}`)
+      getRequest('http://localhost:3001/categories')
+        .then( data => setRows(
+          data.map( item => createData(item.id, item.name, item.description)
+        ))
+        )
+        .catch(err => console.log(err))
     }
   };
 
