@@ -4,9 +4,10 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { getRequest } from '../services/requestsHandlerService';
+import { getRequest, deleteRequest } from '../services/requestsHandlerService';
 import HeadCellsCategories from '../components/ScreenTables/headCellsCategories';
 import EnhancedTable from '../components/EnhancedTable';
+import sweetAlertServices from '../services/sweetAlertServices'
 
 function createData(idKey, name, description) {
   return {
@@ -28,7 +29,7 @@ export default function BackofficeCategories () {
 
 
   useEffect(() => {
-      getRequest('/categories')
+      getRequest('http://localhost:3001/categories')
       .then( data => setRows(
         data.map( item => createData(item.id, item.name, item.description)
       ))
@@ -47,6 +48,8 @@ export default function BackofficeCategories () {
 
   const handleDelete = (selectedRows) => {
     console.log('Delete pressed!!', selectedRows);
+    sweetAlertServices('confirm', 'Eliminando categoría', 'Categoría eliminada exitosamente');
+    deleteRequest(`http://localhost:3001/categories/${selectedRows[0]}`)
   };
 
   return (
