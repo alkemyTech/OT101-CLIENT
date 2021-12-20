@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -9,21 +9,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import { getRequest } from '../services/requestsHandlerService';
 import { EnhancedTableToolbar } from '../components/ScreenTables/EnhancedTableToolbar';
 import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHead';
-import headCellNews from '../components/ScreenTables/headCellsNews';
 
-function createData(idKey, name, image, createAt) {
-  return {
-    idKey,
-    name,
-    image,
-    createAt,
-  };
-}
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -56,22 +44,13 @@ function stableSort(array, comparator) {
 }
 
 
-
-export default function EnhancedTable() {
+export default function EnhancedTable({ headCells, rows, title, dense, onEdit, onDelete }) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('idKey');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setRows] = useState([createData(1, 'Ayuda Escolar', 'imagen de prueba', '24/06/2021'), createData(2, 'Beneficio Comedor', 'imagen de prueba 2', '04/09/2021')]);
 
-  useEffect(() => {
-      getRequest('http://localhost:3001/news')
-      .then( data =>
-        setRows(data.forEach( item => createData(item.idKey, item.name, item.image, item.createAt)))
-      )
-  }, [])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -118,20 +97,29 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  const handleDelete = () => {
+    onDelete(selected);
+  }
+
+  const handleEdit = () => {
+    onEdit(selected);
+  }
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} title='News' />
+        <EnhancedTableToolbar 
+            numSelected={selected.length}
+            title={title}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -140,12 +128,12 @@ export default function EnhancedTable() {
           >
             <EnhancedTableHead
               numSelected={selected.length}
-              headCells={headCellNews}
               order={order}
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
+              headCells={headCells}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
@@ -183,9 +171,17 @@ export default function EnhancedTable() {
                       >
                         {row.idKey}
                       </TableCell>
-                      <TableCell align="right">{row.name}</TableCell>
-                      <TableCell align="right">{row.image}</TableCell>
-                      <TableCell align="right">{row.createAt}</TableCell>
+                      {
+                            headCells
+                                .filter(cell => cell.id !== 'id' && cell.id !== 'idKey')
+                                .map(cell => (
+                                    <TableCell align="right" key={cell.id}>
+                                        {row[cell.id]}
+                                    </TableCell>
+                                )
+                                    
+                            )
+                      }
                     </TableRow>
                   );
                 })}
@@ -211,10 +207,6 @@ export default function EnhancedTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </Box>
   );
 }
