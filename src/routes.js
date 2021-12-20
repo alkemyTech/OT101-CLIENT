@@ -9,8 +9,11 @@ import Testimonials from './pages/Testimonials';
 import Register from './pages/Register';
 import BackofficeActivities from './pages/BackofficeActivities';
 
+import ActivityDetails from './pages/ActivityDetails';
+
 import BackofficeHome from './pages/backoffice/BackofficeHome';
 import BackofficeDummy from './pages/backoffice/BackofficeDummy';
+import BackofficeCategories from './pages/BackofficeCategories';
 import BackofficeContacts from './pages/BackofficeContacts';
 import BackofficeNews from './pages/BackofficeNews';
 
@@ -34,6 +37,7 @@ const publicRoutes = [
   { name: 'Inicio', path: '/', element: <Home /> },
   { name: 'Sobre nosotros', path: '/about', element: <About /> },
   { name: 'Actividades', path: '/activities', element: <Activities /> },
+  { path: '/Actividades/:id', element: <ActivityDetails /> },
   { name: 'Novedades', path: '/Novedades', element: <News /> },
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
   { name: 'Contacto', path: '/contact', element: <Contact /> },
@@ -67,7 +71,7 @@ const backofficeRoutes = [
   {
     name: 'Categorías',
     path: 'categories',
-    element: <BackofficeDummy />,
+    element: <BackofficeCategories />,
     roles: ['admin'],
     icon: <CategoryIcon />,
   },

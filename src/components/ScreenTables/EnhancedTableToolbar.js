@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-export const EnhancedTableToolbar = ({ numSelected, title, onDelete }) => {
+export const EnhancedTableToolbar = ({ numSelected, title, onDelete, onEdit }) => {
   return (
     <Toolbar
       sx={{
@@ -47,7 +47,7 @@ export const EnhancedTableToolbar = ({ numSelected, title, onDelete }) => {
       {numSelected > 0 ? (
         <>
           <Tooltip title="Edit">
-            <IconButton>
+            <IconButton onClick={onEdit}>
               <EditIcon />
             </IconButton>
           </Tooltip>
@@ -71,4 +71,6 @@ export const EnhancedTableToolbar = ({ numSelected, title, onDelete }) => {
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
   title: PropTypes.string,
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func,
 };
