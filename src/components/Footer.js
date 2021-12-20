@@ -71,7 +71,7 @@ const Footer = ({ routes }) => {
               {tempSocials.map((social) => {
                 const Icon = iconsType[social.icon];
                 return (
-                  <MenuItem>
+                  <MenuItem key={social.icon}>
                     <a href={social.url}>
                       <Icon sx={{ margin: 1, color: 'white' }} />
                     </a>
