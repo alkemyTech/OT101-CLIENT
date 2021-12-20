@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { getRequest } from '../services/requestsHandlerService';
-import HeadCellsCategories from '../components/ScreenTables/HeadCellsCategories';
+import HeadCellsCategories from '../components/ScreenTables/headCellsCategories';
 import EnhancedTable from '../components/EnhancedTable';
 
 function createData(idKey, name, description) {
