@@ -8,10 +8,13 @@ import News from './pages/News';
 import Testimonials from './pages/Testimonials';
 import Register from './pages/Register';
 import EditOrganization from './pages/EditOrganization';
+import BackofficeActivities from './pages/BackofficeActivities';
 
 import BackofficeHome from './pages/backoffice/BackofficeHome';
 import BackofficeDummy from './pages/backoffice/BackofficeDummy';
+import BackofficeCategories from './pages/BackofficeCategories';
 import BackofficeContacts from './pages/BackofficeContacts';
+import BackofficeNews from './pages/BackofficeNews';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -19,6 +22,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import CategoryIcon from '@mui/icons-material/Category';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import FeedIcon from '@mui/icons-material/Feed';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import GroupsIcon from '@mui/icons-material/Groups';
 import HomeIcon from '@mui/icons-material/Home';
 import MessageIcon from '@mui/icons-material/Message';
@@ -32,7 +36,7 @@ const publicRoutes = [
   { name: 'Inicio', path: '/', element: <Home /> },
   { name: 'Sobre nosotros', path: '/about', element: <About /> },
   { name: 'Actividades', path: '/activities', element: <Activities /> },
-  { name: 'Novedades', path: '/news', element: <News /> },
+  { name: 'Novedades', path: '/Novedades', element: <News /> },
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
   { name: 'Contacto', path: '/contact', element: <Contact /> },
   { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
@@ -56,9 +60,16 @@ const backofficeRoutes = [
     icon: <HomeIcon />,
   },
   {
+    name: 'Actividades',
+    path: 'activities',
+    element: <BackofficeActivities />,
+    roles: ['admin'],
+    icon: <FormatListBulletedIcon />,
+  },
+  {
     name: 'Categorías',
     path: 'categories',
-    element: <BackofficeDummy />,
+    element: <BackofficeCategories />,
     roles: ['admin'],
     icon: <CategoryIcon />,
   },
@@ -79,14 +90,14 @@ const backofficeRoutes = [
   {
     name: 'Novedades',
     path: 'news',
-    element: <BackofficeDummy />,
+    element: <BackofficeNews />,
     roles: ['admin'],
     icon: <FeedIcon />,
   },
   {
-    name: 'Organización',
-    path: 'activities',
-    element: <BackofficeDummy />,
+    name: 'Backoffice Edit Organization',
+    path: '/backoffice/edit-organization',
+    element: <EditOrganization />,
     roles: ['admin'],
     icon: <BusinessIcon />,
   },
