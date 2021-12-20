@@ -10,7 +10,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
 export const EnhancedTableToolbar = ({ numSelected, title, onDelete, onEdit }) => {
-
   return (
     <Toolbar
       sx={{
@@ -18,7 +17,10 @@ export const EnhancedTableToolbar = ({ numSelected, title, onDelete, onEdit }) =
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity
+            ),
         }),
       }}
     >

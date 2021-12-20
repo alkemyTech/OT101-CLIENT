@@ -11,14 +11,14 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { getRequest } from '../services/requestsHandlerService';
+import { getRequest, deleteRequest } from '../services/requestsHandlerService';
 import { EnhancedTableToolbar } from '../components/ScreenTables/EnhancedTableToolbar';
 import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHead';
 import headCellNews from '../components/ScreenTables/headCellsNews';
 
-function createData(idKey, name, image, createAt) {
+function createData(id, name, image, createAt) {
   return {
-    idKey,
+    id,
     name,
     image,
     createAt,
@@ -55,23 +55,27 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-
-
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('idKey');
+  const [orderBy, setOrderBy] = React.useState('id');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setRows] = useState([createData(1, 'Ayuda Escolar', 'imagen de prueba', '24/06/2021'), createData(2, 'Beneficio Comedor', 'imagen de prueba 2', '04/09/2021')]);
+  const [rows, setRows] = useState([
+    createData(1, 'Ayuda Escolar', 'imagen de prueba', '24/06/2021'),
+    createData(2, 'Beneficio Comedor', 'imagen de prueba 2', '04/09/2021'),
+  ]);
 
   useEffect(() => {
-      getRequest('http://localhost:3001/news')
-      .then( data =>
-        setRows(data.forEach( item => createData(item.idKey, item.name, item.image, item.createAt)))
+    getRequest('http://localhost:3001/news').then((data) =>
+      setRows(
+        data.forEach((item) =>
+          createData(item.id, item.name, item.image, item.createAt)
+        )
       )
-  }, [])
+    );
+  }, []);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -80,9 +84,8 @@ export default function EnhancedTable() {
   };
 
   const handleSelectAllClick = (event) => {
-    
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.idKey);
+      const newSelecteds = rows.map((n) => n.id);
       setSelected(newSelecteds);
       return;
     }
@@ -102,7 +105,7 @@ export default function EnhancedTable() {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
@@ -124,6 +127,21 @@ export default function EnhancedTable() {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
+  const handleDeleteSelected = async () => {
+    const result = window.confirm(
+      '¿Seguro que vas a eliminar las noticias seleccionadas?'
+    ); //Reemplazar con sweet alert
+    if (result) {
+      try {
+        // await Promise.all(selected.map((id) => deleteRequest(`http://localhost:3001/news/${id}`))); //Descomentar para probar con el backend
+        setRows(rows.filter(row => !selected.includes(row.id)))
+        setSelected([]);
+      } catch {
+
+      }
+    }
+  };
+
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -131,7 +149,11 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} title='News' />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          title="News"
+          onDelete={handleDeleteSelected}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -153,17 +175,17 @@ export default function EnhancedTable() {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.idKey);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.idKey)}
+                      onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.idKey}
+                      key={row.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -181,7 +203,7 @@ export default function EnhancedTable() {
                         scope="row"
                         padding="none"
                       >
-                        {row.idKey}
+                        {row.id}
                       </TableCell>
                       <TableCell align="right">{row.name}</TableCell>
                       <TableCell align="right">{row.image}</TableCell>
