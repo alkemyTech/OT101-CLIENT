@@ -9,9 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-export const EnhancedTableToolbar = (props, {title}) => {
-  const { numSelected } = props;
-
+export const EnhancedTableToolbar = ({ numSelected, title, onDelete, onEdit }) => {
   return (
     <Toolbar
       sx={{
@@ -19,7 +17,10 @@ export const EnhancedTableToolbar = (props, {title}) => {
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity
+            ),
         }),
       }}
     >
@@ -39,19 +40,19 @@ export const EnhancedTableToolbar = (props, {title}) => {
           id="tableTitle"
           component="div"
         >
-          {props.title}
+          {title}
         </Typography>
       )}
 
       {numSelected > 0 ? (
         <>
           <Tooltip title="Edit">
-            <IconButton>
+            <IconButton onClick={onEdit}>
               <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
-            <IconButton>
+            <IconButton onClick={onDelete}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -70,4 +71,6 @@ export const EnhancedTableToolbar = (props, {title}) => {
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
   title: PropTypes.string,
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func,
 };
