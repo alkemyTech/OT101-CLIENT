@@ -14,7 +14,7 @@ import Switch from '@mui/material/Switch';
 import { getRequest } from '../services/requestsHandlerService';
 import { EnhancedTableToolbar } from '../components/ScreenTables/EnhancedTableToolbar';
 import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHead';
-import headCellNews from '../components/ScreenTables/HeadCellsNews';
+import headCellNews from '../components/ScreenTables/headCellsNews';
 
 function createData(idKey, name, image, createAt) {
   return {
