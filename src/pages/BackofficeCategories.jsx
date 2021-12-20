@@ -7,7 +7,7 @@ import Switch from '@mui/material/Switch';
 import { getRequest, deleteRequest } from '../services/requestsHandlerService';
 import HeadCellsCategories from '../components/ScreenTables/headCellsCategories';
 import EnhancedTable from '../components/EnhancedTable';
-import sweetAlertServices from '../services/sweetAlertServices'
+import {confirmAlert, basicAlert} from '../services/sweetAlertServices'
 
 function createData(idKey, name, description) {
   return {
@@ -50,13 +50,20 @@ export default function BackofficeCategories () {
   };
 
   const handleDelete = (selectedRows) => {
-    for (let i = 0; i < selectedRows.length; i++) {
-      const category = selectedRows[i];
-      console.log(`Delete element number ${i}!!`, category);
-      sweetAlertServices('confirm', 'Eliminando categoría', 'Categoría eliminada exitosamente');
-      deleteRequest(`http://localhost:3001/categories/${category}`)
-      getRequestCategories();
-    }
+    confirmAlert('Eliminar estas categorias?', 'Las cateogrías serán borradas permantemente', 'question')
+    .then(result => {
+      if(result.isConfirmed) {
+        for (let i = 0; i < selectedRows.length; i++) {
+          const category = selectedRows[i];
+          console.log(`Delete element number ${i}!!`, category);
+          deleteRequest(`http://localhost:3001/categories/${category}`);
+          getRequestCategories();
+          basicAlert('Categorias eliminadas exitosamente', '', 'success');
+        }
+      } else {
+        basicAlert('Acción cancelada', '', 'error');
+      }
+    })
   };
 
   return (
