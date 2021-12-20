@@ -8,6 +8,7 @@ import News from './pages/News';
 import Testimonials from './pages/Testimonials';
 import Register from './pages/Register';
 import BackofficeActivities from './pages/BackofficeActivities';
+import Login from './components/LoginForm'
 
 import BackofficeHome from './pages/backoffice/BackofficeHome';
 import BackofficeDummy from './pages/backoffice/BackofficeDummy';
@@ -39,6 +40,7 @@ const publicRoutes = [
   { name: 'Contacto', path: '/contact', element: <Contact /> },
   { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
   { path: '/register', element: <Register /> },
+  { path: '/login', element: <Login />},
   { path: '*', element: <Error404 /> },
 ];
 

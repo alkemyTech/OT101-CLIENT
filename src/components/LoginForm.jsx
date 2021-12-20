@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import { Button, Stack, Container, InputLabel, Input, FormControl, FormHelperText, Typography, AlertTitle, Alert, CircularProgress } from '@mui/material'
 import * as Yup from 'yup'
-import * as authService from '../services/authService'
+import login from '../features/user/userSlice'
 
 function LoginForm() {
     const navigate = useNavigate();
@@ -13,9 +13,8 @@ function LoginForm() {
         <Container maxWidth='xs'>
             <Formik 
                 initialValues={{ email: '', password: ''}}
-                onSubmit={async (values) => {
-                    await new Promise((r) => setTimeout(r, 500));
-                    authService.login(values)
+                onSubmit={(dispatch, values) => {
+                    dispatch(login(values))
                         .then((response) => {
                         if(response.email === undefined){
                             setStatus({ type: 'error' });
