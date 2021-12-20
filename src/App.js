@@ -8,6 +8,7 @@ import { publicRoutes, backofficeRoutes } from './routes';
 import PublicLayout from './components/PublicLayout';
 import Backoffice from './pages/Backoffice';
 
+
 function App() {
 	const { isTokenVerified } = useSelector(state => state.user)
   
