@@ -1,11 +1,11 @@
 import { Button, Container, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
 import EditUserForm from '../components/EditUserForm';
 import { deleteAccount } from '../features/user/userSlice';
 import { Modal } from '@mui/material';
 import { useState } from 'react';
+import { confirmAlert } from '../services/sweetAlertService';
 
 export default function Profile() {
   const user = useSelector((state) => state.user.data);
@@ -15,15 +15,8 @@ export default function Profile() {
   const handleEditProfile = () => setIsFormOpen(true);
 
   const handleDeleteAccount = () => {
-    Swal.fire({
-      title: '¿Estás seguro de que deseas borrar la cuenta?',
-      showCancelButton: true,
-      icon: 'warning',
-      confirmButtonText: 'Borrar cuenta',
-      cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-    }).then((result) => {
+    confirmAlert('¿Estás seguro de que deseas borrar la cuenta?', '', 'warning')
+    .then((result) => {
       if (result.isConfirmed) dispatch(deleteAccount(user.id));
     });
   };
@@ -35,14 +28,14 @@ export default function Profile() {
       maxWidth="sm"
       sx={{
         border: 1,
-        padding:3,
+        padding: 3,
         borderRadius: 0.5,
         borderColor: 'lightgrey',
         marginTop: 16,
       }}
     >
       <Box>
-        <Typography variant="h4" component="h2" sx={{marginBottom: 2}}>
+        <Typography variant="h4" component="h2" sx={{ marginBottom: 2 }}>
           Tu perfil
         </Typography>
         <Typography variant="subtitle1">Nombre: {user.firstName}</Typography>
@@ -72,7 +65,7 @@ export default function Profile() {
           }}
           maxWidth="sm"
         >
-          <EditUserForm user={user}/>
+          <EditUserForm user={user} />
         </Container>
       </Modal>
     </Container>
