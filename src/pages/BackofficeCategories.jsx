@@ -7,7 +7,7 @@ import Switch from '@mui/material/Switch';
 import { getRequest, deleteRequest } from '../services/requestsHandlerService';
 import HeadCellsCategories from '../components/ScreenTables/headCellsCategories';
 import EnhancedTable from '../components/EnhancedTable';
-import {confirmAlert, basicAlert} from '../services/sweetAlertServices'
+import {confirmAlert, basicAlert} from '../services/sweetAlertService'
 
 function createData(idKey, name, description) {
   return {

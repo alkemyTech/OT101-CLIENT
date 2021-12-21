@@ -19,9 +19,9 @@ function App() {
         </Box>
       ) : (
         <Routes>
-          <Route path="/" excact={true} element={<PublicLayout routes={publicRoutes} />}>
-            {publicRoutes.map(({ i, path, element }) => (
-              <Route key={i} path={path} element={element} />
+          <Route path="/" element={<PublicLayout routes={publicRoutes} />}>
+            {publicRoutes.map(({ path, element }) => (
+              <Route key={path} path={path} element={element} />
             ))}
           </Route>
           { /* Code to use when login process is functional

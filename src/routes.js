@@ -129,13 +129,7 @@ const backofficeRoutes = [
     element: <BackofficeDummy />,
     roles: ['admin', 'user'],
     icon: <AccountCircleIcon />,
-  },
-  {
-    name: 'Backoffice Edit Organization',
-    path: '/backoffice/edit-organization',
-    element: <EditOrganization />,
-    roles: ['admin'],
-  },
+  }
 ];
 
 export { publicRoutes, backofficeRoutes };
