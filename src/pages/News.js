@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import NewsGrid from '../components/NewsGrid';
 import { getRequest } from '../services/requestsHandlerService';
-import sweetAlert from '../services/sweetAlertServices';
+import { basicAlert } from '../services/sweetAlertService';
 
 function News() {
   const [ newsList, setNewsList ] = useState([]);
@@ -17,7 +17,7 @@ function News() {
       .then(news => setNewsList(news))
       .catch(err => {
         console.log(err)
-        sweetAlert('cancel', 'Sin conexión', 'No se pudo establecer la comunicación con el servidor');
+        basicAlert('Sin conexión', 'No se pudo establecer la comunicación con el servidor', 'error');
       })
       .finally(() => setIsLoading(false));
     }, []);
