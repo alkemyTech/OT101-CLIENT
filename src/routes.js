@@ -9,6 +9,7 @@ import Testimonials from './pages/Testimonials';
 import Register from './pages/Register';
 import EditOrganization from './pages/EditOrganization';
 import BackofficeActivities from './pages/BackofficeActivities';
+import Login from './components/LoginForm'
 
 import ActivityDetails from './pages/ActivityDetails';
 
@@ -47,6 +48,7 @@ const publicRoutes = [
   { path: '/profile', element: <Profile /> },
   { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
   { path: '/register', element: <Register /> },
+  { path: '/login', element: <Login />},
   { path: '*', element: <Error404 /> },
 ];
 
