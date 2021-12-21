@@ -4,9 +4,10 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { getRequest } from '../services/requestsHandlerService';
+import { getRequest, deleteRequest } from '../services/requestsHandlerService';
 import HeadCellsCategories from '../components/ScreenTables/headCellsCategories';
 import EnhancedTable from '../components/EnhancedTable';
+import {confirmAlert, basicAlert} from '../services/sweetAlertServices'
 
 function createData(idKey, name, description) {
   return {
@@ -26,15 +27,18 @@ export default function BackofficeCategories () {
   const [dense, setDense] = React.useState(false);
   const [rows, setRows] = useState(sampleData);
 
-
-  useEffect(() => {
-      getRequest('/categories')
+  const getRequestCategories = () => {
+    getRequest('http://localhost:3001/categories')
       .then( data => setRows(
         data.map( item => createData(item.id, item.name, item.description)
       ))
       )
       .catch(err => console.log(err))
-  }, [])
+  }
+  
+  useEffect(() => {
+      getRequestCategories();
+  }, [rows])
 
 
   const handleChangeDense = (event) => {
@@ -46,7 +50,20 @@ export default function BackofficeCategories () {
   };
 
   const handleDelete = (selectedRows) => {
-    console.log('Delete pressed!!', selectedRows);
+    confirmAlert('Eliminar estas categorias?', 'Las cateogrías serán borradas permantemente', 'question')
+    .then(result => {
+      if(result.isConfirmed) {
+        for (let i = 0; i < selectedRows.length; i++) {
+          const category = selectedRows[i];
+          console.log(`Delete element number ${i}!!`, category);
+          deleteRequest(`http://localhost:3001/categories/${category}`);
+          getRequestCategories();
+          basicAlert('Categorias eliminadas exitosamente', '', 'success');
+        }
+      } else {
+        basicAlert('Acción cancelada', '', 'error');
+      }
+    })
   };
 
   return (
