@@ -17,6 +17,7 @@ import BackofficeCategories from './pages/BackofficeCategories';
 import BackofficeContacts from './pages/BackofficeContacts';
 import BackofficeNews from './pages/BackofficeNews';
 import BackofficeTestimonials from './pages/BackofficeTestimonials';
+import Profile from './pages/Profile';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -42,6 +43,7 @@ const publicRoutes = [
   { name: 'Novedades', path: '/Novedades', element: <News /> },
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
   { name: 'Contacto', path: '/contact', element: <Contact /> },
+  { path: '/profile', element: <Profile /> },
   { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
   { path: '/register', element: <Register /> },
   { path: '*', element: <Error404 /> },
