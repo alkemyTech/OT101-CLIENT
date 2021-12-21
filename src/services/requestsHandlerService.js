@@ -1,14 +1,14 @@
 //import axios
-import axios from "axios"
+import axios from 'axios';
 
 //config object for axios to set the headers
-let config = {}
+let config = {};
 
 //if exist token in localStorage, then add it to headers
 function addToken() {
-	if (localStorage.getItem("token")) {
-		config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`
-	}
+  if (localStorage.getItem('token')) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  }
 }
 
 //handle get requests
@@ -22,20 +22,9 @@ function addToken() {
  * if token exist in localStorage, then add it to headers
  */
 export function getRequest(url, headers = {}) {
-	config.headers = headers
-	addToken()
-	let promise = new Promise((resolve, reject) => {
-		axios
-			.get(url, config)
-			.then(response => {
-				resolve(response.data)
-			})
-			.catch(error => {
-				reject(error)
-			})
-	})
-
-	return promise
+  config.headers = headers;
+  addToken();
+  return axios.get(url, config).then((response) => response.data);
 }
 
 //handle post requests
@@ -50,20 +39,9 @@ export function getRequest(url, headers = {}) {
  * if token exist in localStorage, then add it to headers
  */
 export function postRequest(url, data, headers = {}) {
-	let promise = new Promise((resolve, reject) => {
-		config.headers = headers
-		addToken()
-		axios
-			.post(url, data, config)
-			.then(response => {
-				resolve(response.data)
-			})
-			.catch(error => {
-				reject(error)
-			})
-	})
-
-	return promise
+  config.headers = headers;
+  addToken();
+  return axios.post(url, data, config).then((response) => response.data);
 }
 
 //handle patch requests
@@ -78,35 +56,18 @@ export function postRequest(url, data, headers = {}) {
  * if token exist in localStorage, then add it to headers
  */
 export function patchRequest(url, data, headers = {}) {
-	let promise = new Promise((resolve, reject) => {
-		config.headers = headers
-		addToken()
-		axios
-			.patch(url, data, config)
-			.then(response => {
-				resolve(response.data)
-			})
-			.catch(error => {
-				reject(error)
-			})
-	})
-
-	return promise
+  config.headers = headers;
+  addToken();
+  return axios.patch(url, data, config).then((response) => response.data);
 }
 
+/**
+ * @param {string} url
+ * @param {object} headers
+ * @returns {Promise}
+ */
 export function deleteRequest(url, headers = {}) {
-	let promise = new Promise((resolve, reject) => {
-		config.headers = headers
-		addToken()
-		axios
-			.delete(url, config)
-			.then(response => {
-				resolve(response.data)
-			})
-			.catch(error => {
-				reject(error)
-			})
-	})
-
-	return promise
+  config.headers = headers;
+  addToken();
+  return axios.delete(url, config).then((response) => response.data);
 }
