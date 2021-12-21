@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <>
-      <h1>{user.isLogged === true? `Hola , bienvenido a Fundación somos más`: 'Bienvenido a Fundación somos más'}</h1>
+      <h1>{user.isLogged === true? `Hola ${user.data.firstName}, bienvenido a Fundación somos más`: 'Bienvenido a Fundación somos más'}</h1>
       <ImageSlider />
 
       <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
