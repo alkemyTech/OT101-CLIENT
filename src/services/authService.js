@@ -34,8 +34,9 @@ export async function verifyToken() {
 		} catch (err) {
 			if (err.response.status === 401) localStorage.clear("token")
 			throw err
+			
 		}
-	}
+	} else throw new Error('Token not found')
 }
 
 export function logout() {
