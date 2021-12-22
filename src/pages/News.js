@@ -13,7 +13,7 @@ function News() {
 
 
   useEffect(() => {
-    getRequest('http://localhost:3000/news')
+    getRequest('/news')
       .then(news => setNewsList(news))
       .catch(err => {
         console.log(err)

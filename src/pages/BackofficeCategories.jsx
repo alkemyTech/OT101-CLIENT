@@ -28,7 +28,7 @@ export default function BackofficeCategories () {
   const [rows, setRows] = useState(sampleData);
 
   const getRequestCategories = () => {
-    getRequest('http://localhost:3001/categories')
+    getRequest('/categories')
       .then( data => setRows(
         data.map( item => createData(item.id, item.name, item.description)
       ))
@@ -56,7 +56,7 @@ export default function BackofficeCategories () {
         for (let i = 0; i < selectedRows.length; i++) {
           const category = selectedRows[i];
           console.log(`Delete element number ${i}!!`, category);
-          deleteRequest(`http://localhost:3001/categories/${category}`);
+          deleteRequest(`/categories/${category}`);
           getRequestCategories();
           basicAlert('Categorias eliminadas exitosamente', '', 'success');
         }

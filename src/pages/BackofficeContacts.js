@@ -217,7 +217,7 @@ export default function EnhancedTable() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-      getRequest('http://localhost:3001/backoffice/contacts')
+      getRequest('/backoffice/contacts')
       .then( data =>
         setRows(data.forEach( item => createData(item.idKey, item.name, item.lastname, item.phone, item.email)))
       )

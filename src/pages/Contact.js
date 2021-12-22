@@ -17,7 +17,7 @@ const validationSchema = yup.object({
 
 const Contact = () => {
   const doSubmit = (values, actions) => {
-    const apiRequest = postRequest('http://localhost:3006/contacts/', values);
+    const apiRequest = postRequest('/contacts', values);
 
     apiRequest
       .then((data) => {
