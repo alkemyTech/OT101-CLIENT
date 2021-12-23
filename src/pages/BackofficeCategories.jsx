@@ -31,7 +31,7 @@ export default function BackofficeCategories () {
   const [rows, setRows] = useState(sampleData);
 
   const getRequestCategories = async () => {
-    const data = await getRequest('http://localhost:3001/categories');
+    const data = await getRequest(`${process.env.REACT_APP_URL_SERVER}/categories`);
     try{
       setRows(data.map( item => createData(item.id, item.name, item.description, item.deletedAt, item.createdAt, item.updatedAt)))
     }
@@ -60,7 +60,7 @@ export default function BackofficeCategories () {
         for (let i = 0; i < selectedRows.length; i++) {
           const category = selectedRows[i];
           console.log(`Delete element number ${i}!!`, category);
-          deleteRequest(`http://localhost:3001/categories/${category}`);
+          deleteRequest(`${process.env.REACT_APP_URL_SERVER}/categories/${category}`);
           basicAlert('Categorias eliminadas exitosamente', '', 'success');
         }
         getRequestCategories();

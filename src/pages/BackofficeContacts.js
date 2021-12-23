@@ -26,7 +26,7 @@ export default function BackofficeContacts() {
   const [rows, setRows] = useState([]);
 
   const getRequestContacts = async () => {
-    const data = await getRequest('http://localhost:3001/contacts');
+    const data = await getRequest(`${process.env.REACT_APP_URL_SERVER}/contacts`);
     try{
       setRows(data.map( item => createData(item.id, item.name, item.lastname, item.phone, item.email, item.message, item.deleteAt)))
     }
@@ -54,7 +54,7 @@ export default function BackofficeContacts() {
         for (let i = 0; i < selectedRows.length; i++) {
           const contact = selectedRows[i];
           console.log(`Delete element number ${i}!!`, contact);
-          deleteRequest(`http://localhost:3001/contact/${contact}`);
+          deleteRequest(`${process.env.REACT_APP_URL_SERVER}/contact/${contact}`);
           basicAlert('Contacto/s eliminado/s exitosamente', '', 'success');
         }
         getRequestContacts();
