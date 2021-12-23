@@ -9,6 +9,7 @@ import { getRequest } from '../services/requestsHandlerService';
 
 function About() {
   const [members, setMembers] = useState([]);
+  /* console.log(process.env.URL_SERVER); */
   useEffect(()=> {
     getRequest('/members')
       .then(result => {
@@ -33,7 +34,7 @@ function About() {
               component="img"
               height="140"
               image={member.image}
-              alt="green iguana"
+              alt={`${member.firstName} ${member.lastName} image`}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
