@@ -29,7 +29,7 @@ const Footer = ({ routes }) => {
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{ justifyContent: 'space-between', padding: 1 }}>
+      <Toolbar sx={{ justifyContent: 'space-between', padding: 1, bgcolor: '#AFAFAF' }}>
         <Grid
           container
           sx={{
@@ -58,7 +58,7 @@ const Footer = ({ routes }) => {
                 ({ name, path, protect }) =>
                   !protect &&
                   name && (
-                    <MenuItem key={path} to={path} component={Link}>
+                    <MenuItem key={path} to={path} component={Link} sx={{ fontFamily: 'Signika' }}>
                       {name}
                     </MenuItem>
                   )
