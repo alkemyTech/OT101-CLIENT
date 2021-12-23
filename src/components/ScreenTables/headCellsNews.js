@@ -10,19 +10,19 @@ const headCellsNews = [
     id: 'name',
     numeric: true,
     disablePadding: false,
-    label: 'Name',
+    label: 'Nombre',
   },
   {
     id: 'image',
     numeric: true,
     disablePadding: false,
-    label: 'Image',
+    label: 'Imagen',
   },
   {
     id: 'createAt',
     numeric: true,
     disablePadding: false,
-    label: 'CreateAt',
+    label: 'Creado',
   }
 ];
 
