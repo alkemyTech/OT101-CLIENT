@@ -11,7 +11,7 @@ function About() {
   const [members, setMembers] = useState([]);
   /* console.log(process.env.URL_SERVER); */
   useEffect(()=> {
-    getRequest('/members')
+    getRequest(`${process.env.REACT_APP_URL_SERVER}/members`)
       .then(result => {
         setMembers(result);
       })
