@@ -132,7 +132,7 @@ export default function BackofficeActivities () {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} title='Activities' />
+        <EnhancedTableToolbar numSelected={selected.length} title='Actividades' />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
