@@ -1,4 +1,4 @@
-import { Typography, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import logoSomosMas from '../../assets/LOGO-SOMOS MAS.png'
 
 
