@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { getRequest, deleteRequest } from '../services/requestsHandlerService';
+import { getRequest } from '../services/requestsHandlerService';
 import { EnhancedTableToolbar } from '../components/ScreenTables/EnhancedTableToolbar';
 import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHead';
 import headCellNews from '../components/ScreenTables/HeadCellsNews';
