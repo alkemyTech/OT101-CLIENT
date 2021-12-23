@@ -14,7 +14,6 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 
 import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -79,6 +78,7 @@ export default function Backoffice({routes}) {
                     <Toolbar
                         sx={{
                             pr: '24px', // keep right padding when drawer closed
+                            backgroundColor: '#9AC9FB'
                         }}
                     >
                         <IconButton
@@ -87,7 +87,8 @@ export default function Backoffice({routes}) {
                             aria-label="open drawer"
                             onClick={toggleDrawer}
                             sx={{
-                                marginRight: '36px'
+                                marginRight: '36px',
+                                color: 'black'
                             }}
                         >
                             <MenuIcon />
@@ -99,9 +100,10 @@ export default function Backoffice({routes}) {
                             <Typography
                                 component="h1"
                                 variant="h6"
-                                color="white"
+                                color="black"
+                                fontFamily='Signika'
                             >
-                                Logo_S+
+                            Administracion del sitio
                             </Typography>
                         </Button>
                     </Toolbar>
@@ -122,7 +124,9 @@ export default function Backoffice({routes}) {
                                     <ListItemIcon>
                                         { route.icon }
                                     </ListItemIcon>
-                                    <ListItemText primary={route.name} />
+                                    <Typography sx={{fontFamily:'Signika'}}>
+                                        {route.name}
+                                    </Typography>
                                 </ListItemButton>
                             </Tooltip>
                         ))
