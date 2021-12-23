@@ -18,8 +18,12 @@ const Home = () => {
 
   return (
     <>
-      <h1>{user.isLogged === true? `Hola ${user.data.firstName}, bienvenido a Fundación somos más`: 'Bienvenido a Fundación somos más'}</h1>
-      <ImageSlider />
+      <h1>{user.isLogged === true? (`Hola ${user.data.firstName}, bienvenido a Fundación somos más`).toUpperCase(): ('Bienvenido a Fundación somos más').toUpperCase()}</h1>
+      <Box sx={{
+        display: 'flex'
+      }}>
+        <ImageSlider />
+      </Box>
 
       <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
         <h2>ÚLTIMAS NOVEDADES</h2>
