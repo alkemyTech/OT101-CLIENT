@@ -8,8 +8,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Button, Container } from '@mui/material';
+import logoSomosMas from '../assets/LOGO-SOMOS MAS.png'
 
-const Header = ({ logo = '', routes = [{ name: 'home', path: '/' }] }) => {
+const Header = ({ logo = logoSomosMas, routes = [{ name: 'home', path: '/' }] }) => {
   const location = useLocation();
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -23,10 +24,10 @@ const Header = ({ logo = '', routes = [{ name: 'home', path: '/' }] }) => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{bgcolor: '#E5DCB7'}}>
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
-          <img src={logo} alt="Logotipo Somos Más" />
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <img src={logo} width='130px' height='110px' alt="Logotipo Somos Más" />
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }} >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -64,7 +65,7 @@ const Header = ({ logo = '', routes = [{ name: 'home', path: '/' }] }) => {
                       onClick={handleCloseNavMenu}
                       to={path}
                       component={Link}
-                      sx={{ color: location.pathname === path ? 'black' : '#474747' }}
+                      sx={{ color: location.pathname === path ? 'black' : '#474747', fontFamily: 'Signika'}}
                     >
                       {name}
                     </MenuItem>
@@ -79,7 +80,7 @@ const Header = ({ logo = '', routes = [{ name: 'home', path: '/' }] }) => {
                 name && (
                   <Button
                     key={name}
-                    sx={{ color: location.pathname === path ? 'white' : 'lightgray' }}
+                    sx={{ color: location.pathname === path ? 'black' : '#898989', fontFamily: 'Signika' }}
                     to={path}
                     LinkComponent={Link}
                   >
