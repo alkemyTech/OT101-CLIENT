@@ -82,7 +82,7 @@ const backofficeRoutes = [
     icon: <CategoryIcon />,
   },
   {
-    name: 'Backoffice Contacts',
+    name: 'Contactos',
     path: '/backoffice/contacts',
     element: <BackofficeContacts />,
     roles: ['admin'],
@@ -103,7 +103,7 @@ const backofficeRoutes = [
     icon: <FeedIcon />,
   },
   {
-    name: 'Backoffice Edit Organization',
+    name: 'Organización',
     path: '/backoffice/edit-organization',
     element: <EditOrganization />,
     roles: ['admin'],
