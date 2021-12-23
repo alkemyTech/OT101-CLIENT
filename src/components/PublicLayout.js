@@ -17,10 +17,7 @@ export default function PublicLayout({ routes }) {
 
   return organization.isFetching ? (
     <Box sx={{ height: '100vh', display: 'flex' }}>
-      <CircularProgress
-        sx={{ mx: 'auto', my: 'auto', display: 'block' }}
-        size={64}
-      />
+      <CircularProgress sx={{ mx: 'auto', my: 'auto', display: 'block' }} size={64} />
     </Box>
   ) : (
     <Box
@@ -33,7 +30,7 @@ export default function PublicLayout({ routes }) {
       }}
     >
       <Header routes={routes} />
-      <Container sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+      <Container sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', paddingY: 6 }}>
         {<Outlet />}
       </Container>
       <Footer routes={routes} />
