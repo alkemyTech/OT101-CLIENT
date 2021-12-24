@@ -14,7 +14,7 @@ import Switch from '@mui/material/Switch';
 import { getRequest } from '../services/requestsHandlerService';
 import { EnhancedTableToolbar } from '../components/ScreenTables/EnhancedTableToolbar';
 import { EnhancedTableHead } from '../components/ScreenTables/EnhancedTableHead';
-import headCellNews from '../components/ScreenTables/HeadCellsNews';
+import headCellNews from '../components/ScreenTables/headCellsNews';
 
 function createData(id, name, image, createAt) {
   return {
@@ -133,7 +133,7 @@ export default function EnhancedTable() {
     ); //Reemplazar con sweet alert
     if (result) {
       try {
-        // await Promise.all(selected.map((id) => deleteRequest(`http://localhost:3001/news/${id}`))); //Descomentar para probar con el backend
+        await Promise.all(selected.map((id) => deleteRequest(`/news/${id}`))); //Descomentar para probar con el backend
         setRows(rows.filter(row => !selected.includes(row.id)))
         setSelected([]);
       } catch {
