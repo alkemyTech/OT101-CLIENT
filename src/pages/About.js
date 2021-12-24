@@ -8,9 +8,8 @@ import { getRequest } from '../services/requestsHandlerService';
 
 function About() {
   const [members, setMembers] = useState([]);
-  /* console.log(process.env.URL_SERVER); */
   useEffect(()=> {
-    getRequest(`${process.env.REACT_APP_URL_SERVER}/members`)
+    getRequest('/members')
       .then(result => {
         setMembers(result);
       })
