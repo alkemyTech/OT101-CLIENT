@@ -10,7 +10,7 @@ const Home = () => {
   const user = useSelector((state) => state.user);
 
   const [news, setNews] = useState([]);
-  const endPointNews = '';
+  const endPointNews = '/news';
 
   useEffect(() => {
     getRequest(endPointNews).then((response) => setNews(response.reverse().slice(0, 3)));
@@ -18,10 +18,10 @@ const Home = () => {
 
   return (
     <>
-      <Typography variant="h3" component="h2">
+      <Typography variant="h3" component="h2" fontFamily='Signika'>
         {user.isLogged === true
-          ? `Hola ${user.data.firstName}, bienvenido a Fundación somos más`
-          : 'Bienvenido a Fundación somos más'}
+          ? (`Hola ${user.data.firstName}, bienvenido a Fundación somos más`).toUpperCase()
+          : ('Bienvenido a Fundación somos más').toUpperCase()}
       </Typography>
       <Box sx={{ marginY: 4, display: 'flex' }}>
         <ImageSlider />
