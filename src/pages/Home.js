@@ -23,7 +23,7 @@ const Home = () => {
           ? `Hola ${user.data.firstName}, bienvenido a Fundación somos más`
           : 'Bienvenido a Fundación somos más'}
       </Typography>
-      <Box sx={{ marginY: 4 }}>
+      <Box sx={{ marginY: 4, display: 'flex' }}>
         <ImageSlider />
       </Box>
 
