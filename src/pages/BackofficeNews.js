@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { deleteRequest } from '../services/requestsHandlerService';
 
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
