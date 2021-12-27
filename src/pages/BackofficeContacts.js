@@ -26,7 +26,7 @@ export default function BackofficeContacts() {
   const [rows, setRows] = useState([]);
 
   const getRequestContacts = async () => {
-    const data = await getRequest(`${process.env.REACT_APP_URL_SERVER}/contacts`);
+    const data = await getRequest('/contacts');
     try{
       setRows(data.map( item => createData(item.id, item.name, item.lastname, item.phone, item.email, item.message, item.deleteAt)))
     }

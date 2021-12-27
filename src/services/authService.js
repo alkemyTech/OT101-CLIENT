@@ -27,7 +27,7 @@ export async function verifyToken() {
 		//Enviar token y obtener la data correspondiente al usuario, siempre y cuando el token sea válido
 		try {
 			const { firstName, lastName, email, token } =
-				await httpService.getRequest(`${process.env.REACT_APP_URL_SERVER}/auth/me`)
+				await httpService.getRequest('/auth/me')
 			localStorage.setItem("token", token)
 
 			return { firstName, lastName, email }

@@ -69,7 +69,7 @@ export default function EnhancedTable() {
   ]);
 
   useEffect(() => {
-    getRequest(`${process.env.REACT_APP_URL_SERVER}/news`).then((data) =>
+    getRequest('/news').then((data) =>
       setRows(
         data.forEach((item) =>
           createData(item.id, item.name, item.image, item.createAt)
