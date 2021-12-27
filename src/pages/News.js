@@ -13,7 +13,7 @@ function News() {
 
 
   useEffect(() => {
-    getRequest(`${process.env.REACT_APP_URL_SERVER}/news`)
+    getRequest('/news')
       .then(news => setNewsList(news))
       .catch(err => {
         console.log(err)
