@@ -1,10 +1,26 @@
-import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 
 const News = ({ news }) => {
   return (
-    <Grid item xs={12} sm={6} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
-      <img src={news.image} alt={news.title} />
-    </Grid>
+    <Card>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image={news.image}
+          alt={`news ${news.id} image`}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h3" fontFamily='Signika'>
+            {news.name}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
