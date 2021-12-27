@@ -55,7 +55,7 @@ const Contact = () => {
       }}
       justifyContent="center"
     >
-      <Typography variant="h4" component="h2" textAlign="left" mb={4}>
+      <Typography variant="h4" component="h2" textAlign="left" mb={4} fontFamily='Signika'>
         Contactate con nosotros
       </Typography>
       <form onSubmit={handleSubmit} noValidate>
@@ -113,8 +113,8 @@ const Contact = () => {
             />
           </Grid>
 
-          <Grid item>
-            <Button variant="contained" fullWidth type="submit" disabled={isSubmitting}>
+          <Grid item margin='auto'>
+            <Button variant="contained" fullWidth type="submit" disabled={isSubmitting} sx={{ backgroundColor: '#9AC9FB' }}>
               {isSubmitting ? 'Enviando' : 'Enviar'}
             </Button>
           </Grid>
