@@ -40,7 +40,7 @@ import MessageIcon from '@mui/icons-material/Message';
 const publicRoutes = [
   { name: 'Inicio', path: '/', element: <Home /> },
   { name: 'Sobre nosotros', path: '/about', element: <About /> },
-  { name: 'Actividades', path: '/activities', element: <Activities /> },
+  { name: 'Actividades', path: '/Actividades', element: <Activities /> },
   { path: '/Actividades/:id', element: <ActivityDetails /> },
   { name: 'Novedades', path: '/Novedades', element: <News /> },
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
