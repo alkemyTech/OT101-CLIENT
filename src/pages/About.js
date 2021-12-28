@@ -1,50 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, Grid } from '@mui/material';
 import { getRequest } from '../services/requestsHandlerService';
 
 function About() {
   const [members, setMembers] = useState([]);
-  useEffect(()=> {
+  useEffect(() => {
     getRequest('/members')
-      .then(result => {
+      .then((result) => {
         setMembers(result);
       })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
-    <Box 
-    sx={window.innerWidth >= '768'? {
-      display:'flex',
-      margin: 'auto'
-    }: {
-      margin: 'auto'
-    }}>
-      {members.map((member, i) => 
-        <Card sx={{ maxWidth: 345, margin: '10px 20px' }} key={i}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="140"
-              image={member.image}
-              alt="green iguana"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {member.firstName + ' ' + member.lastName}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      )}
-    </Box>
-  )
+    <>
+      <Typography variant='h3' component='h2' sx={{marginBottom: 4}}>Sobre nosotros</Typography>
+      <Grid container spacing={5} rowSpacing={8}>
+        {members.map((member, i) => (
+          <Grid item xs={12} md={4} key={i}>
+            <Card>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={member.image}
+                  alt={`${member.firstName} ${member.lastName} image`}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h3">
+                    {member.firstName + ' ' + member.lastName}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </>
+  );
 }
 
 export default About;
