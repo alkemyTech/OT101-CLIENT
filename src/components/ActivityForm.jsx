@@ -42,8 +42,8 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
     });
     
     const apiRequest = activity && activity.id ?
-      patchRequest(`${process.env.REACT_APP_URL_SERVER}/activities/${activity.id}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
-      postRequest(`${process.env.REACT_APP_URL_SERVER}/activities/`, dataToSend, {headers: {'content-type': 'multipart/form-data'}});
+      patchRequest(`/activities/${activity.id}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
+      postRequest(`/activities/`, dataToSend, {headers: {'content-type': 'multipart/form-data'}});
 
     apiRequest.then(savedActivity => {
         setIsLoading(false);
