@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import { getRequest } from '../services/requestsHandlerService';
 import News from '../components/News';
-import { Typography, Grid } from '@mui/material';
+import { Typography } from '@mui/material';
 
 const Home = () => {
   const user = useSelector((state) => state.user);
@@ -14,7 +14,6 @@ const Home = () => {
 
   useEffect(() => {
     getRequest(endPointNews).then((response) => setNews(response.reverse().slice(0, 3)));
-    console.log(news);
   }, []);
 
   return (

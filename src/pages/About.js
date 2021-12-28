@@ -8,9 +8,9 @@ import { getRequest } from '../services/requestsHandlerService';
 
 function About() {
   const [members, setMembers] = useState([]);
-  useEffect(()=> {
+  useEffect(() => {
     getRequest('/members')
-      .then(result => {
+      .then((result) => {
         setMembers(result);
       })
       .catch((err) => {
