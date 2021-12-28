@@ -1,7 +1,7 @@
 
 const headCellsActivities = [
   {
-    id: 'idKey',
+    id: 'id',
     numeric: false,
     disablePadding: true,
     label: 'ID',
@@ -25,7 +25,7 @@ const headCellsActivities = [
     label: 'Contenido',
   },
   {
-    id: 'deleteAt',
+    id: 'deletedAt',
     numeric: true,
     disablePadding: false,
     label: 'Eliminado'
