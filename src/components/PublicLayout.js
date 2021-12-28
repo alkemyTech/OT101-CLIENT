@@ -1,6 +1,6 @@
 import Footer from './Footer';
 import Header from './Header';
-import { CircularProgress, Container } from '@mui/material';
+import { LinearProgress, Container } from '@mui/material';
 import { Box } from '@mui/system';
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,14 +15,7 @@ export default function PublicLayout({ routes }) {
     dispatch(fetchData());
   }, []);
 
-  return organization.isFetching ? (
-    <Box sx={{ height: '100vh', display: 'flex' }}>
-      <CircularProgress
-        sx={{ mx: 'auto', my: 'auto', display: 'block' }}
-        size={64}
-      />
-    </Box>
-  ) : (
+  return (
     <Box
       sx={{
         display: 'flex',
@@ -33,6 +26,9 @@ export default function PublicLayout({ routes }) {
       }}
     >
       <Header routes={routes} />
+      { organization.isFetching && 
+        <LinearProgress />
+      }
       <Container sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         {<Outlet />}
       </Container>
