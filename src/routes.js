@@ -31,6 +31,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import GroupsIcon from '@mui/icons-material/Groups';
 import HomeIcon from '@mui/icons-material/Home';
 import MessageIcon from '@mui/icons-material/Message';
+import BackofficeMembers from './pages/BackofficeMembers';
 
 /* Routes settings
   name: Name of the route, if not set will not show
@@ -91,7 +92,7 @@ const backofficeRoutes = [
   {
     name: 'Miembros',
     path: 'members',
-    element: <BackofficeDummy />,
+    element: <BackofficeMembers />,
     roles: ['admin'],
     icon: <AccountTreeIcon />,
   },
