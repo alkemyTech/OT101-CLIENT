@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import { getRequest } from '../services/requestsHandlerService';
 import News from '../components/News';
-import { Typography } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 
 const Home = () => {
   const user = useSelector((state) => state.user);
