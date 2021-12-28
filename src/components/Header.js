@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,11 +8,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Button, Container } from '@mui/material';
-import logoSomosMas from '../assets/LOGO-SOMOS MAS.png'
+import { useSelector } from 'react-redux';
 
-const Header = ({ logo = logoSomosMas, routes = [{ name: 'home', path: '/' }] }) => {
+
+const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
   const location = useLocation();
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const organization = useSelector((state) => state.organization);
+  const [logo, setLogo] = useState('');
+  useEffect(() => {
+    setLogo(organization.data.image)
+  }, [])
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

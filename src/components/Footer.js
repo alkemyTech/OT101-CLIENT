@@ -42,7 +42,7 @@ const Footer = ({ routes }) => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Link to="/">
-                <img src={organization?.logo} alt="Logotipo Somos Más" />
+                <img src={organization? organization.data.image: ''} alt="Logotipo Somos Más" />
               </Link>
             </Box>
           </Grid>
