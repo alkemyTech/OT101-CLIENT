@@ -29,7 +29,7 @@ export default function PublicLayout({ routes }) {
       { organization.isFetching && 
         <LinearProgress />
       }
-      <Container sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+      <Container sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', paddingY: 6 }}>
         {<Outlet />}
       </Container>
       <Footer routes={routes} />

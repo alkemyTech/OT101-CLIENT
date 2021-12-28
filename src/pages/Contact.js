@@ -45,10 +45,17 @@ const Contact = () => {
   return (
     <Container
       maxWidth="sm"
-      sx={{ border: 1, paddingX: 5, paddingY: 5, borderRadius: 0.5, borderColor: 'lightgrey', my: 'auto' }}
+      sx={{
+        border: 1,
+        paddingX: 5,
+        paddingY: 5,
+        borderRadius: 0.5,
+        borderColor: 'lightgrey',
+        my: 'auto',
+      }}
       justifyContent="center"
     >
-      <Typography variant="h5" component="h2" textAlign="left" fontWeight="bold" mb={6}>
+      <Typography variant="h4" component="h2" textAlign="left" mb={4}>
         Contactate con nosotros
       </Typography>
       <form onSubmit={handleSubmit} noValidate>
