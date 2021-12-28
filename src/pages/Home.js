@@ -23,7 +23,7 @@ const Home = () => {
           ? (`Hola ${user.data.firstName}, bienvenido a Fundación somos más`).toUpperCase()
           : ('Bienvenido a Fundación somos más').toUpperCase()}
       </Typography>
-      <Box sx={{ marginY: 4, display: 'flex' }}>
+      <Box sx={{ marginY: 4 }}>
         <ImageSlider />
       </Box>
 
