@@ -11,14 +11,10 @@ import { Button, Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 
-const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
+const Header = ({ logo, routes = [{ name: 'home', path: '/' }] }) => {
   const location = useLocation();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const organization = useSelector((state) => state.organization);
-  const [logo, setLogo] = useState('');
-  useEffect(() => {
-    setLogo(organization.data.image)
-  }, [])
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -32,7 +28,7 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
     <AppBar position="static">
       <Container maxWidth="xl" sx={{bgcolor: '#E5DCB7'}}>
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
-          <img src={logo} width='130px' height='110px' alt="Logotipo Somos Más" />
+          <img src={organization?.data?.image} width='130px' height='110px' alt="Logotipo Somos Más" />
           <Box sx={{ display: { xs: 'flex', md: 'none' } }} >
             <IconButton
               size="large"
