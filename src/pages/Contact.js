@@ -17,8 +17,8 @@ const validationSchema = yup.object({
 
 const Contact = () => {
   const doSubmit = (values, actions) => {
-    const apiRequest = postRequest(`${process.env.REACT_APP_URL_SERVER}/contacts/`, values);
-
+    const apiRequest = postRequest(`/contacts/`, values);
+    
     apiRequest
       .then((data) => {
         Swal.fire('Contacto', 'Solicitud procesada correctamente', 'success');
