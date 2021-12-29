@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,7 +11,7 @@ import { Button, Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 
-const Header = ({ logo, routes = [{ name: 'home', path: '/' }] }) => {
+const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
   const location = useLocation();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const organization = useSelector((state) => state.organization);
