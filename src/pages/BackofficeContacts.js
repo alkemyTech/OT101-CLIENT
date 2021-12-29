@@ -54,7 +54,7 @@ export default function BackofficeContacts() {
         for (let i = 0; i < selectedRows.length; i++) {
           const contact = selectedRows[i];
           console.log(`Delete element number ${i}!!`, contact);
-          deleteRequest(`${process.env.REACT_APP_URL_SERVER}/contact/${contact}`);
+          deleteRequest(`/contact/${contact}`);
           basicAlert('Contacto/s eliminado/s exitosamente', '', 'success');
         }
         getRequestContacts();

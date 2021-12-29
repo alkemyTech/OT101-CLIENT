@@ -60,7 +60,7 @@ export default function BackofficeCategories () {
         for (let i = 0; i < selectedRows.length; i++) {
           const category = selectedRows[i];
           console.log(`Delete element number ${i}!!`, category);
-          deleteRequest(`${process.env.REACT_APP_URL_SERVER}/categories/${category}`);
+          deleteRequest(`/categories/${category}`);
           basicAlert('Categorias eliminadas exitosamente', '', 'success');
         }
         getRequestCategories();

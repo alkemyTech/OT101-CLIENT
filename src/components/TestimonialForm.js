@@ -39,8 +39,8 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
     });
 
     const apiRequest = testimonial && testimonial.id ?
-      patchRequest(`${process.env.REACT_APP_URL_SERVER}/testimonials/${testimonial.id}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
-      postRequest(`${process.env.REACT_APP_URL_SERVER}/testimonials/`, dataToSend, {headers: {'content-type': 'multipart/form-data'}});
+      patchRequest(`/testimonials/${testimonial.id}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
+      postRequest(`/testimonials/`, dataToSend, {headers: {'content-type': 'multipart/form-data'}});
 
     apiRequest.then(savedtestimonial => {
         /* setIsLoading(false); */
