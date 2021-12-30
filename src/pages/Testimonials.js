@@ -17,7 +17,7 @@ function Testimonials() {
 	if (!testimonials?.length) {
         return (
             <Typography align='center' sx={{ fontSize: 25, mt: 2 }}> 
-               No hay disponible ninguna novedad
+               No hay disponible ningún testimonio
             </Typography>
         );
     }
