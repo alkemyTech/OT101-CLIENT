@@ -4,19 +4,24 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-const News = ({ news }) => {
+const GridHome = ({ item }) => {
   return (
     <Card>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image={news.image}
-          alt={`news ${news.id} image`}
+          image={item.image}
+          alt={`item ${item.id} image`}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h3" fontFamily='Signika'>
-            {news.name}
+            {item.name}
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h3" fontFamily='Signika'>
+            {item.content}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -24,4 +29,4 @@ const News = ({ news }) => {
   );
 };
 
-export default News;
+export default GridHome;
