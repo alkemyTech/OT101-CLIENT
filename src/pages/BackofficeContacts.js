@@ -9,15 +9,14 @@ import EnhancedTable from '../components/EnhancedTable';
 import {confirmAlert, basicAlert} from '../services/sweetAlertService'
 import HeadCellsContacts from '../components/ScreenTables/HeadCellsContacts';
 
-function createData(idKey, name, lastname, phone, email, message, deleteAt) {
+function createData(idKey, name, lastname, phone, email, message) {
   return {
     idKey,
     name,
     lastname,
     phone,
     email,
-    message,
-    deleteAt
+    message
   };
 }
 

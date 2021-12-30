@@ -9,13 +9,12 @@ import HeadCellsActivities from '../components/ScreenTables/HeadCellsActivities'
 import { confirmAlert, basicAlert } from '../services/sweetAlertService';
 import EnhancedTable from '../components/EnhancedTable';
 
-function createData(idKey, name, image, content, deleteAt) {
+function createData(idKey, name, image, content) {
   return {
     idKey,
     name,
     image,
-    content,
-    deleteAt,
+    content
   };
 }
 

@@ -42,12 +42,6 @@ const headCellsNews = [
     disablePadding: false,
     label: 'Actualizado',
   },
-  {
-    id: 'deletedAt',
-    numeric: true,
-    disablePadding: false,
-    label: 'Eliminado',
-  },
 ];
 
 export default headCellsNews

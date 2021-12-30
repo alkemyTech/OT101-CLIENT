@@ -9,16 +9,15 @@ import HeadCellsNews from '../components/ScreenTables/headCellsNews';
 import { confirmAlert, basicAlert } from '../services/sweetAlertService';
 import EnhancedTable from '../components/EnhancedTable';
 
-function createData(id, name, image, type, categoryId, createdAt, updatedAt, deletedAt) {
+function createData(idKey, name, image, type, categoryId, createdAt, updatedAt) {
   return {
-    id,
+    idKey,
     name,
     image,
     type,
     categoryId,
     createdAt,
     updatedAt,
-    deletedAt
   };
 }
 
@@ -29,7 +28,7 @@ export default function BackofficeNews() {
   const getRequestNews = async () => {
     const data = await getRequest('/news/backoffice');
     try{
-      setRows(data.map( item => createData(item.id, item.name, item.image, item.type, item.categoryId, item.createAt, item.updatedAt, item.deletedAt)))
+      setRows(data.map( item => createData(item.id, item.name, item.image, item.type, item.categoryId, item.createdAt, item.updatedAt)))
     }
     catch (err) {
       console.log(err)
@@ -55,7 +54,7 @@ export default function BackofficeNews() {
         for (let i = 0; i < selectedRows.length; i++) {
           const entry = selectedRows[i];
           console.log(`Delete element number ${i}!!`, entry);
-          deleteRequest(`/members/${entry}`);
+          deleteRequest(`/news/${entry}`);
           basicAlert('Novedades eliminadas exitosamente', '', 'success');
         }
         getRequestNews();
