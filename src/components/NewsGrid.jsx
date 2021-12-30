@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 const NewsGrid = ({news}) => {
     if (!news?.length) {
         return (
-            <Typography align='center' sx={{ fontSize: 25, mt: 2 }}> 
+            <Typography align='center' sx={{ fontSize: 25, mt: 2, fontFamily: 'Signika' }}> 
                No hay disponible ninguna novedad
             </Typography>
         );
@@ -31,7 +31,7 @@ const NewsGrid = ({news}) => {
                             to={`/Novedades/${id}`}
                         >
                             <CardContent align='center'>
-                                <Typography align='center' noWrap sx={{ fontSize: 20 }}>
+                                <Typography align='center' noWrap sx={{ fontSize: 20, fontFamily: 'Signika' }}>
                                     { name }
                                 </Typography>
                             </CardContent>

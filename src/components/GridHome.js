@@ -15,12 +15,12 @@ const GridHome = ({ item }) => {
           alt={`item ${item.id} image`}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h3" fontFamily='Signika'>
+          <Typography align='center' noWrap sx={{ fontSize: 20 }} fontFamily='Signika'>
             {item.name}
           </Typography>
         </CardContent>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h3" fontFamily='Signika'>
+          <Typography align='center' sx={{ fontSize: 15 }} fontFamily='Signika'>
             {item.content}
           </Typography>
         </CardContent>

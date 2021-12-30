@@ -30,7 +30,7 @@ function News() {
 
   return (
     <>
-      <Typography align='center' sx={{ fontSize: { lg: 80, md: 60, sm: 50, xs: 40 } }}> 
+      <Typography align='center' sx={{ fontSize: { lg: 80, md: 60, sm: 50, xs: 40, fontFamily: 'Signika' } }}> 
         Novedades
       </Typography>
       <NewsGrid news={newsList} />

@@ -31,7 +31,7 @@ const Home = () => {
       </Box>
       
       <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
-        <Typography variant="h4" component="h3">
+        <Typography variant="h4" component="h3" fontFamily='Signika'>
           ÚLTIMAS NOVEDADES
         </Typography>
         <Grid container spacing={5} rowSpacing={8}>
@@ -44,7 +44,7 @@ const Home = () => {
       </Box>
 
       <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
-        <Typography variant="h4" component="h3">
+        <Typography variant="h4" component="h3" fontFamily='Signika'>
           TESTIMONIOS
         </Typography>
         <Grid container spacing={5} rowSpacing={8}>

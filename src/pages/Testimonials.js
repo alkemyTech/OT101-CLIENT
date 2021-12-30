@@ -28,7 +28,7 @@ function Testimonials() {
   	}
 	return (
 		<>
-			<Typography align='center' sx={{ fontSize: { lg: 80, md: 60, sm: 50, xs: 40 } }}> 
+			<Typography align='center' sx={{ fontSize: { lg: 80, md: 60, sm: 50, xs: 40, fontFamily: 'Signika' } }}> 
         	Testimonios
       		</Typography>
 			  <Grid container spacing={2}>
@@ -45,12 +45,12 @@ function Testimonials() {
 									image={image}
 								/>
 								<CardContent align='center'>
-									<Typography align='center' noWrap sx={{ fontSize: 20 }}>
+									<Typography align='center' noWrap sx={{ fontSize: 20, fontFamily: 'Signika' }}>
 										{ name }
 									</Typography>
 								</CardContent>
 								<CardContent align='center'>
-									<Typography align='center' sx={{ fontSize: 15 }}>
+									<Typography align='center' sx={{ fontSize: 15, fontFamily: 'Signika' }}>
 										{ content }
 									</Typography>
 								</CardContent>

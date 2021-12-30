@@ -19,19 +19,19 @@ function Activities() {
   }, []);
   return (
     <>
-      <Typography variant='h3' component='h2' sx={{marginBottom: 4}}>Actividades</Typography>
+      <Typography variant='h3' component='h2' sx={{marginBottom: 4, fontFamily: 'Signika'}}>Actividades</Typography>
       <Grid container spacing={5} rowSpacing={8}>
         {activities.map((activity, i) => (
-          <Grid item xs={12} md={4} key={i}>
-            <Card>
+          <Grid item xs={12} md={6} lg={4} key={i}>
+            <Card sx={{m:1}}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   height="140"
                   image={activity.image}
                 />
-                <CardContent>
-                  <Typography gutterBottom variant="h3" component="h3">
+                <CardContent align='center'>
+                  <Typography align='center' noWrap sx={{ fontSize: 20 }} fontFamily='Signika'>
                     {activity.name}
                   </Typography>
                 </CardContent>
