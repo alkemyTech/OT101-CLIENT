@@ -29,7 +29,7 @@ const Footer = ({ routes }) => {
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{ justifyContent: 'space-between', padding: 1 }}>
+      <Toolbar sx={{ justifyContent: 'space-between', padding: 1, bgcolor: '#AFAFAF' }}>
         <Grid
           container
           sx={{
@@ -42,7 +42,7 @@ const Footer = ({ routes }) => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Link to="/">
-                <img src={organization?.logo} alt="Logotipo Somos Más" />
+                <img src={organization?.data?.image} alt="Logotipo Somos Más" />
               </Link>
             </Box>
           </Grid>
@@ -58,7 +58,7 @@ const Footer = ({ routes }) => {
                 ({ name, path, protect }) =>
                   !protect &&
                   name && (
-                    <MenuItem key={path} to={path} component={Link}>
+                    <MenuItem key={path} to={path} component={Link} sx={{ fontFamily: 'Signika' }}>
                       {name}
                     </MenuItem>
                   )

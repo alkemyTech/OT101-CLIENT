@@ -10,19 +10,19 @@ const HeadCellsTestimonials = [
     id: 'name',
     numeric: true,
     disablePadding: false,
-    label: 'Name',
+    label: 'Nombre',
   },
   {
     id: 'content',
     numeric: true,
     disablePadding: false,
-    label: 'Content',
+    label: 'Contenido',
   },
   {
     id: 'image',
     numeric: true,
     disablePadding: false,
-    label: 'Image',
+    label: 'Imagen',
   }
 ];
 

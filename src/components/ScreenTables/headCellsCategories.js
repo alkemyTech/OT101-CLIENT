@@ -18,6 +18,24 @@ const headCellsCategories = [
     disablePadding: false,
     label: 'Descripción',
   },
+  {
+    id: 'deletedAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Eliminado',
+  },
+  {
+    id: 'createdAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Creado',
+  },
+  {
+    id: 'updatedAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Actualizado',
+  },
 ];
 
 export default headCellsCategories;

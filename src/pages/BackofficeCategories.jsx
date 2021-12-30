@@ -9,11 +9,14 @@ import HeadCellsCategories from '../components/ScreenTables/headCellsCategories'
 import EnhancedTable from '../components/EnhancedTable';
 import {confirmAlert, basicAlert} from '../services/sweetAlertService'
 
-function createData(idKey, name, description) {
+function createData(idKey, name, description, deletedAt, createdAt, updatedAt) {
   return {
     idKey,
     name,
     description,
+    deletedAt,
+    createdAt,
+    updatedAt
   };
 }
 
@@ -27,18 +30,19 @@ export default function BackofficeCategories () {
   const [dense, setDense] = React.useState(false);
   const [rows, setRows] = useState(sampleData);
 
-  const getRequestCategories = () => {
-    getRequest('/categories')
-      .then( data => setRows(
-        data.map( item => createData(item.id, item.name, item.description)
-      ))
-      )
-      .catch(err => console.log(err))
+  const getRequestCategories = async () => {
+    const data = await getRequest('/categories');
+    try{
+      setRows(data.map( item => createData(item.id, item.name, item.description, item.deletedAt, item.createdAt, item.updatedAt)))
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
   
   useEffect(() => {
       getRequestCategories();
-  }, [rows])
+  }, [])
 
 
   const handleChangeDense = (event) => {
@@ -57,9 +61,9 @@ export default function BackofficeCategories () {
           const category = selectedRows[i];
           console.log(`Delete element number ${i}!!`, category);
           deleteRequest(`/categories/${category}`);
-          getRequestCategories();
           basicAlert('Categorias eliminadas exitosamente', '', 'success');
         }
+        getRequestCategories();
       } else {
         basicAlert('Acción cancelada', '', 'error');
       }

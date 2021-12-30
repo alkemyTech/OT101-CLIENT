@@ -1,12 +1,13 @@
-import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
+import logoSomosMas from '../../assets/LOGO-SOMOS MAS.png'
 
 
 const BackofficeHome = (props) => {
     return (
     <>
-        <Typography gutterBottom variant="h4" component="h2" align="center" paragraph={true}>
-            Administración del sitio
-        </Typography>
+        <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center' }}>
+            <img src={logoSomosMas} width='300px' height='250px' alt="Logotipo Somos Más" />
+        </Box>
     </>
     );
 };

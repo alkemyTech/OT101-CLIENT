@@ -10,20 +10,38 @@ const headCellsNews = [
     id: 'name',
     numeric: true,
     disablePadding: false,
-    label: 'Name',
+    label: 'Nombre',
   },
   {
     id: 'image',
     numeric: true,
     disablePadding: false,
-    label: 'Image',
+    label: 'Imagen',
   },
   {
-    id: 'createAt',
+    id: 'type',
     numeric: true,
     disablePadding: false,
-    label: 'CreateAt',
-  }
+    label: 'Tipo',
+  },
+  {
+    id: 'categoryId',
+    numeric: true,
+    disablePadding: false,
+    label: 'ID Categoría',
+  },
+  {
+    id: 'createdAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Creado',
+  },
+  {
+    id: 'updatedAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Actualizado',
+  },
 ];
 
 export default headCellsNews

@@ -1,7 +1,7 @@
 
 const headCellsActivities = [
   {
-    id: 'idKey',
+    id: 'id',
     numeric: false,
     disablePadding: true,
     label: 'ID',
@@ -10,25 +10,25 @@ const headCellsActivities = [
     id: 'name',
     numeric: true,
     disablePadding: false,
-    label: 'Name',
+    label: 'Nombre',
   },
   {
     id: 'image',
     numeric: true,
     disablePadding: false,
-    label: 'Image',
+    label: 'Imagen',
   },
   {
     id: 'content',
     numeric: true,
     disablePadding: false,
-    label: 'Content',
+    label: 'Contenido',
   },
   {
-    id: 'deleteAt',
+    id: 'deletedAt',
     numeric: true,
     disablePadding: false,
-    label: 'DeleteAt'
+    label: 'Eliminado'
   }
 ];
 

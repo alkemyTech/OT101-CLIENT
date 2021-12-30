@@ -31,6 +31,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import GroupsIcon from '@mui/icons-material/Groups';
 import HomeIcon from '@mui/icons-material/Home';
 import MessageIcon from '@mui/icons-material/Message';
+import BackofficeMembers from './pages/BackofficeMembers';
 
 /* Routes settings
   name: Name of the route, if not set will not show
@@ -40,7 +41,7 @@ import MessageIcon from '@mui/icons-material/Message';
 const publicRoutes = [
   { name: 'Inicio', path: '/', element: <Home /> },
   { name: 'Sobre nosotros', path: '/about', element: <About /> },
-  { name: 'Actividades', path: '/activities', element: <Activities /> },
+  { name: 'Actividades', path: '/Actividades', element: <Activities /> },
   { path: '/Actividades/:id', element: <ActivityDetails /> },
   { name: 'Novedades', path: '/Novedades', element: <News /> },
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
@@ -82,7 +83,7 @@ const backofficeRoutes = [
     icon: <CategoryIcon />,
   },
   {
-    name: 'Backoffice Contacts',
+    name: 'Contactos',
     path: '/backoffice/contacts',
     element: <BackofficeContacts />,
     roles: ['admin'],
@@ -91,7 +92,7 @@ const backofficeRoutes = [
   {
     name: 'Miembros',
     path: 'members',
-    element: <BackofficeDummy />,
+    element: <BackofficeMembers />,
     roles: ['admin'],
     icon: <AccountTreeIcon />,
   },
@@ -103,7 +104,7 @@ const backofficeRoutes = [
     icon: <FeedIcon />,
   },
   {
-    name: 'Backoffice Edit Organization',
+    name: 'Organización',
     path: '/backoffice/edit-organization',
     element: <EditOrganization />,
     roles: ['admin'],
