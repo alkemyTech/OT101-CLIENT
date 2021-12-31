@@ -18,7 +18,6 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const organization = useSelector((state) => state.organization);
   const user = useSelector((state) => state.user);
-console.log(user);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
