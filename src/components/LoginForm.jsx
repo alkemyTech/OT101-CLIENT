@@ -2,6 +2,7 @@ import { React , useState} from "react"
 import { useNavigate } from "react-router-dom"
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import { Button, Stack, Container, InputLabel, Input, FormControl, FormHelperText, AlertTitle, Alert, CircularProgress } from '@mui/material'
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import * as Yup from 'yup'
 import login from '../features/user/userSlice'
 
@@ -69,11 +70,12 @@ function LoginForm() {
       
       </Alert>
       )}
-                            <Button variant='contained' disabled={isSubmitting} type='submit' color={errors.email || errors.password ? 'error' : 'primary'}>Login</Button>
+                            <Button variant='contained' disabled={isSubmitting} type='submit' sx={{ bgcolor: errors.email || errors.password ? '#DB5752': '#9AC9FB' }}>Login</Button>
                     </Stack>
                 </Form>
                 )}
             </Formik>
+                <Button href='/register' startIcon={<PersonAddAltIcon />} sx={{ color: '#DB5752', display: 'flex', mt: 3, fontSize: 18, fontWeight: 'bold', fontFamily: 'Signika' }}>CREAR CUENTA</Button>
             
         </Container>
     )
