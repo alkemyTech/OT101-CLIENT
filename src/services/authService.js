@@ -1,13 +1,13 @@
 import * as httpService from "../services/requestsHandlerService"
 
 export async function login(data) {
-	const { firstName, lastName, email, token } = await httpService.postRequest(
+	const user = await httpService.postRequest(
 		`/auth/login`, data
 	)
 
-	localStorage.setItem("token", token)
+	localStorage.setItem("token", user.token)
 
-	return { firstName, lastName, email }
+	return user;
 }
 
 export async function register(data) {
