@@ -1,6 +1,8 @@
 import { React, useState } from "react"
 import { Formik, Form, Field } from "formik"
 import { Button, Stack, Container, TextField } from "@mui/material"
+import { patchRequest } from "../services/requestsHandlerService"
+import Swal from "sweetalert2"
 import ImageInput from "./ImageInput"
 import * as Yup from "yup"
 
@@ -15,10 +17,37 @@ function EditHomeForm({ data }) {
 		img3text: data?.img3.text || "",
 	}
 
-	let submit = async values => {
-		await new Promise(r => setTimeout(r, 500))
-		values.type = "edit"
-		alert(JSON.stringify(values, null, 2))
+	let submit = async (values, actions) => {
+		const dataToSend = new FormData()
+
+		// append all form inputs
+		Object.keys(values).forEach(key => {
+			dataToSend.append(key, values[key])
+		})
+
+		const apiRequest = patchRequest(`/news/{news.id}`, dataToSend, {
+			headers: { "content-type": "multipart/form-data" },
+		})
+
+		apiRequest
+			.then(data => {
+				Swal.fire(
+					"Pagina de Inicio",
+					"Solicitud procesada correctamente",
+					"success"
+				)
+				actions.resetForm({
+					values: { name: "", content: "", image: null, categoryId: "" },
+				})
+			})
+			.catch(err => {
+				Swal.fire(
+					"Pagina de Inicio",
+					"No se pudo procesar la solicitud",
+					"error"
+				)
+			})
+			.finally(() => actions.setSubmitting(false))
 	}
 
 	return (
@@ -35,7 +64,7 @@ function EditHomeForm({ data }) {
 					img3: Yup.mixed().required("Debe seleccionar una imagen"),
 					img3text: Yup.string().required("Por favor completar!"),
 				})}>
-				{({ isSubmitting, errors, touched }) => (
+				{({ isSubmitting, errors, touched, values, setFieldValue }) => (
 					<Form>
 						<Stack spacing={4}>
 							<Field name='welcomeText'>
@@ -62,7 +91,14 @@ function EditHomeForm({ data }) {
 								)}
 							</Field>
 							<Field name='img1'>
-								{({ field, meta }) => <ImageInput {...field} />}
+								{({ field, meta }) => (
+									<ImageInput
+										{...field}
+										image={values.img1 ? values.img1 : null}
+										onChange={file => setFieldValue("img1", file)}
+										error={meta.touched && meta.error}
+									/>
+								)}
 							</Field>
 
 							<Field name='img2text'>
@@ -76,7 +112,14 @@ function EditHomeForm({ data }) {
 								)}
 							</Field>
 							<Field name='img2'>
-								{({ field, meta }) => <ImageInput {...field} />}
+								{({ field, meta }) => (
+									<ImageInput
+										{...field}
+										image={values.img1 ? values.img1 : null}
+										onChange={file => setFieldValue("img2", file)}
+										error={meta.touched && meta.error}
+									/>
+								)}
 							</Field>
 
 							<Field name='img3text'>
@@ -90,14 +133,21 @@ function EditHomeForm({ data }) {
 								)}
 							</Field>
 							<Field name='img3'>
-								{({ field, meta }) => <ImageInput {...field} />}
+								{({ field, meta }) => (
+									<ImageInput
+										{...field}
+										image={values.img1 ? values.img1 : null}
+										onChange={file => setFieldValue("img3", file)}
+										error={meta.touched && meta.error}
+									/>
+								)}
 							</Field>
 
 							<Button
 								variant='contained'
-								disabled={isSubmitting}
+								// disabled={isSubmitting}
 								type='submit'
-								color={errors ? "error" : "primary"}>
+								color='primary'>
 								Editar pagina de Inicio
 							</Button>
 						</Stack>
