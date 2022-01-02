@@ -47,7 +47,7 @@ function RegisterForm() {
                         <Field name='name' >
                             {({field, meta}) => (
                                 <FormControl variant='standard' error={meta.touched && meta.error ? true : false}>
-                                    <InputLabel htmlFor="name">Nombre</InputLabel>
+                                    <InputLabel htmlFor="name" >Nombre</InputLabel>
                                     <Input {...field} />
                                     <ErrorMessage name='name' component={FormHelperText} />
                                 </FormControl>
@@ -75,7 +75,7 @@ function RegisterForm() {
                             {({field, meta}) => (
                                 <FormControl variant='standard' error={meta.touched && meta.error ? true : false}>
                                     <InputLabel htmlFor="password">Contraseña</InputLabel>
-                                    <Input {...field} />
+                                    <Input {...field} type='password'/>
                                     <ErrorMessage name='password' component={FormHelperText} />
                                 </FormControl>
                             )}
@@ -84,7 +84,7 @@ function RegisterForm() {
                             {({field, meta}) => (
                                 <FormControl variant='standard' error={meta.touched && meta.error ? true : false}>
                                     <InputLabel htmlFor="confirmPassword">Confirmar Contraseña</InputLabel>
-                                    <Input {...field} />
+                                    <Input {...field} type='password'/>
                                     <ErrorMessage name='confirmPassword' component={FormHelperText} />
                                 </FormControl>
                             )}
@@ -99,7 +99,7 @@ function RegisterForm() {
       
       </Alert>
       )}
-                            <Button variant='contained' disabled={isSubmitting} type='submit' sx={{ bgcolor: errors.email || errors.password ? '#DB5752': '#9AC9FB' }}>Register</Button>
+                            <Button variant='contained' disabled={isSubmitting} type='submit' sx={{ bgcolor: errors.email || errors.password ? '#DB5752': '#9AC9FB' }}>Crear Usuario</Button>
                     </Stack>
                 </Form>
                 )}
