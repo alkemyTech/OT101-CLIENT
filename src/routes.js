@@ -32,6 +32,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import HomeIcon from '@mui/icons-material/Home';
 import MessageIcon from '@mui/icons-material/Message';
 import BackofficeMembers from './pages/BackofficeMembers';
+import BackofficeUsers from './pages/BackofficeUsers';
 
 /* Routes settings
   name: Name of the route, if not set will not show
@@ -120,7 +121,7 @@ const backofficeRoutes = [
   {
     name: 'Usuarios',
     path: 'users',
-    element: <BackofficeDummy />,
+    element: < BackofficeUsers/>,
     roles: ['admin'],
     icon: <GroupsIcon />,
   },
