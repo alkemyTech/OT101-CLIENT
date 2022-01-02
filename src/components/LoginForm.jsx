@@ -54,7 +54,7 @@ function LoginForm() {
                                 {({field, meta}) => (
                                     <FormControl variant='standard' error={meta.touched && meta.error ? true : false}>
                                         <InputLabel htmlFor="password">Password</InputLabel>
-                                        <Input {...field} />
+                                        <Input {...field} type='password'/>
                                         <ErrorMessage name='password' component={FormHelperText} />
                                     </FormControl>
                                 )}
