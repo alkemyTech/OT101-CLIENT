@@ -6,7 +6,7 @@ import Error404 from './pages/Error404';
 import Home from './pages/Home';
 import News from './pages/News';
 import Testimonials from './pages/Testimonials';
-import Register from './pages/Register';
+import Register from './pages/RegisterForm';
 import EditOrganization from './pages/EditOrganization';
 import BackofficeActivities from './pages/BackofficeActivities';
 import Login from './components/LoginForm'

@@ -1,7 +1,8 @@
 import { React , useState} from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import { Button, Stack, Container, InputLabel, Input, FormControl, FormHelperText, AlertTitle, Alert } from '@mui/material'
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import * as Yup from 'yup'
 import { login } from '../features/user/userSlice'
 import { useDispatch } from "react-redux";
@@ -66,6 +67,7 @@ function LoginForm() {
                 </Form>
                 )}
             </Formik>
+                <Button component={Link} to='/register' startIcon={<PersonAddAltIcon />} sx={{ color: '#DB5752', display: 'flex', mt: 3, fontSize: 18, fontWeight: 'bold', fontFamily: 'Signika' }}>CREAR CUENTA</Button>
             
         </Container>
     )

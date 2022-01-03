@@ -7,7 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { Button, Container } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Button, Container, Avatar, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 
@@ -15,7 +16,7 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
   const location = useLocation();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const organization = useSelector((state) => state.organization);
-
+  const user = useSelector((state) => state.user);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -72,7 +73,7 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
                       {name}
                     </MenuItem>
                   )
-              )}
+                  )}
             </Menu>
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -90,6 +91,17 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
                   </Button>
                 )
             )}
+            {
+              user.isLogged === true?
+              <Stack direction="row" spacing={2}>
+                <Avatar alt={`user ${user.data.id} image`} src={user.data.image} />
+              </Stack>:
+              <Button component={Link} to='/login'>
+                <AccountCircleIcon 
+                  sx={{ color: '#898989', width: '50px' }}
+                />
+              </Button> 
+              }
           </Box>
         </Toolbar>
       </Container>

@@ -1,13 +1,13 @@
 import { React, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Box, TextField, Button, Container, Typography , CircularProgress } from '@material-ui/core'
+import { Box, TextField, Button, Container, Typography } from '@material-ui/core'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { withStyles } from '@material-ui/core';
+/* import { withStyles } from '@material-ui/core';
 
-import Styles from '../styles/RegisterFormStyles';
+import Styles from '../styles/RegisterFormStyles'; */
 
 import * as authService from '../services/authService';
 
@@ -28,10 +28,10 @@ const validationSchema = yup.object({
     }),
 });
 
-function Register(props) {
+function Register() {
   const [status, setStatus] = useState(undefined);
   const navigate = useNavigate();
-  const {classes} = props;
+  /* const {classes} = props; */
   
   const formik = useFormik({
     initialValues: {
@@ -57,14 +57,13 @@ function Register(props) {
 
   return (
     <>   
-    <div>
       <Box>
         <Container maxWidth="sm">
-          <Box className={classes.innerBox}>
-            <Typography variant="h5" component="h2" textAlign="left" fontWeight="bold" mb={6}>
+          <Box /* className={classes.innerBox} */>
+            <Typography variant="h5" component="h2" fontWeight="bold" mb={6}>
               Registrarse
             </Typography>
-            <form onSubmit={formik.handleSubmit} className={classes.form}>
+            <form onSubmit={formik.handleSubmit} /* className={classes.form} */>
               <TextField
                 fullWidth
                 id='name'
@@ -74,7 +73,7 @@ function Register(props) {
                 onChange={formik.handleChange}
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 helperText={formik.touched.name && formik.errors.name}
-                className={classes.textField}
+                /* className={classes.textField} */
               />
               <TextField
                 fullWidth
@@ -85,7 +84,7 @@ function Register(props) {
                 onChange={formik.handleChange}
                 error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                 helperText={formik.touched.name && formik.errors.lastName}
-                className={classes.textField}
+                /* className={classes.textField} */
               />
               <TextField
                 fullWidth
@@ -96,7 +95,7 @@ function Register(props) {
                 onChange={formik.handleChange}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
-                className={classes.textField}
+                /* className={classes.textField} */
               />
               <TextField
                 fullWidth
@@ -108,7 +107,8 @@ function Register(props) {
                 onChange={formik.handleChange}
                 error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
-                className={classes.textField}
+                autoComplete='true'
+                /* className={classes.textField} */
               />
               <TextField
                 fullWidth
@@ -120,11 +120,10 @@ function Register(props) {
                 onChange={formik.handleChange}
                 error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
                 helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
-                className={classes.textField}
+                autoComplete='true'
+                /* className={classes.textField} */
               />
 
-              {status?.type === 'waiting' && <CircularProgress />
-              }
               {status?.type === 'success' && <Alert severity="success">
                 <AlertTitle>Usuario Creado</AlertTitle>
                 <Typography variant="h5" component="h3" textAlign="left" fontWeight="bold" mb={6}>
@@ -137,16 +136,16 @@ function Register(props) {
       
       </Alert>
       )}
-              <Button color="primary" variant="contained" fullWidth type="submit" className={classes.button}>
+              <Button sx={{ bgcolor: "#9AC9FB" }} variant="contained" fullWidth type="submit" /* className={classes.button} */>
                 Enviar
               </Button>
             </form>
           </Box>
         </Container>
       </Box>
-    </div>
     </>
   )
 }
 
-export default withStyles(Styles)(Register);
+
+export default Register
