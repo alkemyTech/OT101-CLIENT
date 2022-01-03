@@ -62,7 +62,14 @@ function LoginForm() {
                                     <AlertTitle>Usuario o contraseña incorrectas</AlertTitle>
                                 </Alert>
                             )}
-                            <Button variant='contained' disabled={isSubmitting} type='submit' color={errors.email || errors.password ? 'error' : 'primary'}>Login</Button>
+                            <Button 
+                                variant='contained'
+                                disabled={isSubmitting}
+                                type='submit'
+                                sx={{ bgcolor: errors.email || errors.password ? '#DB5752': '#9AC9FB' }}
+                                color={errors.email || errors.password ? 'error' : 'primary'}>
+                                Login
+                            </Button>
                     </Stack>
                 </Form>
                 )}
