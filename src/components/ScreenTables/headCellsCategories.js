@@ -19,12 +19,6 @@ const headCellsCategories = [
     label: 'Descripción',
   },
   {
-    id: 'deletedAt',
-    numeric: true,
-    disablePadding: false,
-    label: 'Eliminado',
-  },
-  {
     id: 'createdAt',
     numeric: true,
     disablePadding: false,
