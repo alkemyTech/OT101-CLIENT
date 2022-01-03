@@ -128,7 +128,7 @@ const backofficeRoutes = [
   {
     name: 'Mi Perfil',
     path: 'profile',
-    element: <BackofficeDummy />,
+    element: <Profile />,
     roles: ['admin', 'user'],
     icon: <AccountCircleIcon />,
   }
