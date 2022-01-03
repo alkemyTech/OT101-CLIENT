@@ -36,6 +36,18 @@ const HeadCellsUsers = [
     disablePadding: false,
     label: 'Rool',
   },
+  {
+    id: 'createdAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Creado',
+  },
+  {
+    id: 'updatedAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Actualizado',
+  },
 ];
 
 export default HeadCellsUsers

@@ -9,14 +9,16 @@ import HeadCellsUsers from '../components/ScreenTables/HeadCellsUsers';
 import { confirmAlert, basicAlert } from '../services/sweetAlertService';
 import EnhancedTable from '../components/EnhancedTable';
 
-function createData(idKey, firstName, lastName, email, image, roleId) {
+function createData(idKey, firstName, lastName, email, image, roleId, createdAt, updatedAt) {
   return {
     idKey,
     firstName,
     lastName,
     email,
     image,
-    roleId
+    roleId,
+    createdAt,
+    updatedAt
   };
 }
 
@@ -27,7 +29,7 @@ export default function BackofficeUsers2 () {
   const getRequesUsers = async () => {
     const data = await getRequest('/users');
     try{
-      setRows(data.map( item => createData(item.id, item.firstName, item.lastName, item.email, item.image, item.roleId)))
+      setRows(data.map( item => createData(item.id, item.firstName, item.lastName, item.email, item.image, item.roleId, item.createdAt, item.updatedAt)))
     }
     catch (err) {
       console.log(err)
