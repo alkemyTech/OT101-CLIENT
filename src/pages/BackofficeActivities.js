@@ -9,12 +9,14 @@ import HeadCellsActivities from '../components/ScreenTables/HeadCellsActivities'
 import { confirmAlert, basicAlert } from '../services/sweetAlertService';
 import EnhancedTable from '../components/EnhancedTable';
 
-function createData(idKey, name, image, content) {
+function createData(idKey, name, image, content, createdAt, updatedAt) {
   return {
     idKey,
     name,
     image,
-    content
+    content,
+    createdAt,
+    updatedAt
   };
 }
 
@@ -25,7 +27,7 @@ export default function BackofficeActivities () {
   const getRequestActivities = async () => {
     const data = await getRequest('/activities/backoffice');
     try{
-      setRows(data.map( item => createData(item.id, item.name, item.image, item.content, item.deletedAt)))
+      setRows(data.map( item => createData(item.id, item.name, item.image, item.content, item.createdAt, item.updatedAt)))
     }
     catch (err) {
       console.log(err)

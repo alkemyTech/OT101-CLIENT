@@ -25,10 +25,16 @@ const headCellsActivities = [
     label: 'Contenido',
   },
   {
-    id: 'deletedAt',
+    id: 'createdAt',
     numeric: true,
     disablePadding: false,
-    label: 'Eliminado'
+    label: 'Creado',
+  },
+  {
+    id: 'updatedAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Actualizado',
   }
 ];
 
