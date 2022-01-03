@@ -9,14 +9,16 @@ import EnhancedTable from '../components/EnhancedTable';
 import {confirmAlert, basicAlert} from '../services/sweetAlertService'
 import HeadCellsContacts from '../components/ScreenTables/HeadCellsContacts';
 
-function createData(idKey, name, lastname, phone, email, message) {
+function createData(idKey, name, lastname, phone, email, message, createdAt, updatedAt) {
   return {
     idKey,
     name,
     lastname,
     phone,
     email,
-    message
+    message,
+    createdAt,
+    updatedAt
   };
 }
 
@@ -27,7 +29,7 @@ export default function BackofficeContacts() {
   const getRequestContacts = async () => {
     const data = await getRequest('/contacts');
     try{
-      setRows(data.map( item => createData(item.id, item.name, item.lastname, item.phone, item.email, item.message, item.deleteAt)))
+      setRows(data.map( item => createData(item.id, item.name, item.lastname, item.phone, item.email, item.message, item.createdAt, item.updatedAt)))
     }
     catch (err) {
       console.log(err)

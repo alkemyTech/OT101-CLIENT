@@ -13,12 +13,6 @@ const headCellsContacts = [
     label: 'Nombre',
   },
   {
-    id: 'lastname',
-    numeric: true,
-    disablePadding: false,
-    label: 'Apellido',
-  },
-  {
     id: 'phone',
     numeric: true,
     disablePadding: false,
@@ -37,10 +31,16 @@ const headCellsContacts = [
     label: 'Mensaje',
   },
   {
-    id: 'deleteAt',
+    id: 'createdAt',
     numeric: true,
     disablePadding: false,
-    label: 'Eliminado',
+    label: 'Creado',
+  },
+  {
+    id: 'updatedAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Actualizado',
   },
 ];
 
