@@ -1,82 +1,84 @@
-import * as React from "react"
-import Table from "@mui/material/Table"
-import TableBody from "@mui/material/TableBody"
-import TableCell from "@mui/material/TableCell"
-import TableContainer from "@mui/material/TableContainer"
-import TableHead from "@mui/material/TableHead"
-import TableRow from "@mui/material/TableRow"
-import Paper from "@mui/material/Paper"
-import { Button, Container, Link, Box } from "@mui/material"
-import { Link as RouterLink } from "react-router-dom"
-import { deleteRequest } from "../services/requestsHandlerService"
+import React, { useState, useEffect } from 'react';
 
-const rows = [
-	{ firstName: "John", lastName: "Smith", email: "john@smith.com", id: 1 },
-	{ firstName: "John", lastName: "Smith", email: "john@smith.com", id: 2 },
-	{ firstName: "John", lastName: "Smith", email: "john@smith.com", id: 3 },
-	{ firstName: "John", lastName: "Smith", email: "john@smith.com", id: 4 },
-	{ firstName: "John", lastName: "Smith", email: "john@smith.com", id: 5 },
-	{ firstName: "John", lastName: "Smith", email: "john@smith.com", id: 6 },
-	{ firstName: "John", lastName: "Smith", email: "john@smith.com", id: 7 },
-	{ firstName: "John", lastName: "Smith", email: "john@smith.com", id: 8 },
-]
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import { deleteRequest, getRequest } from '../services/requestsHandlerService';
+import HeadCellsUsers from '../components/ScreenTables/HeadCellsUsers';
+import { confirmAlert, basicAlert } from '../services/sweetAlertService';
+import EnhancedTable from '../components/EnhancedTable';
 
-export default function BackofficeUsers() {
-	const deleteUser = async id => {
-		alert("Eliminar usuario con ID: " + id)
+function createData(idKey, firstName, lastName, email, image, roleId) {
+  return {
+    idKey,
+    firstName,
+    lastName,
+    email,
+    image,
+    roleId
+  };
+}
 
-		// TODO make the delete work, and probably should check that the token matches the user id sent, or that the token belongs to an admin. Just to make sure you cant delete another users account.
-		// await deleteRequest(`..../users/${id}`)
-	}
+export default function BackofficeUsers2 () {
+  const [dense, setDense] = React.useState(false);
+  const [rows, setRows] = useState([]);
 
-	return (
-		<Box sx={{ marginTop: "32px", marginBottom: "32px" }}>
-			<Container maxWidth='xl'>
-				<TableContainer component={Paper}>
-					<Table sx={{ minWidth: 650 }} size='small' aria-label='table'>
-						<TableHead>
-							<TableRow>
-								<TableCell>Email</TableCell>
-								<TableCell align='right'>Nombre</TableCell>
-								<TableCell align='right'>Apellido</TableCell>
-								<TableCell align='right'>Editar</TableCell>
-								<TableCell align='right'>Eliminar</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{rows.map(row => (
-								<TableRow
-									key={row.id}
-									sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-									<TableCell component='th' scope='row'>
-										{row.email}
-									</TableCell>
-									<TableCell align='right'>{row.firstName}</TableCell>
-									<TableCell align='right'>{row.lastName}</TableCell>
-									<TableCell align='right'>
-										<Link
-											to={`/backoffice/users/${row.id}`}
-											underline='none'
-											component={RouterLink}>
-											<Button color='primary' size='small'>
-												Editar
-											</Button>
-										</Link>
-									</TableCell>
-									<TableCell align='right'>
-										<Button
-											color='error'
-											size='small'
-											onClick={() => deleteUser(row.id)}>
-											Eliminar
-										</Button>
-									</TableCell>
-								</TableRow>
-							))}
-						</TableBody>
-					</Table>
-				</TableContainer>
-			</Container>
-		</Box>
-	)
+  const getRequesUsers = async () => {
+    const data = await getRequest('/users');
+    try{
+      setRows(data.map( item => createData(item.id, item.firstName, item.lastName, item.email, item.image, item.roleId)))
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+  
+  useEffect(() => {
+    getRequesUsers();  
+  }, [])
+
+  const handleChangeDense = (event) => {
+    setDense(event.target.checked);
+  };
+
+  const handleEdit = (selectedRows) => {
+    console.log('Edit pressed!!', selectedRows);
+  };
+
+  const handleDelete = (selectedRows) => {
+    confirmAlert('Eliminar estos usuarios?', 'Los usuarios serán borradas permantemente', 'question')
+    .then(result => {
+      if(result.isConfirmed) {
+        for (let i = 0; i < selectedRows.length; i++) {
+          const user = selectedRows[i];
+          console.log(`Delete element number ${i}!!`, user);
+          deleteRequest(`/users/${user}`);
+          basicAlert('Usuarios eliminados exitosamente', '', 'success');
+        }
+        getRequesUsers();
+      } else {
+        basicAlert('Acción cancelada', '', 'error');
+      }
+    })
+  };
+
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2 }}>
+        <EnhancedTable
+          title='Actividades'
+          dense={dense}
+          headCells={HeadCellsUsers}
+          rows={rows}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+        />
+      </Paper>
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Dense padding"
+      />
+    </Box>
+  );
 }
