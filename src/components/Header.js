@@ -10,7 +10,6 @@ import Menu from '@mui/material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button, Container, Avatar, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
-import LoginForm from './LoginForm';
 
 
 const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
@@ -97,7 +96,7 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
               <Stack direction="row" spacing={2}>
                 <Avatar alt={`user ${user.data.id} image`} src={user.data.image} />
               </Stack>:
-              <Button href='/login'>
+              <Button component={Link} to='/login'>
                 <AccountCircleIcon 
                   sx={{ color: '#898989', width: '50px' }}
                 />
