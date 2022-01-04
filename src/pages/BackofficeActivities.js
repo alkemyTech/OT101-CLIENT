@@ -4,10 +4,13 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { deleteRequest, getRequest } from '../services/requestsHandlerService';
+import { deleteRequest, getRequest, patchRequest } from '../services/requestsHandlerService';
 import HeadCellsActivities from '../components/ScreenTables/HeadCellsActivities';
 import { confirmAlert, basicAlert } from '../services/sweetAlertService';
 import EnhancedTable from '../components/EnhancedTable';
+import { Modal, Container } from '@mui/material';
+import ActivityForm from '../components/ActivityForm';
+import FormStyles from '../styles/FormStyles';
 
 function createData(idKey, name, image, content, createdAt, updatedAt) {
   return {
@@ -23,6 +26,8 @@ function createData(idKey, name, image, content, createdAt, updatedAt) {
 export default function BackofficeActivities () {
   const [dense, setDense] = React.useState(false);
   const [rows, setRows] = useState([]);
+  const [rowSelected, setRowSelected] = useState([]);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const getRequestActivities = async () => {
     const data = await getRequest('/activities/backoffice');
@@ -43,8 +48,11 @@ export default function BackofficeActivities () {
   };
 
   const handleEdit = (selectedRows) => {
-    console.log('Edit pressed!!', selectedRows);
+    setRowSelected(rows.find( r => r.idKey === selectedRows[0]))
+    setIsFormOpen(true);
   };
+  
+  const handleFormClose = () => setIsFormOpen(false);
 
   const handleDelete = (selectedRows) => {
     confirmAlert('Eliminar estas actividades?', 'Las actividades serán borradas permantemente', 'question')
@@ -79,6 +87,17 @@ export default function BackofficeActivities () {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <Modal
+        open={isFormOpen}
+      >
+          <ActivityForm
+            maxWidth="sm"
+            sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }} 
+            open={isFormOpen} 
+            activity={rowSelected}
+            onSuccess={rowSelected}
+            onCancel={handleFormClose} />
+      </Modal>
     </Box>
   );
 }

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Paper, Button, Container, TextField, Typography } from '@material-ui/core'
@@ -11,12 +10,11 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import Styles from '../styles/FormStyles'
 import { postRequest, patchRequest } from '../services/requestsHandlerService';
-import Loading from './Loading';
 import ImageInput from './ImageInput'
+import { basicAlert } from '../services/sweetAlertService';
 
 
-const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure}) => {
-  const [isLoading, setIsLoading] = useState(false);
+const ActivityForm = ({classes, open, activity, requestData, onCancel, onSuccess, onFailure}) => {
 
   const validationSchema = yup.object({
     name: yup
@@ -32,7 +30,6 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
   });
 
   const activitySubmit = (values, actions) => {
-    setIsLoading(true);
 
     const dataToSend = new FormData();
 
@@ -41,17 +38,14 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
       dataToSend.append(key, values[key]);
     });
     
-    const apiRequest = activity && activity.id ?
-      patchRequest(`/activities/${activity.id}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
+    const apiRequest = activity ?
+      patchRequest(`/activities/${activity.idKey}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
       postRequest(`/activities/`, dataToSend, {headers: {'content-type': 'multipart/form-data'}});
 
     apiRequest.then(savedActivity => {
-        setIsLoading(false);
-
-        onSuccess(savedActivity);
+      onSuccess(savedActivity);
       })
       .catch(err => {
-        setIsLoading(false);
 
         onFailure(err);
       })
@@ -77,19 +71,20 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
     formik.setFieldValue("content", editor.getData());
   }
 
-  if (!open) {
-    return (null);
+  const onClickSubmit = () => {
+    basicAlert('Actividad modificada!', '', 'success');
+    /* onCancel(); */
   }
 
-  if (isLoading) {
-    return (<Loading />);
+  if (!open) {
+    return (null);
   }
 
   return (
     <Container maxWidth="sm">
       <Paper elevation={3} className={classes.innerBox}>
         <Typography variant="h5" component="h2" fontWeight="bold" mb={6}>
-          {activity && activity.id ? "Modificar" : "Crear" } Actividades
+          {activity? "Modificar" : "Crear" } Actividades
         </Typography>
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <TextField
@@ -128,7 +123,7 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
           <Button
             variant="contained"
             type="reset"
-            onClick={()=>formik.resetForm()}
+            onClick={()=> formReset()}
             className={classes.buttonCancel}
           >
             Cancelar
@@ -139,6 +134,7 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
             variant="contained"
             type="submit"
             className={classes.buttonOk}
+            onClick={onClickSubmit}
           >
             Enviar
           </Button>
