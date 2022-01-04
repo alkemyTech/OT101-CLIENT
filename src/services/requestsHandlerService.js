@@ -16,7 +16,7 @@ const httpRequest = (verb, endpoint, data, headers) => {
   if (data) {
     config.data = data;
   }
-console.log(config)
+
   return new Promise((resolve, reject) => {
     axios(config)
       .then(res => resolve(res.data))
