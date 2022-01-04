@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 
-const httpRequest = (verb, endpoint, data, headers) => {
+const httpRequest = (verb, endpoint, data, headers = {}) => {
   const config = {
-    headers: headers || {}
+    headers: headers
   };
 
   const token = localStorage.getItem('token');
@@ -50,7 +50,7 @@ export function getRequest(endpoint, headers) {
  * if not headers are passed, then the headers object is setted to {}
  * if token exist in localStorage, then add it to headers
  */
-export function postRequest(endpoint, data, headers = {}) {
+export function postRequest(endpoint, data, headers) {
   return httpRequest('post', endpoint, data, headers);
 }
 
@@ -65,7 +65,7 @@ export function postRequest(endpoint, data, headers = {}) {
  * if not headers are passed, then the headers object is setted to {}
  * if token exist in localStorage, then add it to headers
  */
-export function patchRequest(endpoint, data, headers = {}) {
+export function patchRequest(endpoint, data, headers) {
   return httpRequest('patch', endpoint, data, headers);}
 
 /**
@@ -73,6 +73,6 @@ export function patchRequest(endpoint, data, headers = {}) {
  * @param {object} headers
  * @returns {Promise}
  */
-export function deleteRequest(endpoint, headers = {}) {
+export function deleteRequest(endpoint, headers) {
   return httpRequest('delete', endpoint, null, headers);
 }
