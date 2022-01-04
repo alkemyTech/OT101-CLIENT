@@ -25,8 +25,8 @@ export default function BackofficeTestimonials () {
   const [rows, setRows] = useState([]);
   
   const getRequestTestimonials = async () => {
-    const data = await getRequest('/testimonials/backoffice');
     try{
+      const data = await getRequest('/testimonials/backoffice');
       setRows(data.map( item => createData(item.id, item.name, item.content, item.image, item.createAt, item.updatedAt)))
     }
     catch (err) {

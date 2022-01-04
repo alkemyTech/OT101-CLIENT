@@ -23,8 +23,8 @@ export default function BackofficeActivities () {
   const [rows, setRows] = useState([]);
 
   const getRequestActivities = async () => {
-    const data = await getRequest('/activities/backoffice');
     try{
+      const data = await getRequest('/activities/backoffice');
       setRows(data.map( item => createData(item.id, item.name, item.image, item.content, item.deletedAt)))
     }
     catch (err) {
