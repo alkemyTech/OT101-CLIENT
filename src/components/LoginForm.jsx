@@ -20,8 +20,11 @@ function LoginForm() {
                         .then((response) => {
                             if (!response.payload?.email){
                                 setFailedLogin(true);
-                            } else {
+                            } else if(response.payload.roleId === 1) {
                                 navigate('/backoffice');
+                            }
+                            else{
+                                navigate('/');
                             }
                         })
                         .catch((error) => {

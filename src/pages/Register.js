@@ -47,7 +47,7 @@ function Register(props) {
       authService.register(values)
         .then(() => {
           setStatus({ type: 'success' });
-          setTimeout(function(){ navigate('/'); }, 2000); //TimeOut used to simulate DB delay
+          navigate('/login'); //TimeOut used to simulate DB delay
         })
         .catch((error) => {
           setStatus({ type: 'error', error });
