@@ -26,8 +26,8 @@ export default function BackofficeNews() {
   const [rows, setRows] = useState([]);
 
   const getRequestNews = async () => {
-    const data = await getRequest('/news/backoffice');
     try{
+      const data = await getRequest('/news/backoffice');
       setRows(data.map( item => createData(item.id, item.name, item.image, item.type, item.categoryId, item.createdAt, item.updatedAt)))
     }
     catch (err) {
