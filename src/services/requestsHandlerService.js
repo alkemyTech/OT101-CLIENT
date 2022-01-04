@@ -1,16 +1,29 @@
-//import axios
 import axios from 'axios';
 
-//config object for axios to set the headers
-const config = {};
-const API_URL = process.env.REACT_APP_API_URL; 
 
-//if exist token in localStorage, then add it to headers
-function addToken() {
-  if (localStorage.getItem('token')) {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+const httpRequest = (verb, endpoint, data, headers = {}) => {
+  const config = {
+    headers: headers
+  };
+
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-}
+
+  config.method = verb;
+  config.url = process.env.REACT_APP_API_URL + endpoint;
+  if (data) {
+    config.data = data;
+  }
+
+  return new Promise((resolve, reject) => {
+    axios(config)
+      .then(res => resolve(res.data))
+      .catch(error => reject(error));
+  });
+};
+
 
 //handle get requests
 /**
@@ -22,10 +35,8 @@ function addToken() {
  * if not headers are passed, then the headers object is setted to {}
  * if token exist in localStorage, then add it to headers
  */
-export function getRequest(endpoint, headers = {}) {
-  config.headers = headers;
-  addToken();
-  return axios.get(`${API_URL}${endpoint}`, config).then((response) => response.data);
+export function getRequest(endpoint, headers) {
+  return httpRequest('get', endpoint, null, headers);
 }
 
 //handle post requests
@@ -39,10 +50,8 @@ export function getRequest(endpoint, headers = {}) {
  * if not headers are passed, then the headers object is setted to {}
  * if token exist in localStorage, then add it to headers
  */
-export function postRequest(endpoint, data, headers = {}) {
-  config.headers = headers;
-  addToken();
-  return axios.post(`${API_URL}${endpoint}`, data, config).then((response) => response.data);
+export function postRequest(endpoint, data, headers) {
+  return httpRequest('post', endpoint, data, headers);
 }
 
 //handle patch requests
@@ -56,19 +65,14 @@ export function postRequest(endpoint, data, headers = {}) {
  * if not headers are passed, then the headers object is setted to {}
  * if token exist in localStorage, then add it to headers
  */
-export function patchRequest(endpoint, data, headers = {}) {
-  config.headers = headers;
-  addToken();
-  return axios.patch(`${API_URL}${endpoint}`, data, config).then((response) => response.data);
-}
+export function patchRequest(endpoint, data, headers) {
+  return httpRequest('patch', endpoint, data, headers);}
 
 /**
  * @param {string} endpoint
  * @param {object} headers
  * @returns {Promise}
  */
-export function deleteRequest(endpoint, headers = {}) {
-  config.headers = headers;
-  addToken();
-  return axios.delete(`${API_URL}${endpoint}`, config).then((response) => response.data);
+export function deleteRequest(endpoint, headers) {
+  return httpRequest('delete', endpoint, null, headers);
 }
