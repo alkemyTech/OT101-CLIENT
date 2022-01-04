@@ -26,8 +26,8 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl" sx={{bgcolor: '#E5DCB7'}}>
+    <AppBar position="static" sx={{bgcolor: '#E5DCB7'}}>
+      <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <img src={organization?.data?.image} width='130px' height='110px' alt="Logotipo Somos Más" />
           <Box sx={{ display: { xs: 'flex', md: 'none' } }} >
