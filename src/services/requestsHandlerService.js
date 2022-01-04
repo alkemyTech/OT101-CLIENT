@@ -74,5 +74,5 @@ export function patchRequest(endpoint, data, headers = {}) {
  * @returns {Promise}
  */
 export function deleteRequest(endpoint, headers = {}) {
-  return httpRequest('post', endpoint, null, headers);
+  return httpRequest('delete', endpoint, null, headers);
 }
