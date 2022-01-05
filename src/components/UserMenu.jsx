@@ -10,8 +10,8 @@ import { logout as doLogout } from '../services/authService';
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const user = useSelector((state) => state.user);
-  const open = Boolean(anchorEl);
   const dispatch = useDispatch();
+  const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
