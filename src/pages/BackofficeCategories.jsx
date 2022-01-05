@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { getRequest, deleteRequest, patchRequest } from '../services/requestsHandlerService';
+import { getRequest, deleteRequest } from '../services/requestsHandlerService';
 import HeadCellsCategories from '../components/ScreenTables/headCellsCategories';
 import EnhancedTable from '../components/EnhancedTable';
 import {confirmAlert, basicAlert} from '../services/sweetAlertService'

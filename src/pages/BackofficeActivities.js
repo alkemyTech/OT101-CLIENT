@@ -4,13 +4,12 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { deleteRequest, getRequest, patchRequest } from '../services/requestsHandlerService';
+import { deleteRequest, getRequest } from '../services/requestsHandlerService';
 import HeadCellsActivities from '../components/ScreenTables/HeadCellsActivities';
 import { confirmAlert, basicAlert } from '../services/sweetAlertService';
 import EnhancedTable from '../components/EnhancedTable';
-import { Modal, Container } from '@mui/material';
+import { Modal } from '@mui/material';
 import ActivityForm from '../components/ActivityForm';
-import FormStyles from '../styles/FormStyles';
 
 function createData(idKey, name, image, content, createdAt, updatedAt) {
   return {
