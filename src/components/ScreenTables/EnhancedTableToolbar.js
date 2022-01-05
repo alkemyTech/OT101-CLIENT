@@ -7,9 +7,10 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-export const EnhancedTableToolbar = ({ numSelected, title, onDelete, onEdit }) => {
+export const EnhancedTableToolbar = ({ numSelected, title, onDelete, onEdit, onCreate }) => {
   return (
     <Toolbar
       sx={{
@@ -60,11 +61,18 @@ export const EnhancedTableToolbar = ({ numSelected, title, onDelete, onEdit }) =
           </Tooltip>
         </>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
+        <>
+          <Tooltip title="Add">
+            <IconButton onClick={onCreate}>
+              <AddCircleOutlineIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Filter list">
+            <IconButton>
+              <FilterListIcon />
+            </IconButton>
+          </Tooltip>
+        </>
       )}
     </Toolbar>
   );
@@ -75,4 +83,5 @@ EnhancedTableToolbar.propTypes = {
   title: PropTypes.string,
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
+  onCreate: PropTypes.func,
 };

@@ -44,7 +44,7 @@ function stableSort(array, comparator) {
 }
 
 
-export default function EnhancedTable({ headCells, rows, title, dense, onEdit, onDelete }) {
+export default function EnhancedTable({ headCells, rows, title, dense, onEdit, onDelete, onCreate }) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('idKey');
   const [selected, setSelected] = React.useState([]);
@@ -111,6 +111,10 @@ export default function EnhancedTable({ headCells, rows, title, dense, onEdit, o
     onEdit(selected);
   }
 
+  const handleCreate = () => {
+    onCreate(selected);
+  }
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -119,6 +123,7 @@ export default function EnhancedTable({ headCells, rows, title, dense, onEdit, o
             title={title}
             onEdit={handleEdit}
             onDelete={handleDelete}
+            onCreate={handleCreate}
         />
         <TableContainer>
           <Table

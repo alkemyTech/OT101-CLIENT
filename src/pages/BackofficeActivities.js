@@ -39,7 +39,8 @@ export default function BackofficeActivities () {
   }
   
   useEffect(() => {
-    getRequestActivities();  
+    getRequestActivities();
+    console.log(rowSelected);  
   }, [isFormOpen])
 
   const handleChangeDense = (event) => {
@@ -51,6 +52,10 @@ export default function BackofficeActivities () {
     setIsFormOpen(true);
   };
   
+  const handleFormOpen = () => {
+    setIsFormOpen(true)
+    console.log(rowSelected);
+  }
   const handleFormClose = () => setIsFormOpen(false);
 
   const handleDelete = (selectedRows) => {
@@ -80,6 +85,7 @@ export default function BackofficeActivities () {
           rows={rows}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          onCreate={handleFormOpen}
         />
       </Paper>
       <FormControlLabel
