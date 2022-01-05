@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,7 +8,7 @@ import { CardActionArea } from '@mui/material';
 const GridHome = ({ item }) => {
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea component={Link} to={`/Novedades/${item.id}`}>
         <CardMedia
           component="img"
           height="140"
