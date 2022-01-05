@@ -31,6 +31,7 @@ export default function BackofficeCategories () {
 
   const getRequestCategories = async () => {
     try{
+      const data = await getRequest('/categories');
       setRows(data.map( item => createData(item.id, item.name, item.description, item.createdAt, item.updatedAt)))
     }
     catch (err) {

@@ -28,6 +28,7 @@ export default function BackofficeContacts() {
 
   const getRequestContacts = async () => {
     try{
+      const data = await getRequest('/contacts');
       setRows(data.map( item => createData(item.id, item.name, item.lastname, item.phone, item.email, item.message, item.createdAt, item.updatedAt)))
     }
     catch (err) {
