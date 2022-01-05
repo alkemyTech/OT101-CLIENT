@@ -5,7 +5,6 @@ import { Link, Outlet } from 'react-router-dom';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import MuiAppBar from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -19,6 +18,7 @@ import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import LanguageIcon from '@mui/icons-material/Language';
 
 const drawerWidth = 200;
 
@@ -93,10 +93,6 @@ export default function Backoffice({routes}) {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Button
-                            to='/'
-                            LinkComponent={Link}
-                        >
                             <Typography
                                 component="h1"
                                 variant="h6"
@@ -105,7 +101,15 @@ export default function Backoffice({routes}) {
                             >
                             Administracion del sitio
                             </Typography>
-                        </Button>
+                            <Tooltip placement='left' title='Sitio web'>
+                                <IconButton
+                                    to='/'
+                                    LinkComponent={Link}
+                                    sx={{display: 'block', marginLeft: 'auto', }}
+                                >
+                                    <LanguageIcon sx={{marginTop: '10px'}}/>
+                                </IconButton>
+                            </Tooltip>
                     </Toolbar>
                 </AppBar>
                 <Drawer variant="permanent" open={open}>
