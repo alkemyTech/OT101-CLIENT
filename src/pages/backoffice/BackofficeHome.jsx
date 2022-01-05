@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
 import logoSomosMas from '../../assets/LOGO-SOMOS MAS.png';
 import { Button, Typography } from '@mui/material';
-import { HomeOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 
