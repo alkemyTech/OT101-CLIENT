@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-//import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { fetchData } from '../features/organization/organizationSlice';
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -65,11 +66,17 @@ export default function Backoffice({routes}) {
 //    const { role } = useSelector((state) => state.user);
     const role = 'admin'; // temporary until login fully functional
     const allowedRoutes = routes.filter(route => route.roles.includes(role));
+    const dispatch = useDispatch();
 
     const toggleDrawer = () => {
         setOpen(!open);
     };
 
+  
+    useEffect(() => {
+      dispatch(fetchData());
+    }, []);
+  
     return (
         <ThemeProvider theme={mdTheme}>
             <Box sx={{ display: 'flex' }}>

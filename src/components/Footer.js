@@ -4,25 +4,12 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Toolbar from '@mui/material/Toolbar';
 import MenuItem from '@mui/material/MenuItem';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { useSelector } from 'react-redux';
 
-const iconsType = {
-  facebook: FacebookIcon,
-  instagram: InstagramIcon,
-  phone: LocalPhoneIcon,
-  email: MailOutlineIcon,
-};
-//DELETE THIS WHEN IMPLEMENT SOCIALS TO /organizations/1/public endpoint
-const tempSocials = [
-  { url: 'mailto:mail@mail.com', icon: 'email' },
-  { url: 'http://facebook.com', icon: 'facebook' },
-  { url: 'http://instagram.com', icon: 'instagram' },
-  { url: 'tel:+5491161141500', icon: 'phone' },
-];
 
 const Footer = ({ routes }) => {
   const organization = useSelector((state) => state.organization);
@@ -42,7 +29,7 @@ const Footer = ({ routes }) => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Link to="/">
-                <img src={organization?.data?.image} alt="Logotipo Somos Más" />
+                <img src={organization?.data?.image} alt={`Logotipo ${organization?.data?.name}`} />
               </Link>
             </Box>
           </Grid>
@@ -67,17 +54,26 @@ const Footer = ({ routes }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              {/* Replace tempSocials with organization.socials */}
-              {tempSocials.map((social) => {
-                const Icon = iconsType[social.icon];
-                return (
-                  <MenuItem key={social.icon}>
-                    <a href={social.url}>
-                      <Icon sx={{ margin: 1, color: 'white' }} />
-                    </a>
-                  </MenuItem>
-                );
-              })}
+              <MenuItem key={organization?.data?.facebook}>
+                <a href={organization?.data?.facebook}>
+                  <FacebookIcon sx={{ margin: 1, color: 'white' }} />
+                </a>
+              </MenuItem>
+              <MenuItem key={organization?.data?.instagram}>
+                <a href={organization?.data?.instagram}>
+                  <InstagramIcon sx={{ margin: 1, color: 'white' }} />
+                </a>
+              </MenuItem>
+              <MenuItem key={organization?.data?.linkedin}>
+                <a href={organization?.data?.linkedin}>
+                  <LinkedInIcon sx={{ margin: 1, color: 'white' }} />
+                </a>
+              </MenuItem>
+              <MenuItem key={organization?.data?.phone}>
+                <a href={organization?.data?.phone}>
+                  <LocalPhoneIcon sx={{ margin: 1, color: 'white' }} />
+                </a>
+              </MenuItem>
             </Box>
           </Grid>
         </Grid>

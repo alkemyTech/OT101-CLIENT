@@ -3,28 +3,19 @@ import { ArrowBackIos, ArrowForwardIos} from '@mui/icons-material'
 import './ImageSlider.css'
 
 
-function ImageSlider() {
+function ImageSlider({ slides = []}) {
     // TODO: Add style to mix properly with homepage, and define size of the slider.
     const [currentImg, setCurrentImg] = useState(0)
 
-    let images = [{
-        imageUrl: 'https://source.unsplash.com/random/1600x800',
-        text: 'img1'
-    },{
-        imageUrl: 'https://source.unsplash.com/random/1600x802',
-        text: 'img2'
-    },{
-        imageUrl: 'https://source.unsplash.com/random/1600x801',
-        text: 'img3'
-    }]
+    const images = slides.slice().sort((s1, s2) => s1.order - s2.order);
 
-    return (
+    return !images.length ? null : (
         <div className='carousel-outer'>
-            <div className='carousel-inner' style={{background: `url(${images[currentImg].imageUrl})`}}>
+            <div className='carousel-inner' style={{background: `url(${images[currentImg].imageURL})`}}>
 
                 <div onClick={() => {
                     if (currentImg === 0) {
-                        setCurrentImg(2)
+                        setCurrentImg(images.length - 1)
                         return
                     }
                     setCurrentImg(prev => prev - 1 )
@@ -37,7 +28,7 @@ function ImageSlider() {
             </div>
       
             <div onClick={() => {
-                if (currentImg === 2) {
+                if (currentImg === images.length - 1) {
                     setCurrentImg(0)
                     return }
                 

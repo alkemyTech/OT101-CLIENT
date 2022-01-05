@@ -1,12 +1,18 @@
 import { Box } from '@mui/material';
-import logoSomosMas from '../../assets/LOGO-SOMOS MAS.png'
+import { useSelector } from 'react-redux';
 
 
 const BackofficeHome = (props) => {
+    const organization = useSelector((state) => state.organization);
+ 
     return (
     <>
         <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center' }}>
-            <img src={logoSomosMas} width='300px' height='250px' alt="Logotipo Somos Más" />
+            <img
+                src={organization?.data?.image}
+                width='300px' height='250px'
+                alt={`Logotipo ${organization?.data?.name}`}
+            />
         </Box>
     </>
     );
