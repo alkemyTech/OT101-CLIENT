@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -24,7 +25,7 @@ function Activities() {
         {activities.map((activity, i) => (
           <Grid item xs={12} md={6} lg={4} key={i}>
             <Card sx={{m:1}}>
-              <CardActionArea>
+              <CardActionArea component={Link} to={`/Actividades/${activity.id}`}>
                 <CardMedia
                   component="img"
                   height="140"

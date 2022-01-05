@@ -37,7 +37,11 @@ const Home = () => {
         <Grid container spacing={5} rowSpacing={8}>
         {news.map((entry, key) => (
           <Grid item xs={12} md={4} key={key}>
-            <GridHome key={key} item={entry} />
+            <GridHome
+              key={key}
+              item={entry} 
+              linkTo={`/Novedades/${entry.id}`}
+            />
           </Grid>
         ))}
       </Grid>
