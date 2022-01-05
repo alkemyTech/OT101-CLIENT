@@ -46,11 +46,13 @@ export const EnhancedTableToolbar = ({ numSelected, title, onDelete, onEdit }) =
 
       {numSelected > 0 ? (
         <>
+        {numSelected === 1 && (
           <Tooltip title="Edit">
             <IconButton onClick={onEdit}>
               <EditIcon />
             </IconButton>
           </Tooltip>
+        )}
           <Tooltip title="Delete">
             <IconButton onClick={onDelete}>
               <DeleteIcon />

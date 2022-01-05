@@ -30,7 +30,8 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
     <AppBar position="static" sx={{bgcolor: '#E5DCB7'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
-          <img src={organization?.data?.image} width='130px' height='110px' alt="Logotipo Somos Más" />
+          <img src={organization?.data?.image} width='130px' height='110px'
+              alt={`Logotipo ${organization?.data?.name}`} />
           <Box sx={{ display: { xs: 'flex', md: 'none' } }} >
             <IconButton
               size="large"
