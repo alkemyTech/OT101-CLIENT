@@ -73,7 +73,7 @@ const ActivityForm = ({classes, open, activity, requestData, onCancel, onSuccess
 
   const onClickSubmit = () => {
     basicAlert('Actividad modificada!', '', 'success');
-    /* onCancel(); */
+    setTimeout(() => onCancel(), 200);
   }
 
   if (!open) {

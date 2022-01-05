@@ -40,7 +40,7 @@ export default function BackofficeActivities () {
   
   useEffect(() => {
     getRequestActivities();  
-  }, [])
+  }, [isFormOpen])
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
@@ -95,6 +95,7 @@ export default function BackofficeActivities () {
             open={isFormOpen} 
             activity={rowSelected}
             onSuccess={rowSelected}
+            requestData={getRequestActivities}
             onCancel={handleFormClose} />
       </Modal>
     </Box>
