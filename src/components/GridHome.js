@@ -5,10 +5,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-const GridHome = ({ item }) => {
+const GridHome = ({ item, linkTo }) => {
   return (
     <Card>
-      <CardActionArea component={Link} to={`/Novedades/${item.id}`}>
+      <CardActionArea component={Link} to={linkTo}>
         <CardMedia
           component="img"
           height="140"
