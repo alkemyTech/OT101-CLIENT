@@ -12,7 +12,7 @@ const BackofficeHome = (props) => {
             <img src={logoSomosMas} width='300px' height='250px' alt="Logotipo Somos Más" />
         </Box>
         <Button component={Link} to={'/'} sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center', m: 'auto' }} >
-            <Typography iconStart={HomeOutlined}>
+            <Typography>
                 Ir al sitio
             </Typography>
         </Button>
