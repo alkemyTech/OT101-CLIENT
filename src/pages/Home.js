@@ -27,7 +27,7 @@ const Home = () => {
         { organization?.data?.welcomeText.toUpperCase()}
       </Typography>
       <Box sx={{ marginY: 4 }}>
-        { <ImageSlider slides={ organization?.data?.Slides } /> }
+        <ImageSlider slides={ organization?.data?.Slides } />
       </Box>
       
       <Box sx={{ flexGrow: 1, textAlign: 'center', mt: 5 }}>
