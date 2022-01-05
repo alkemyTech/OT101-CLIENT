@@ -30,9 +30,10 @@ export const userSlice = createSlice({
       role: { name: 'Admin' },
     },
   },
-  reducer: {
+  reducers: {
     clearData: (state) => {
       state.isLogged = false;
+      state.isTokenVerified = false;
       state.data = null;
     },
   },
