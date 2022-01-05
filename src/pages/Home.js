@@ -8,6 +8,7 @@ import GridHome from '../components/GridHome';
 
 const Home = () => {
   const user = useSelector((state) => state.user);
+  const organization = useSelector((state) => state.organization);
 
   const [news, setNews] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
@@ -22,12 +23,11 @@ const Home = () => {
   return (
     <>
       <Typography variant="h3" component="h2" fontFamily='Signika'>
-        {user.isLogged === true
-          ? (`Hola ${user.data.firstName}, bienvenido a Fundación somos más`).toUpperCase()
-          : ('Bienvenido a Fundación somos más').toUpperCase()}
+        { user.isLogged && `Hola ${user.data.firstName}, `.toUpperCase() }
+        { organization?.data?.welcomeText.toUpperCase()}
       </Typography>
       <Box sx={{ marginY: 4 }}>
-        <ImageSlider />
+        <ImageSlider slides={ organization?.data?.Slides } />
       </Box>
       
       <Box sx={{ flexGrow: 1, textAlign: 'center', mt: 5 }}>

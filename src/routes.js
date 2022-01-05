@@ -15,7 +15,6 @@ import ActivityDetails from './pages/ActivityDetails';
 import NewsDetails from './pages/NewsDetails';
 
 import BackofficeHome from './pages/backoffice/BackofficeHome';
-import BackofficeDummy from './pages/backoffice/BackofficeDummy';
 import BackofficeCategories from './pages/BackofficeCategories';
 import BackofficeContacts from './pages/BackofficeContacts';
 import BackofficeNews from './pages/BackofficeNews';
@@ -130,7 +129,7 @@ const backofficeRoutes = [
   {
     name: 'Mi Perfil',
     path: 'profile',
-    element: <BackofficeDummy />,
+    element: <Profile />,
     roles: ['admin', 'user'],
     icon: <AccountCircleIcon />,
   }
