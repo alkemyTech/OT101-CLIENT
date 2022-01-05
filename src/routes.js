@@ -12,6 +12,7 @@ import BackofficeActivities from './pages/BackofficeActivities';
 import Login from './components/LoginForm'
 
 import ActivityDetails from './pages/ActivityDetails';
+import NewsDetails from './pages/NewsDetails';
 
 import BackofficeHome from './pages/backoffice/BackofficeHome';
 import BackofficeDummy from './pages/backoffice/BackofficeDummy';
@@ -45,6 +46,7 @@ const publicRoutes = [
   { name: 'Actividades', path: '/Actividades', element: <Activities /> },
   { path: '/Actividades/:id', element: <ActivityDetails /> },
   { name: 'Novedades', path: '/Novedades', element: <News /> },
+  { path: 'Novedades/:id', element: <NewsDetails />},
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
   { name: 'Contacto', path: '/contact', element: <Contact /> },
   { path: '/profile', element: <Profile /> },

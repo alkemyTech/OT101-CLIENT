@@ -8,8 +8,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Button, Container, Avatar, Stack } from '@mui/material';
+import { Button, Container, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
+import UserMenu from './UserMenu';
 
 
 const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
@@ -26,8 +27,8 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl" sx={{bgcolor: '#E5DCB7'}}>
+    <AppBar position="static" sx={{bgcolor: '#E5DCB7'}}>
+      <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <img src={organization?.data?.image} width='130px' height='110px' alt="Logotipo Somos Más" />
           <Box sx={{ display: { xs: 'flex', md: 'none' } }} >
@@ -94,7 +95,7 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
             {
               user.isLogged === true?
               <Stack direction="row" spacing={2}>
-                <Avatar alt={`user ${user.data.id} image`} src={user.data.image} />
+                <UserMenu />
               </Stack>:
               <Button component={Link} to='/login'>
                 <AccountCircleIcon 

@@ -25,8 +25,8 @@ export default function BackofficeMembers () {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const getRequestMembers = async () => {
-    const data = await getRequest('/members');
     try{
+      const data = await getRequest('/members');
       setRows(data.map( item => createData(item.id, item.firstName, item.lastName, item.image)))
     }
     catch (err) {

@@ -30,7 +30,6 @@ export default function BackofficeActivities () {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const getRequestActivities = async () => {
-    const data = await getRequest('/activities/backoffice');
     try{
       setRows(data.map( item => createData(item.id, item.name, item.image, item.content, item.createdAt, item.updatedAt)))
     }

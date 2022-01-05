@@ -19,7 +19,7 @@ function About() {
   }, []);
   return (
     <>
-      <Typography variant='h3' component='h2' sx={{marginBottom: 4}}>Sobre nosotros</Typography>
+      <Typography variant='h3' component='h2' sx={{marginBottom: 4, fontFamily: 'Signika'}}>Sobre nosotros</Typography>
       <Grid container spacing={5} rowSpacing={8}>
         {members.map((member, i) => (
           <Grid item xs={12} md={4} key={i}>
@@ -32,7 +32,7 @@ function About() {
                   alt={`${member.firstName} ${member.lastName} image`}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="h3">
+                  <Typography gutterBottom variant="h5" component="h3" fontFamily='Signika'>
                     {member.firstName + ' ' + member.lastName}
                   </Typography>
                 </CardContent>
