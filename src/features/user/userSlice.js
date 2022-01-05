@@ -33,6 +33,7 @@ export const userSlice = createSlice({
   reducer: {
     clearData: (state) => {
       state.isLogged = false;
+      state.isTokenVerified = false;
       state.data = null;
     },
   },
