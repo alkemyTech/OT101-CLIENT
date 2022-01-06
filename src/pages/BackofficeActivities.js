@@ -40,7 +40,6 @@ export default function BackofficeActivities () {
   
   useEffect(() => {
     getRequestActivities();
-    console.log(rowSelected);  
   }, [isFormOpen])
 
   const handleChangeDense = (event) => {
@@ -94,6 +93,7 @@ export default function BackofficeActivities () {
       />
       <Modal
         open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
       >
           <ActivityForm
             maxWidth="sm"
