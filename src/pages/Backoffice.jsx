@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../features/organization/organizationSlice';
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
@@ -63,8 +63,8 @@ const mdTheme = createTheme();
 
 export default function Backoffice({routes}) {
     const [open, setOpen] = useState(false);
-//    const { role } = useSelector((state) => state.user);
-    const role = 'admin'; // temporary until login fully functional
+    const user = useSelector((state) => state.user);
+    const role = user?.data?.role?.name.toLowerCase();
     const allowedRoutes = routes.filter(route => route.roles.includes(role));
     const dispatch = useDispatch();
 
