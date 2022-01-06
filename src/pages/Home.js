@@ -28,7 +28,7 @@ const Home = () => {
   const getRequestTestimonials = async () => {
     try {
       const data = await getRequest(endPointTestimonials);
-      setNews(data);
+      setTestimonials(data);
     }
     catch (err) {
       console.log(err);
@@ -74,7 +74,7 @@ const Home = () => {
         <Grid container spacing={5} rowSpacing={8}>
         {testimonials.map((testimonial, key) => (
           <Grid item xs={12} md={4} key={key}>
-            <GridHome key={key} item={testimonial} />
+            <GridHome key={key} item={testimonial} linkTo={`/Testimonios/${entry.id}`} />
           </Grid>
         ))}
       </Grid>
