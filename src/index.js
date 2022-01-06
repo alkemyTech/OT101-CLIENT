@@ -5,17 +5,15 @@ import App from './App';
 import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import {verifyToken} from './features/user/userSlice';
+import { verifyToken } from './features/user/userSlice';
 
 //Se llama al auth service y se verifica el token para obtener los datos del usuario logeado
 store.dispatch(verifyToken());
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 
