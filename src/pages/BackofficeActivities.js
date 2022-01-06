@@ -40,7 +40,7 @@ export default function BackofficeActivities () {
   
   useEffect(() => {
     getRequestActivities();
-  }, [isFormOpen])
+  }, [])
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
@@ -52,7 +52,10 @@ export default function BackofficeActivities () {
   };
   
   const handleFormOpen  = () => setIsFormOpen(true);
-  const handleFormClose = () => setIsFormOpen(false);
+  const handleFormClose = () => {
+    setRowSelected([]);
+    setIsFormOpen(false)
+  };
 
   const handleDelete = (selectedRows) => {
     confirmAlert('Eliminar estas actividades?', 'Las actividades serán borradas permantemente', 'question')
@@ -60,7 +63,6 @@ export default function BackofficeActivities () {
       if(result.isConfirmed) {
         for (let i = 0; i < selectedRows.length; i++) {
           const activity = selectedRows[i];
-          console.log(`Delete element number ${i}!!`, activity);
           deleteRequest(`/activities/${activity}`);
           basicAlert('Actividades eliminadas exitosamente', '', 'success');
         }
@@ -69,6 +71,12 @@ export default function BackofficeActivities () {
         basicAlert('Acción cancelada', '', 'error');
       }
     })
+  };
+
+  const doSuccess = (item) => {
+    getRequestActivities();
+    setRowSelected([]);
+    handleFormClose();
   };
 
   return (
@@ -97,7 +105,7 @@ export default function BackofficeActivities () {
             sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }} 
             open={isFormOpen} 
             activity={rowSelected}
-            onSuccess={handleFormClose}
+            onSuccess={doSuccess}
             onCancel={handleFormClose} />
       </Modal>
     </Box>
