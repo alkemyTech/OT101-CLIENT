@@ -45,9 +45,9 @@ export default function UserMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem component={Link} to={'/backoffice'} sx={{ color: '#DB5752', fontFamily: 'Signika' }}>Administracion del sitio</MenuItem>
-        <MenuItem component={Link} to={'/profile'} sx={{ color: '#FAFA88', fontFamily: 'Signika' }}>Mi cuenta</MenuItem>
-        <MenuItem onClick={handleLogout} sx={{ color: '#9AC9FB', fontFamily: 'Signika' }}>Logout</MenuItem>
+        <MenuItem component={Link} to={'/backoffice'} sx={{ color: '#DB5752', fontFamily: 'Signika', textShadow: '1px 1px 2px black' }}>Administracion del sitio</MenuItem>
+        <MenuItem component={Link} to={'/profile'} sx={{ color: '#FAFA88', fontFamily: 'Signika', textShadow: '1px 1px 2px black' }}>Mi cuenta</MenuItem>
+        <MenuItem onClick={handleLogout} sx={{ color: '#9AC9FB', fontFamily: 'Signika', textShadow: '.5px .5px .5px black' }}>Logout</MenuItem>
       </Menu>
     </div>
   );
