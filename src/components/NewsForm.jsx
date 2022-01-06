@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import PropTypes from 'prop-types';
-import { Paper, Button, Container, MenuItem, TextField, Typography } from '@material-ui/core'
+import { Paper, Container, MenuItem, TextField, Typography } from '@material-ui/core'
 import { FormControl, FormLabel, FormHelperText } from '@material-ui/core'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -11,8 +10,8 @@ import Swal from 'sweetalert2';
 
 import Styles from '../styles/FormStyles'
 import { postRequest, patchRequest } from '../services/requestsHandlerService';
-import Loading from './Loading';
-import ImageInput from './ImageInput'
+import ImageInput from './ImageInput';
+import CustomButton from './CustomButton';
 
 const validationSchema = yup.object({
   name: yup
@@ -30,11 +29,7 @@ const validationSchema = yup.object({
 
 
 const NewsForm = ({classes, news}) => {
-  const [isLoading, setIsLoading] = useState(false);
-
   const newsSubmit = (values, actions) => {
-    setIsLoading(true);
-
     const dataToSend = new FormData();
 
     // append all form inputs
@@ -47,12 +42,10 @@ const NewsForm = ({classes, news}) => {
       postRequest('/news/', dataToSend, {headers: {'content-type': 'multipart/form-data'}});
 
     apiRequest.then(data => {
-        setIsLoading(false);
         Swal.fire('News', 'Solicitud procesada correctamente', 'success');
         actions.resetForm( {values: {name: '', content: '', image: null, categoryId: ''}} );
       })
       .catch(err => {
-        setIsLoading(false);
         Swal.fire('News', 'No se pudo procesar la solicitud', 'error');
       })
       .finally(() => actions.setSubmitting(false));
@@ -71,10 +64,6 @@ const NewsForm = ({classes, news}) => {
 
   const CKinputHandler = (event, editor) => {
     formik.setFieldValue("content", editor.getData());
-  }
-
-  if (isLoading) {
-    return (<Loading />);
   }
 
   return (
@@ -133,7 +122,7 @@ const NewsForm = ({classes, news}) => {
             onChange={file => formik.setFieldValue("image", file)}
             error={formik.touched.image && formik.errors.image}
           />
-          <Button
+          <CustomButton
             fullWidth
             disabled={formik.isSubmitting}
             color="primary"
@@ -142,7 +131,7 @@ const NewsForm = ({classes, news}) => {
             className={classes.button}
           >
             Enviar
-          </Button>
+          </CustomButton>
         </form>
       </Paper>
     </Container>
