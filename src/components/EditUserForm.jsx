@@ -133,6 +133,7 @@ function EditUserForm({ classes, user, backOffice, onSuccess, onFailure }) {
           initialValues={{
             firstName: user.firstName || '',
             lastName: user.lastName || '',
+            email: user.email || '',
             roleId: user.roleId,
           }}
           onSubmit={async (values, actions) => {
@@ -147,6 +148,7 @@ function EditUserForm({ classes, user, backOffice, onSuccess, onFailure }) {
           validationSchema={Yup.object({
             firstName: Yup.string().required('Por favor completar!'),
             lastName: Yup.string().required('Por favor completar'),
+            email: Yup.string().required('Por favor completar'),
             roleId: Yup.number().required('Por favor completar!'),
           })}
         >
@@ -175,6 +177,19 @@ function EditUserForm({ classes, user, backOffice, onSuccess, onFailure }) {
                       <InputLabel htmlFor="lastName">Apellido</InputLabel>
                       <Input {...field} />
                       <ErrorMessage name="lastName" component={FormHelperText} />
+                    </FormControl>
+                  )}
+                </Field>
+
+                <Field name="email">
+                  {({ field, meta }) => (
+                    <FormControl
+                      variant="standard"
+                      error={meta.touched && meta.error ? true : false}
+                    >
+                      <InputLabel htmlFor="email">Email</InputLabel>
+                      <Input {...field} />
+                      <ErrorMessage name="email" component={FormHelperText} />
                     </FormControl>
                   )}
                 </Field>
