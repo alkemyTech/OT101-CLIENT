@@ -42,7 +42,7 @@ export default function BackofficeUsers2 () {
   
   useEffect(() => {
     getRequesUsers();  
-  }, [])
+  }, [isFormOpen])
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
@@ -68,6 +68,10 @@ export default function BackofficeUsers2 () {
         basicAlert('Acción cancelada', '', 'error');
       }
     })
+  };
+
+  const handleClose = () => {
+    setIsFormOpen(false);
   };
 
   return (
@@ -96,6 +100,9 @@ export default function BackofficeUsers2 () {
             open={isFormOpen} 
             user={rowSelected}
             backOffice={true}
+            onSuccess={handleClose}
+            onCancel={handleClose}
+            onFailure={handleClose}
         />
       </Modal>
 
