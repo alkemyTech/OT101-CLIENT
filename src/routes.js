@@ -1,7 +1,6 @@
 import About from './pages/About';
 import Activities from './pages/Activities';
 import Contact from './pages/Contact';
-import Contribute from './pages/Contribute';
 import Error404 from './pages/Error404';
 import Home from './pages/Home';
 import News from './pages/News';
@@ -46,11 +45,10 @@ const publicRoutes = [
   { path: '/Actividades/:id', element: <ActivityDetails /> },
   { name: 'Novedades', path: '/Novedades', element: <News /> },
   { path: 'Novedades/:id', element: <NewsDetails />},
-  { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
+  { name: 'Testimonios', path: '/Testimonios', element: <Testimonials /> },
   { path: 'Testimonios/:id', element: <TestimonialsDetails />},
-  { name: 'Contacto', path: '/contact', element: <Contact /> },
+  { name: 'Contacto', path: '/Contacto', element: <Contact /> },
   { path: '/profile', element: <Profile /> },
-  { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
   { path: '/register', element: <Register /> },
   { path: '/login', element: <Login />},
   { path: '*', element: <Error404 /> },
