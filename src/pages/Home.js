@@ -15,9 +15,29 @@ const Home = () => {
   const endPointNews = '/news';
   const endPointTestimonials = '/testimonials/last-elements';
 
+  const getRequestNews = async () => {
+    try {
+      const data = await getRequest(endPointNews);
+      setNews(data);
+    }
+    catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getRequestTestimonials = async () => {
+    try {
+      const data = await getRequest(endPointTestimonials);
+      setNews(data);
+    }
+    catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    getRequest(endPointNews).then((response) => setNews(response));
-    getRequest(endPointTestimonials).then((response) => setTestimonials(response));
+    getRequestNews();
+    getRequestTestimonials();
   }, []);
 
   return (
