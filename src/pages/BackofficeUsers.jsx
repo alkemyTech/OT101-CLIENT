@@ -4,10 +4,12 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import Modal from '@mui/material/Modal';
 import { deleteRequest, getRequest } from '../services/requestsHandlerService';
 import HeadCellsUsers from '../components/ScreenTables/HeadCellsUsers';
 import { confirmAlert, basicAlert } from '../services/sweetAlertService';
 import EnhancedTable from '../components/EnhancedTable';
+import EditUserForm from '../components/EditUserForm';
 
 function createData(idKey, firstName, lastName, email, image, roleId, createdAt, updatedAt) {
   return {
@@ -25,10 +27,12 @@ function createData(idKey, firstName, lastName, email, image, roleId, createdAt,
 export default function BackofficeUsers2 () {
   const [dense, setDense] = React.useState(false);
   const [rows, setRows] = useState([]);
+  const [rowSelected, setRowSelected] = useState([]);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const getRequesUsers = async () => {
-    const data = await getRequest('/users');
     try{
+      const data = await getRequest('/users');
       setRows(data.map( item => createData(item.id, item.firstName, item.lastName, item.email, item.image, item.roleId, item.createdAt, item.updatedAt)))
     }
     catch (err) {
@@ -45,7 +49,8 @@ export default function BackofficeUsers2 () {
   };
 
   const handleEdit = (selectedRows) => {
-    console.log('Edit pressed!!', selectedRows);
+    setRowSelected(rows.find( r => r.idKey === selectedRows[0]))
+    setIsFormOpen(true);
   };
 
   const handleDelete = (selectedRows) => {
@@ -69,7 +74,7 @@ export default function BackofficeUsers2 () {
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTable
-          title='Actividades'
+          title='Usuarios'
           dense={dense}
           headCells={HeadCellsUsers}
           rows={rows}
@@ -81,6 +86,19 @@ export default function BackofficeUsers2 () {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <Modal
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+      >
+        <EditUserForm
+            maxWidth="sm"
+            sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }} 
+            open={isFormOpen} 
+            user={rowSelected}
+            backOffice={true}
+        />
+      </Modal>
+
     </Box>
   );
 }
