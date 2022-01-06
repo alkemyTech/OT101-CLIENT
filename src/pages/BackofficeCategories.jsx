@@ -40,7 +40,7 @@ export default function BackofficeCategories () {
   
   useEffect(() => {
       getRequestCategories();
-  }, [isFormOpen])
+  }, [])
 
 
   const handleChangeDense = (event) => {
@@ -70,7 +70,16 @@ export default function BackofficeCategories () {
   };
 
   const handleFormOpen  = () => setIsFormOpen(true);
-  const handleFormClose = () => setIsFormOpen(false);
+  const handleFormClose = () => {
+    setRowSelected([]);
+    setIsFormOpen(false)
+  };
+
+  const doSuccess = (item) => {
+    getRequestCategories();
+    setRowSelected([]);
+    handleFormClose();
+  }
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -99,7 +108,7 @@ export default function BackofficeCategories () {
             sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }} 
             open={isFormOpen} 
             category={rowSelected}
-            onSuccess={handleFormClose}
+            onSuccess={doSuccess}
             onCancel={handleFormClose}
           />
       </Modal>

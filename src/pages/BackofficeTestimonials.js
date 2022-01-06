@@ -40,7 +40,7 @@ export default function BackofficeTestimonials () {
   
   useEffect(() => {
     getRequestTestimonials();  
-  }, [isFormOpen])
+  }, [])
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
@@ -69,8 +69,17 @@ export default function BackofficeTestimonials () {
   };
 
   const handleFormOpen  = () => setIsFormOpen(true);
-  const handleFormClose = () => setIsFormOpen(false);
 
+  const handleFormClose = () => {
+    setRowSelected([]);
+    setIsFormOpen(false)
+  };
+
+  const doSuccess = (item) => {
+    getRequestTestimonials();
+    setRowSelected([]);
+    handleFormClose();
+  }
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -98,7 +107,7 @@ export default function BackofficeTestimonials () {
             open={isFormOpen} 
             testimonial={rowSelected}
             onCancel={handleFormClose}
-            onSuccess={handleFormClose}
+            onSuccess={doSuccess}
             onFailure={handleFormClose}
           />
       </Modal>

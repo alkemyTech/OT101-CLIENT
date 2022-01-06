@@ -70,7 +70,15 @@ export default function BackofficeNews() {
   };
 
   const handleFormOpen  = () => setIsFormOpen(true);
-  const handleFormClose = () => setIsFormOpen(false);
+  const handleFormClose = () => {
+    setRowSelected([]);
+    setIsFormOpen(false)
+  };
+  const doSuccess = (item) => {
+    getRequestNews();
+    setRowSelected([]);
+    handleFormClose();
+  }
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -98,7 +106,7 @@ export default function BackofficeNews() {
             sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }} 
             open={isFormOpen} 
             news={rowSelected}
-            onSuccess={handleFormClose}
+            onSuccess={doSuccess}
             onCancel={handleFormClose}
           />
       </Modal>

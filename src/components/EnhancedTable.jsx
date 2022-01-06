@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -50,6 +50,10 @@ export default function EnhancedTable({ headCells, rows, title, dense, onEdit, o
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  useEffect(() => {
+    setSelected([]);
+  }, [rows]);
 
 
   const handleRequestSort = (event, property) => {
@@ -114,6 +118,7 @@ export default function EnhancedTable({ headCells, rows, title, dense, onEdit, o
   const handleCreate = () => {
     onCreate(selected);
   }
+
 
   return (
     <Box sx={{ width: '100%' }}>
