@@ -13,7 +13,7 @@ import Login from './components/LoginForm'
 
 import ActivityDetails from './pages/ActivityDetails';
 import NewsDetails from './pages/NewsDetails';
-
+import TestimonialsDetails from './pages/testimonialsDetails'
 import BackofficeHome from './pages/backoffice/BackofficeHome';
 import BackofficeCategories from './pages/BackofficeCategories';
 import BackofficeContacts from './pages/BackofficeContacts';
@@ -47,6 +47,7 @@ const publicRoutes = [
   { name: 'Novedades', path: '/Novedades', element: <News /> },
   { path: 'Novedades/:id', element: <NewsDetails />},
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
+  { path: 'Testimonials/:id', element: <TestimonialsDetails />},
   { name: 'Contacto', path: '/contact', element: <Contact /> },
   { path: '/profile', element: <Profile /> },
   { name: 'Contribuir', path: '/contribute', element: <Contribute /> },

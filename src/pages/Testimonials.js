@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getRequest } from '../services/requestsHandlerService';
-import { CircularProgress, Typography, Grid, Card, CardActionArea, Link, CardContent, CardMedia } from '@mui/material';
+import { CircularProgress, Typography, Grid, Card, CardActionArea, CardContent, CardMedia } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 function Testimonials() {
 	const [testimonials, setTestimonials] = useState([]);
@@ -38,6 +39,7 @@ function Testimonials() {
 						<Card sx={{m:1}}>
 							<CardActionArea
 								component={Link}
+								to={`/Testimonials/${id}`}
 							>
 								<CardMedia
 									component="img"
