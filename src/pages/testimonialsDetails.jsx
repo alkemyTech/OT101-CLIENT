@@ -9,7 +9,7 @@ import { getRequest } from '../services/requestsHandlerService';
 
 const NewsDetails = () => {
     const { id } = useParams();
-    const [ novedades, setNovedades ] = useState();
+    const [ testimonios, setTestimonios ] = useState();
     const [ isLoading, setIsLoading ] = useState(true);
 
 
@@ -18,11 +18,11 @@ const NewsDetails = () => {
 
         const fetchDetails = async () => {
             try {
-                const details = await getRequest(`/news/${id}`);
+                const details = await getRequest(`/testimonials/${id}`);
 
                 if (disposed) return; // avoid state change in a unmounted component
                 
-                setNovedades(details);
+                setTestimonios(details);
             } catch (err) {
                 console.log(err);
             } finally {
@@ -40,21 +40,21 @@ const NewsDetails = () => {
         );
     }
 
-    if (!novedades) {
+    if (!testimonios) {
         return (
             <Typography variant="h3" align='center' style={{marginTop: '30vh'}}>
-                No existen detalles sobre dicha novedad
+                No existen detalles sobre el testimonio
             </Typography>
         );
     }
 
     return (
         <>
-      <Typography variant="h3" align='center' gutterBottom>{novedades.name}</Typography>
+      <Typography variant="h3" align='center' gutterBottom>{testimonios.name}</Typography>
       <Container maxwidth='lg' align='center'>
-            <img src={novedades.image} alt='activity' style={{margin: '50px 0', maxWidth: '100%'}}/>
-            
+            <img src={testimonios.image} alt='testimonial' style={{margin: '50px 0', minWidth: '15%', height: '100%'}}/>
         </Container>
+        <Typography variant="h5" align='center' gutterBottom>{testimonios.content}</Typography>
     </>
     );
 
