@@ -28,7 +28,7 @@ const Home = () => {
   const getRequestTestimonials = async () => {
     try {
       const data = await getRequest(endPointTestimonials);
-      setNews(data);
+      setTestimonials(data);
     }
     catch (err) {
       console.log(err);
