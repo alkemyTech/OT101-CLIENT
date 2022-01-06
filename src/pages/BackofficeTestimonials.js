@@ -68,6 +68,7 @@ export default function BackofficeTestimonials () {
     })
   };
 
+  const handleFormOpen  = () => setIsFormOpen(true);
   const handleFormClose = () => setIsFormOpen(false);
 
   return (
@@ -80,6 +81,7 @@ export default function BackofficeTestimonials () {
           rows={rows}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          onCreate={handleFormOpen}
         />
       </Paper>
       <FormControlLabel
@@ -88,7 +90,7 @@ export default function BackofficeTestimonials () {
       />
       <Modal
         open={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
+        onClose={handleFormClose}
       >
           <TestimonialForm
             maxWidth="sm"

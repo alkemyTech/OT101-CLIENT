@@ -51,10 +51,7 @@ export default function BackofficeActivities () {
     setIsFormOpen(true);
   };
   
-  const handleFormOpen = () => {
-    setIsFormOpen(true)
-    console.log(rowSelected);
-  }
+  const handleFormOpen  = () => setIsFormOpen(true);
   const handleFormClose = () => setIsFormOpen(false);
 
   const handleDelete = (selectedRows) => {
@@ -93,15 +90,14 @@ export default function BackofficeActivities () {
       />
       <Modal
         open={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
+        onClose={handleFormClose}
       >
           <ActivityForm
             maxWidth="sm"
             sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }} 
             open={isFormOpen} 
             activity={rowSelected}
-            onSuccess={rowSelected}
-            requestData={getRequestActivities}
+            onSuccess={handleFormClose}
             onCancel={handleFormClose} />
       </Modal>
     </Box>

@@ -70,9 +70,8 @@ export default function BackofficeUsers2 () {
     })
   };
 
-  const handleClose = () => {
-    setIsFormOpen(false);
-  };
+  const handleFormOpen  = () => setIsFormOpen(true);
+  const handleFormClose = () => setIsFormOpen(false);
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -84,6 +83,7 @@ export default function BackofficeUsers2 () {
           rows={rows}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          onCreate={handleFormOpen}
         />
       </Paper>
       <FormControlLabel
@@ -92,7 +92,7 @@ export default function BackofficeUsers2 () {
       />
       <Modal
         open={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
+        onClose={handleFormClose}
       >
         <EditUserForm
             maxWidth="sm"
@@ -100,9 +100,9 @@ export default function BackofficeUsers2 () {
             open={isFormOpen} 
             user={rowSelected}
             backOffice={true}
-            onSuccess={handleClose}
-            onCancel={handleClose}
-            onFailure={handleClose}
+            onSuccess={handleFormClose}
+            onCancel={handleFormClose}
+            onFailure={handleFormClose}
         />
       </Modal>
 
