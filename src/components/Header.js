@@ -38,7 +38,6 @@ const Header = ({ routes = [{ name: 'home', path: '/' }] }) => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              color="inherit"
               onClick={handleOpenNavMenu}
             >
               <MenuIcon />
