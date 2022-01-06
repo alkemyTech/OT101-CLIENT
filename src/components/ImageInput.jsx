@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, FormHelperText } from '@material-ui/core';
-import CustomButton from './CustomButton';
+import { Box, FormHelperText } from '@material-ui/core';
 
 const ImageInput = ({error, image = null, name = 'image', onChange = e => null }) => {
   const [selectedImage, setSelectedImage] = useState(null);

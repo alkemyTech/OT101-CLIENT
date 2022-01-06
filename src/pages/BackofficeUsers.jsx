@@ -24,7 +24,7 @@ function createData(idKey, firstName, lastName, email, image, roleId, createdAt,
   };
 }
 
-export default function BackofficeUsers2 () {
+export default function BackofficeUsers() {
   const [dense, setDense] = React.useState(false);
   const [rows, setRows] = useState([]);
   const [rowSelected, setRowSelected] = useState([]);

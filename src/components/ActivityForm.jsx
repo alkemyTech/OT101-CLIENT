@@ -39,7 +39,7 @@ const ActivityForm = ({classes, open, activity, requestData, onCancel, onSuccess
       dataToSend.append(key, values[key]);
     });
 
-    const apiRequest = activity.length !== 0?
+    const apiRequest = activity?.idKey ?
       patchRequest(`/activities/${activity.idKey}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
       postRequest(`/activities/`, dataToSend, {headers: {'content-type': 'multipart/form-data'}});
 
@@ -54,9 +54,9 @@ const ActivityForm = ({classes, open, activity, requestData, onCancel, onSuccess
 
   const formik = useFormik({
     initialValues: {
-      name: activity.length !== 0? activity.name : '',
+      name: activity?.name || '',
       image: null,
-      content: activity.length !== 0? activity.content : '',
+      content: activity?.content || '',
     },
     validationSchema: validationSchema,
     onSubmit: activitySubmit,
@@ -72,9 +72,9 @@ const ActivityForm = ({classes, open, activity, requestData, onCancel, onSuccess
   }
 
   const onClickSubmit = () => {
-    activity.length !== 0?
-    basicAlert('Actividad modificada!', '', 'success'):
-    basicAlert('Actividad creada!', '', 'success');
+    activity?.idKey ?
+      basicAlert('Actividad modificada!', '', 'success') :
+      basicAlert('Actividad creada!', '', 'success');
     setTimeout(() => onCancel(), 200);
   }
 
@@ -86,7 +86,7 @@ const ActivityForm = ({classes, open, activity, requestData, onCancel, onSuccess
     <Container maxWidth="sm">
       <Paper elevation={3} className={classes.innerBox}>
         <Typography variant="h5" component="h2" fontWeight="bold" mb={6}>
-          {activity.length !== 0? "Modificar" : "Crear" } Actividades
+          {activity?.idKey ? "Modificar" : "Crear" } Actividades
         </Typography>
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <TextField
@@ -118,7 +118,7 @@ const ActivityForm = ({classes, open, activity, requestData, onCancel, onSuccess
           </FormControl>
           <ImageInput
             name="image"
-            image={activity.length !== 0? activity.image : null}
+            image={activity?.image}
             onChange={file => formik.setFieldValue("image", file)}
             error={formik.touched.image && formik.errors.image}
           />

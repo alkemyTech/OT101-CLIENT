@@ -14,7 +14,6 @@ import ImageInput from './ImageInput'
 
 
 const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFailure}) => {
-console.log(testimonial)
   const validationSchema = yup.object({
     name: yup
       .string()
@@ -36,7 +35,7 @@ console.log(testimonial)
       dataToSend.append(key, values[key]);
     });
 
-    const apiRequest = testimonial && testimonial.idKey ?
+    const apiRequest = testimonial?.idKey ?
       patchRequest(`/testimonials/${testimonial.idKey}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
       postRequest(`/testimonials/`, dataToSend, {headers: {'content-type': 'multipart/form-data'}});
 
@@ -76,7 +75,7 @@ console.log(testimonial)
     <Container maxWidth="sm">
       <Paper elevation={3} className={classes.innerBox}>
         <Typography variant="h5" component="h2" fontWeight="bold" mb={6}>
-          {testimonial && testimonial.id ? "Modificar" : "Crear" } Testimonios
+          {testimonial?.idKey ? "Modificar" : "Crear" } Testimonios
         </Typography>
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <TextField
