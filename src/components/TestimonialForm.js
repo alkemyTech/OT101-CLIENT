@@ -1,7 +1,8 @@
 /* import { useState } from 'react'; */
 import PropTypes from 'prop-types';
 
-import { Paper, Button, Container, TextField, Typography, withStyles, FormControl, FormLabel, FormHelperText } from '@material-ui/core'
+import { Paper, Container, TextField, Typography, withStyles, FormControl, FormLabel, FormHelperText } from '@material-ui/core'
+import CustomButton from './CustomButton';
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -13,10 +14,9 @@ import ImageInput from './ImageInput'
 
 
 const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFailure}) => {
-  /* const [isLoading, setIsLoading] = useState(false); */
-
+console.log(testimonial)
   const validationSchema = yup.object({
-    nombre: yup
+    name: yup
       .string()
       .required('Debe ingresar un título.'),
     content: yup
@@ -29,8 +29,6 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
   });
 
   const testimonialSubmit = (values, actions) => {
-    /* setIsLoading(true); */
-
     const dataToSend = new FormData();
 
     // append all form inputs
@@ -38,18 +36,14 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
       dataToSend.append(key, values[key]);
     });
 
-    const apiRequest = testimonial && testimonial.id ?
-      patchRequest(`/testimonials/${testimonial.id}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
+    const apiRequest = testimonial && testimonial.idKey ?
+      patchRequest(`/testimonials/${testimonial.idKey}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
       postRequest(`/testimonials/`, dataToSend, {headers: {'content-type': 'multipart/form-data'}});
 
     apiRequest.then(savedtestimonial => {
-        /* setIsLoading(false); */
-
         onSuccess(savedtestimonial);
       })
       .catch(err => {
-        /* setIsLoading(false); */
-
         onFailure(err);
       })
       .finally(() => actions.setSubmitting(false));
@@ -57,7 +51,7 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
 
   const formik = useFormik({
     initialValues: {
-      nombre: testimonial ? testimonial.nombre : '',
+      name: testimonial ? testimonial.name : '',
       image: null,
       content: testimonial ? testimonial.content : '',
     },
@@ -78,10 +72,6 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
     return (null);
   }
 
-  /* if (isLoading) {
-    return (<Loading />);
-  } */
-
   return (
     <Container maxWidth="sm">
       <Paper elevation={3} className={classes.innerBox}>
@@ -91,13 +81,13 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <TextField
             fullWidth
-            id='nombre'
-            name='nombre'
+            id='name'
+            name='name'
             label='Título'
-            value={formik.values.nombre}
+            value={formik.values.name}
             onChange={formik.handleChange}
-            error={formik.touched.nombre && Boolean(formik.errors.nombre)}
-            helperText={formik.touched.nombre && formik.errors.nombre}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
             className={classes.textField}
           />
           <FormControl
@@ -122,15 +112,15 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
             onChange={file => formik.setFieldValue("image", file)}
             error={formik.touched.image && formik.errors.image}
           />
-          <Button
+          <CustomButton
             variant="contained"
             type="reset"
             onClick={()=>formReset()}
             className={classes.buttonCancel}
           >
             Cancelar
-          </Button>
-          <Button
+          </CustomButton>
+          <CustomButton
             disabled={formik.isSubmitting}
             color="primary"
             variant="contained"
@@ -138,7 +128,7 @@ const TestimonialForm = ({classes, open, testimonial, onCancel, onSuccess, onFai
             className={classes.buttonOk}
           >
             Enviar
-          </Button>
+          </CustomButton>
         </form>
       </Paper>
     </Container>
@@ -149,7 +139,7 @@ TestimonialForm.propTypes = {
   open: PropTypes.bool,
   testimonial: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    nombre: PropTypes.string,
+    name: PropTypes.string,
     content: PropTypes.string,
     image: PropTypes.string,
   }),
