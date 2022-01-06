@@ -74,7 +74,7 @@ const Home = () => {
         <Grid container spacing={5} rowSpacing={8}>
         {testimonials.map((testimonial, key) => (
           <Grid item xs={12} md={4} key={key}>
-            <GridHome key={key} item={testimonial} linkTo={`/Testimonios/${entry.id}`} />
+            <GridHome key={key} item={testimonial} linkTo={`/Testimonios/${testimonial.id}`} />
           </Grid>
         ))}
       </Grid>
