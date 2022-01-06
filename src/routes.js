@@ -47,7 +47,7 @@ const publicRoutes = [
   { name: 'Novedades', path: '/Novedades', element: <News /> },
   { path: 'Novedades/:id', element: <NewsDetails />},
   { name: 'Testimonios', path: '/testimonials', element: <Testimonials /> },
-  { path: 'Testimonials/:id', element: <TestimonialsDetails />},
+  { path: 'Testimonios/:id', element: <TestimonialsDetails />},
   { name: 'Contacto', path: '/contact', element: <Contact /> },
   { path: '/profile', element: <Profile /> },
   { name: 'Contribuir', path: '/contribute', element: <Contribute /> },
