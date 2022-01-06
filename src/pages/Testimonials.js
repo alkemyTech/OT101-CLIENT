@@ -39,7 +39,7 @@ function Testimonials() {
 						<Card sx={{m:1}}>
 							<CardActionArea
 								component={Link}
-								to={`/Testimonials/${id}`}
+								to={`/Testimonios/${id}`}
 							>
 								<CardMedia
 									component="img"
