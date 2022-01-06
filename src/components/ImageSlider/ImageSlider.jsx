@@ -9,9 +9,11 @@ function ImageSlider({ slides = []}) {
 
     const images = slides.slice().sort((s1, s2) => s1.order - s2.order);
 
+    console.log(images);
+
     return !images.length ? null : (
         <div className='carousel-outer'>
-            <div className='carousel-inner' style={{background: `url(${images[currentImg].imageURL})`}}>
+            <div className='carousel-inner' style={{backgroundImage: `url(${images[currentImg].imageURL})`}}>
 
                 <div onClick={() => {
                     if (currentImg === 0) {
