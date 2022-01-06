@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Paper, Button, Container, TextField, Typography } from '@material-ui/core'
+import { Paper, Container, TextField, Typography } from '@material-ui/core'
 import { FormControl, FormLabel, FormHelperText } from '@material-ui/core'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -11,12 +10,12 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import Styles from '../styles/FormStyles'
 import { postRequest, patchRequest } from '../services/requestsHandlerService';
-import Loading from './Loading';
 import ImageInput from './ImageInput'
+import { basicAlert } from '../services/sweetAlertService';
+import CustumButton from './CustomButton';
 
 
-const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure}) => {
-  const [isLoading, setIsLoading] = useState(false);
+const ActivityForm = ({classes, open, activity, requestData, onCancel, onSuccess, onFailure}) => {
 
   const validationSchema = yup.object({
     name: yup
@@ -32,7 +31,6 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
   });
 
   const activitySubmit = (values, actions) => {
-    setIsLoading(true);
 
     const dataToSend = new FormData();
 
@@ -40,19 +38,15 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
     Object.keys(values).forEach(key => {
       dataToSend.append(key, values[key]);
     });
-    
-    const apiRequest = activity && activity.id ?
-      patchRequest(`/activities/${activity.id}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
+
+    const apiRequest = activity?.idKey ?
+      patchRequest(`/activities/${activity.idKey}`, dataToSend, {headers: {'content-type': 'multipart/form-data'}}) :
       postRequest(`/activities/`, dataToSend, {headers: {'content-type': 'multipart/form-data'}});
 
     apiRequest.then(savedActivity => {
-        setIsLoading(false);
-
-        onSuccess(savedActivity);
+      onSuccess(savedActivity);
       })
       .catch(err => {
-        setIsLoading(false);
-
         onFailure(err);
       })
       .finally(() => actions.setSubmitting(false));
@@ -60,9 +54,9 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
 
   const formik = useFormik({
     initialValues: {
-      name: activity ? activity.name : '',
+      name: activity?.name || '',
       image: null,
-      content: activity ? activity.content : '',
+      content: activity?.content || '',
     },
     validationSchema: validationSchema,
     onSubmit: activitySubmit,
@@ -77,19 +71,22 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
     formik.setFieldValue("content", editor.getData());
   }
 
-  if (!open) {
-    return (null);
+  const onClickSubmit = () => {
+    activity?.idKey ?
+      basicAlert('Actividad modificada!', '', 'success') :
+      basicAlert('Actividad creada!', '', 'success');
+    setTimeout(() => onCancel(), 200);
   }
 
-  if (isLoading) {
-    return (<Loading />);
+  if (!open) {
+    return (null);
   }
 
   return (
     <Container maxWidth="sm">
       <Paper elevation={3} className={classes.innerBox}>
         <Typography variant="h5" component="h2" fontWeight="bold" mb={6}>
-          {activity && activity.id ? "Modificar" : "Crear" } Actividades
+          {activity?.idKey ? "Modificar" : "Crear" } Actividades
         </Typography>
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <TextField
@@ -121,27 +118,28 @@ const ActivityForm = ({classes, open, activity, onCancel, onSuccess, onFailure})
           </FormControl>
           <ImageInput
             name="image"
-            image={activity ? activity.image : null}
+            image={activity?.image}
             onChange={file => formik.setFieldValue("image", file)}
             error={formik.touched.image && formik.errors.image}
           />
-          <Button
+          <CustumButton
             variant="contained"
             type="reset"
-            onClick={()=>formik.resetForm()}
+            onClick={()=> formReset()}
             className={classes.buttonCancel}
           >
             Cancelar
-          </Button>
-          <Button
+          </CustumButton>
+          <CustumButton
             disabled={formik.isSubmitting}
             color="primary"
             variant="contained"
             type="submit"
             className={classes.buttonOk}
+            onClick={onClickSubmit}
           >
             Enviar
-          </Button>
+          </CustumButton>
         </form>
       </Paper>
     </Container>

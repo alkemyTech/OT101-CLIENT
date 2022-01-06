@@ -34,7 +34,19 @@ const HeadCellsUsers = [
     id: 'roleId',
     numeric: true,
     disablePadding: false,
-    label: 'Rool',
+    label: 'Role',
+  },
+  {
+    id: 'createdAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Creado',
+  },
+  {
+    id: 'updatedAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Actualizado',
   },
 ];
 

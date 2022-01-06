@@ -4,10 +4,12 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import Modal from '@mui/material/Modal';
 import { deleteRequest, getRequest } from '../services/requestsHandlerService';
 import { confirmAlert, basicAlert } from '../services/sweetAlertService';
 import EnhancedTable from '../components/EnhancedTable';
 import HeadCellsTestimonials from '../components/ScreenTables/HeadCellsTestimonials';
+import TestimonialForm from '../components/TestimonialForm';
 
 function createData(idKey, name, content, image, createdAt, updatedAt) {
   return {
@@ -23,6 +25,8 @@ function createData(idKey, name, content, image, createdAt, updatedAt) {
 export default function BackofficeTestimonials () {
   const [dense, setDense] = React.useState(false);
   const [rows, setRows] = useState([]);
+  const [rowSelected, setRowSelected] = useState([]);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   
   const getRequestTestimonials = async () => {
     try{
@@ -36,14 +40,15 @@ export default function BackofficeTestimonials () {
   
   useEffect(() => {
     getRequestTestimonials();  
-  }, [])
+  }, [isFormOpen])
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
 
   const handleEdit = (selectedRows) => {
-    console.log('Edit pressed!!', selectedRows);
+    setRowSelected(rows.find( r => r.idKey === selectedRows[0]))
+    setIsFormOpen(true);
   };
 
   const handleDelete = (selectedRows) => {
@@ -63,6 +68,9 @@ export default function BackofficeTestimonials () {
     })
   };
 
+  const handleFormOpen  = () => setIsFormOpen(true);
+  const handleFormClose = () => setIsFormOpen(false);
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -73,12 +81,27 @@ export default function BackofficeTestimonials () {
           rows={rows}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          onCreate={handleFormOpen}
         />
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <Modal
+        open={isFormOpen}
+        onClose={handleFormClose}
+      >
+          <TestimonialForm
+            maxWidth="sm"
+            sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }} 
+            open={isFormOpen} 
+            testimonial={rowSelected}
+            onCancel={handleFormClose}
+            onSuccess={handleFormClose}
+            onFailure={handleFormClose}
+          />
+      </Modal>
     </Box>
   );
 }

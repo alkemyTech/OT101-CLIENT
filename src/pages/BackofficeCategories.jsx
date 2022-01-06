@@ -8,32 +8,30 @@ import { getRequest, deleteRequest } from '../services/requestsHandlerService';
 import HeadCellsCategories from '../components/ScreenTables/headCellsCategories';
 import EnhancedTable from '../components/EnhancedTable';
 import {confirmAlert, basicAlert} from '../services/sweetAlertService'
+import Modal from '@mui/material/Modal';
+import CategoryForm from '../components/CategoryForm';
 
-function createData(idKey, name, description, deletedAt, createdAt, updatedAt) {
+function createData(idKey, name, description, createdAt, updatedAt) {
   return {
     idKey,
     name,
     description,
-    deletedAt,
     createdAt,
-    updatedAt
+    updatedAt,
   };
 }
-
-const sampleData = [
-  createData(1, 'Nombre Uno', 'Descripción de nombre uno'),
-  createData(2, 'Nombre Dos', 'Descripción de nombre dos'),
-];
 
 
 export default function BackofficeCategories () {
   const [dense, setDense] = React.useState(false);
-  const [rows, setRows] = useState(sampleData);
+  const [rows, setRows] = useState([]);
+  const [rowSelected, setRowSelected] = useState([]);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const getRequestCategories = async () => {
     try{
       const data = await getRequest('/categories');
-      setRows(data.map( item => createData(item.id, item.name, item.description, item.deletedAt, item.createdAt, item.updatedAt)))
+      setRows(data.map( item => createData(item.id, item.name, item.description, item.createdAt, item.updatedAt)))
     }
     catch (err) {
       console.log(err)
@@ -42,7 +40,7 @@ export default function BackofficeCategories () {
   
   useEffect(() => {
       getRequestCategories();
-  }, [])
+  }, [isFormOpen])
 
 
   const handleChangeDense = (event) => {
@@ -50,7 +48,8 @@ export default function BackofficeCategories () {
   };
 
   const handleEdit = (selectedRows) => {
-    console.log('Edit pressed!!', selectedRows);
+    setRowSelected(rows.find( r => r.idKey === selectedRows[0]))
+    setIsFormOpen(true);
   };
 
   const handleDelete = (selectedRows) => {
@@ -70,6 +69,9 @@ export default function BackofficeCategories () {
     })
   };
 
+  const handleFormOpen  = () => setIsFormOpen(true);
+  const handleFormClose = () => setIsFormOpen(false);
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -80,12 +82,27 @@ export default function BackofficeCategories () {
           rows={rows}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          onCreate={handleFormOpen}
+
         />
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <Modal
+        open={isFormOpen}
+        onClose={handleFormClose}
+      >
+          <CategoryForm
+            maxWidth="sm"
+            sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }} 
+            open={isFormOpen} 
+            category={rowSelected}
+            onSuccess={handleFormClose}
+            onCancel={handleFormClose}
+          />
+      </Modal>
     </Box>
   );
 }

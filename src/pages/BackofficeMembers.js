@@ -8,6 +8,7 @@ import { deleteRequest, getRequest } from '../services/requestsHandlerService';
 import HeadCellsMembers from '../components/ScreenTables/HeadCellsMembers';
 import { confirmAlert, basicAlert } from '../services/sweetAlertService';
 import EnhancedTable from '../components/EnhancedTable';
+import { Modal, Container } from '@mui/material';
 
 function createData(idKey, firstName, lastName, image) {
   return {
@@ -21,6 +22,7 @@ function createData(idKey, firstName, lastName, image) {
 export default function BackofficeMembers () {
   const [dense, setDense] = React.useState(false);
   const [rows, setRows] = useState([]);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const getRequestMembers = async () => {
     try{
@@ -42,7 +44,10 @@ export default function BackofficeMembers () {
 
   const handleEdit = (selectedRows) => {
     console.log('Edit pressed!!', selectedRows);
+    setIsFormOpen(true);
   };
+  
+  const handleFormClose = () => setIsFormOpen(false);
 
   const handleDelete = (selectedRows) => {
     confirmAlert('Eliminar estos miembros?', 'Las miembros serán borradas permantemente', 'question')
@@ -77,6 +82,22 @@ export default function BackofficeMembers () {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <Modal
+        open={isFormOpen}
+        onClose={handleFormClose}
+        sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}
+      >
+        <Container
+          sx={{
+            backgroundColor: 'white',
+            borderRadius: 0.5,
+            borderColor: 'lightgrey',
+          }}
+          maxWidth="sm"
+        >
+          {/* <EditUserForm user={user} /> */}
+        </Container>
+      </Modal>
     </Box>
   );
 }
