@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Box, Button, FormHelperText } from '@material-ui/core';
+import CustomButton from './CustomButton';
 
 const ImageInput = ({error, image = null, name = 'image', onChange = e => null }) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -25,14 +26,7 @@ const ImageInput = ({error, image = null, name = 'image', onChange = e => null }
         accept="image/*"
         type="file"
         onChange={handleChange}
-
-        style={{ display: 'none' }}
       />
-      <label htmlFor={name}>
-        <Button variant="contained" color="primary" component="span">
-          Seleccionar imagen
-        </Button>
-      </label>
       <FormHelperText id={name} error={Boolean(error)}>
         {error}
       </FormHelperText>
